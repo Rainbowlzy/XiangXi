@@ -1,0 +1,153 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@include file="..\..\XiangXiEntities\CodeTemplates\Manager.ttinclude"#>
+<#@ output extension=".txt" #>
+<#@ import namespace="XiangXiENtities.CodeTemplates" #>
+<#@ assembly name="$(SolutionDir)\Generator\bin\Debug\Generator.dll"#>
+
+/* ------------------------------------------------------------ *
+ * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
+ * 生成时间：<#=DateTime.Now#>
+ * 生成版本：<#=g.DomainVersionTime#> 
+ * 作者：路正遥
+ * ------------------------------------------------------------ */
+<#
+foreach(var table in table_schema2.Select(t=>t.Key)){
+	var evalname = string.Format("{0}Evaluator",table);
+	var evalFile = string.Format("{0}.cs",evalname);
+	var current_table = table_schema2[table];
+	var table_name_ch = current_table.table_name_ch;
+	var table_name_en = current_table.table_name_en;
+#>
+-----------------------------------------------------------------------
+模块名称：<#=table_name_ch#>
+模块英文名称：<#=table_name_en#>
+参考页面：http://www.dsmlyw.com/gen/<#=table_name_en#>List.html
+-----------------------------------------------------------------------
+接口名称：保存<#=table_name_ch#>接口
+接口功能：保存（新增/编辑）<#=table_name_ch#>结果
+接口地址：[POST] http://www.dsmlyw.com/DefaultHandler.ashx
+参数：
+	method=Save<#=table_name_en#>
+	data=JSON.stringify({
+		id : "string",
+<#
+	foreach(var col in current_table.Columns){
+		var column_name = col.column_name;
+		var column_description = col.column_description;
+		var dbtype = col.dbtype;
+		var max_length = col.max_length;
+		var pascal_column_name = col.pascal_column_name;
+
+		
+#>
+		<#=column_name#> : "<#=SqlServerDbTypeMap.MapCsharpType(dbtype.Split('(')[0])#>", //<#=column_description#>
+<#
+	}
+#>
+	})
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息"
+	}
+-----------------------------------------------------------------------
+接口名称：删除<#=table_name_ch#>接口
+接口功能：删除一条<#=table_name_ch#>记录
+接口地址：[POST] http://www.dsmlyw.com/DefaultHandler.ashx
+参数：
+	method=Delete<#=table_name_en#>
+	data=JSON.stringify({
+		id : "string",
+<#
+	foreach(var col in current_table.Columns){
+		var column_name = col.column_name;
+		var column_description = col.column_description;
+		var dbtype = col.dbtype;
+		var max_length = col.max_length;
+		var pascal_column_name = col.pascal_column_name;
+
+		
+#>
+		<#=column_name#> : "<#=SqlServerDbTypeMap.MapCsharpType(dbtype.Split('(')[0])#>", //<#=column_description#>
+<#
+	}
+#>
+	})
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息"
+	}
+-----------------------------------------------------------------------
+接口名称：查询<#=table_name_ch#>列表接口
+接口功能：分页查询<#=table_name_ch#>列表
+接口地址：[POST] http://www.dsmlyw.com/DefaultHandler.ashx
+参数：
+	method=Get<#=table_name_en#>List
+	data=JSON.stringify({
+		id : "string",
+<#
+	foreach(var col in current_table.Columns){
+		var column_name = col.column_name;
+		var column_description = col.column_description;
+		var dbtype = col.dbtype;
+		var max_length = col.max_length;
+		var pascal_column_name = col.pascal_column_name;
+
+		
+#>
+		<#=column_name#> : "<#=SqlServerDbTypeMap.MapCsharpType(dbtype.Split('(')[0])#>",//<#=column_description#>
+<#
+	}
+#>
+	})
+	search=搜索关键字
+	offset=分页页码
+	limit=每页条数
+	sort=排序字段(<#
+	foreach(var col in current_table.Columns){
+		var column_name = col.column_name;
+		var column_description = col.column_description;
+		var dbtype = col.dbtype;
+		var max_length = col.max_length;
+		var pascal_column_name = col.pascal_column_name;
+
+		
+#><#=column_name#>,<#
+	}
+#>)
+	order=asc/desc
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息",
+		total: 条数,
+		rows: [
+		{
+			id : "string",
+<#
+	foreach(var col in current_table.Columns){
+		var column_name = col.column_name;
+		var column_description = col.column_description;
+		var dbtype = col.dbtype;
+		var max_length = col.max_length;
+		var pascal_column_name = col.pascal_column_name;
+
+		
+#>
+			<#=column_name#> : "<#=SqlServerDbTypeMap.MapCsharpType(dbtype.Split('(')[0])#>",//<#=column_description#>
+<#
+	}
+#>
+		}
+		]
+	}
+
+
+
+<#
+}
+#>

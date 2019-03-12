@@ -1,0 +1,329 @@
+  
+<!-------------------------------------------------------------------------------------------------------------------
+ * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
+ * 生成时间：03/12/2019 13:34:37
+ * 生成版本：03/12/2019 13:33:51 
+ * 作者：路正遥
+*-------------------------------------------------------------------------------------------------------------------> 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <title>工会</title>
+    <link rel="shortcut icon" href="../assets/i/bitbug_favicon.ico" />
+    <meta charset="utf-8"/>
+    <link href="../assets/css/pageonecss.css" rel="stylesheet" />
+    <link href="../assets/css/2-index/business.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap-table.css" rel="stylesheet">
+    <link href="../node_modules/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../assets/css/0-common/common.css" rel="stylesheet"/>
+    <link href="../assets/css/2-index/business.css" rel="stylesheet"/>
+    <link href="../assets/css/docs.css" rel="stylesheet"/>
+    <link href="../assets/UEditor-utf8-net/themes/iframe.css" rel="stylesheet" />
+    <link href="../assets/UEditor-utf8-net/themes/default/css/ueditor.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap-table.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/fileinput.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/common.css" rel="stylesheet"/>
+	
+    <script src="../assets/js/0-common/third-party/zeroclipboard/ZeroClipboard.js"></script>
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+    <script src="LabourUnion.js"></script>
+</head>
+<body>
+<div  id="LabourUnion">
+	<div v-if="!(request||{}).hidden_title"><page-top></page-top></div>
+<div class="container">
+	<h3>工会</h3>
+		<form role="form" class="col-xs-11 form-horizontal">
+
+<div class=""  style="margin-top:5px;">
+	<div class="container" style="margin-bottom: 20px;">
+			<a href="javascript:history.go(-1)" id="table-back" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>返回</a>
+			<button type="button" class="btn btn-info excel-import-button-LabourUnion"><i class="glyphicon glyphicon-cloud-upload"></i>Excel导入</button>
+			<a href="/XiangXi/ExportSchema.ashx?title=LabourUnion" class="btn btn-primary">Excel导出</a>
+			<button type="button" id="submit" @click="save" class="btn  btn-info"><i class="glyphicon glyphicon-circle-arrow-up"></i>提交</button>
+	</div>
+
+    <div class="modal fade table_excel_modal-LabourUnion">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Excel导入</h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <!--<button type="button" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i>确定</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+				<div v-if="table">
+					<div class="row" >						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="LUUnitOrganizationCode">
+									单位组织机构代码
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="LUUnitOrganizationCode" 
+											v-model="LUUnitOrganizationCode" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="LUClassificationCodeOfNationalEconomyIndustryOfUnitOrSubjectOfUnit">
+									单位或单位主体的国民经济行业分类代码
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="LUClassificationCodeOfNationalEconomyIndustryOfUnitOrSubjectOfUnit" 
+											v-model="LUClassificationCodeOfNationalEconomyIndustryOfUnitOrSubjectOfUnit" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="LUClassificationOfUnitsOrSubjectsOfUnits">
+									单位或单位主体的单位类别
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="LUClassificationOfUnitsOrSubjectsOfUnits" 
+											v-model="LUClassificationOfUnitsOrSubjectsOfUnits" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="LUUnitAddress">
+									单位地址
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="LUUnitAddress" 
+											v-model="LUUnitAddress" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="LUHigherLevelTradeUnion">
+									上级工会
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="LUHigherLevelTradeUnion" 
+											v-model="LUHigherLevelTradeUnion" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="LUUnitTradeUnionName">
+									单位工会名称
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="LUUnitTradeUnionName" 
+											v-model="LUUnitTradeUnionName" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="LUBuildingTime">
+									建会时间
+								</label>
+                                <div class="col-sm-8">
+																		<input	size="16" id="LUBuildingTime" type="text" v-model="LUBuildingTime" @change="val=>LUBuildingTime=val"class="LUBuildingTime form_datetime form-control">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="LUTheHeadOfTheTradeUnion">
+									工会负责人
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="LUTheHeadOfTheTradeUnion" 
+											v-model="LUTheHeadOfTheTradeUnion" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="LUTelephoneCallsFromTradeUnionLeaders">
+									工会负责人联系电话
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="LUTelephoneCallsFromTradeUnionLeaders" 
+											v-model="LUTelephoneCallsFromTradeUnionLeaders" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="LUTradeUnionOfficeTelephone">
+									工会办公电话
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="LUTradeUnionOfficeTelephone" 
+											v-model="LUTradeUnionOfficeTelephone" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="LUNumberOfCopiesOfMembershipIdentityCardsSubmittedToBankOfSuzhou">
+									本单位已交至苏州银行的会员身份证复印件数量
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="LUNumberOfCopiesOfMembershipIdentityCardsSubmittedToBankOfSuzhou" 
+											v-model="LUNumberOfCopiesOfMembershipIdentityCardsSubmittedToBankOfSuzhou" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="LUTotalNumberOfEmployeesInaUnit">
+									单位职工总数人
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="LUTotalNumberOfEmployeesInaUnit" 
+											v-model="LUTotalNumberOfEmployeesInaUnit" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="LUNumberOfUnitMembers">
+									单位会员数人
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="LUNumberOfUnitMembers" 
+											v-model="LUNumberOfUnitMembers" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="LUNumberOfFemaleEmployeesInaUnit">
+									单位女职工数人
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="LUNumberOfFemaleEmployeesInaUnit" 
+											v-model="LUNumberOfFemaleEmployeesInaUnit" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="LUNumberOfFemaleMembersInaUnit">
+									单位女会员数人
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="LUNumberOfFemaleMembersInaUnit" 
+											v-model="LUNumberOfFemaleMembersInaUnit" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="LUStatisticalTopic1">
+									统计主题1
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="LUStatisticalTopic1" 
+											v-model="LUStatisticalTopic1" 
+											placeholder="">                                </div>
+                            </div>
+                        </div></div>
+					</div>
+					</div>
+					</form>
+            </div>
+<div class="modal fade" id="common-alert">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</body>
+</html>

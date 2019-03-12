@@ -1,0 +1,279 @@
+﻿body {
+    font-family: 'Microsoft YaHei UI';
+    font-weight: 500;
+    line-height: 1.7;
+}
+
+.main-header {
+    background-image: url('../../i/index/bg.png');
+    background-size: cover;
+    height: 200px;
+}
+ 
+.row.cut_menu {
+    
+}
+ 
+/*背景*/
+.cut_menu [class*="col-"].cut_shown  { 
+    /*background:#e1e6ec;*/
+    /*margin: 5px 10px;    
+    height: 138px;
+    width: 167.3px;*/
+    text-align:center;
+    color:black;
+    font-size:20px;
+    font-weight:400;  
+    margin:0 0 18px  0 ;
+}
+.cut_menu [class*="col-"].cut_shown:hover {    
+    font-size:21px;
+    font-weight:500;  
+     -webkit-transition: ease-out 0.14s;
+    -moz-transition: all 0.14s ease-in-out;       
+}
+ 
+hr{
+    border:2px solid #b9dbf4;
+    margin-bottom:0;
+}
+/*快捷按钮*/
+  @import "compass/css3";  
+        .hovicon {
+            display: inline-block;
+            font-size: 45px;
+            /*line-height: 90px;*/
+            cursor: pointer;
+            margin: 20px;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            text-align: center;
+            position: relative;
+            text-decoration: none;
+            z-index: 1;
+            color: #ff5f80;
+        }
+
+            .hovicon.small {
+                font-size: 14px;
+                line-height: 45px;
+                width: 45px;
+                height: 45px;
+                margin: 7px;
+            }
+
+            .hovicon.mini {
+                font-size: 12px;
+                line-height: 32px;
+                width: 30px;
+                height: 30px;
+                margin: 7px;
+            }
+
+            .hovicon.auto-width {
+                width: auto;
+                height: auto;
+                padding: 15px;
+            }
+
+            .hovicon:after {
+                pointer-events: none;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                content: '';
+                -webkit-box-sizing: content-box;
+                -moz-box-sizing: content-box;
+                box-sizing: content-box;
+            }
+
+            .hovicon:before {
+                speak: none;
+                font-size: 48px;
+                line-height: 90px;
+                font-style: normal;
+                font-weight: normal;
+                font-variant: normal;
+                text-transform: none;
+                display: block;
+                -webkit-font-smoothing: antialiased;
+            }
+            /* Effect 1 */
+            .hovicon.effect-1 {
+                background: rgba(255, 255, 255, 0.1);
+                -webkit-transition: background 0.2s, color 0.2s;
+                -moz-transition: background 0.2s, color 0.2s;
+                transition: background 0.2s, color 0.2s;
+            }
+
+                .hovicon.effect-1:after {
+                    top: -12px;
+                    left: -12px;
+                    padding: 12px;
+                    box-shadow: 0 0 0 4px #ff5f80;
+                    -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+                    -webkit-transform: scale(.8);
+                    -moz-transition: -moz-transform 0.2s, opacity 0.2s;
+                    -moz-transform: scale(.8);
+                    -ms-transform: scale(.8);
+                    transition: transform 0.2s, opacity 0.2s;
+                    transform: scale(.8);
+                    opacity: 0;
+                }
+                /* Effect 1a */
+                .hovicon.effect-1.sub-a:hover {
+                    /*background: rgba(225, 255, 255, 1);*/
+                    color: #ff5f80;
+                }
+
+                    .hovicon.effect-1.sub-a :hover img {
+                       height:100px;
+                    }
+
+                    .hovicon.effect-1.sub-a:hover:after {
+                        -webkit-transform: scale(1);
+                        -moz-transform: scale(1);
+                        -ms-transform: scale(1);
+                        transform: scale(1);
+                        opacity: 1;
+                    }
+            /* Effect 2 */
+           
+                .hovicon.effect-2:after {
+                    top: -12px;
+                    left: -12px;
+                    padding: 12px;
+                    box-shadow: 0 0 0 4px #8f41f5;
+                    -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+                    -webkit-transform: scale(.8);
+                    -moz-transition: -moz-transform 0.2s, opacity 0.2s;
+                    -moz-transform: scale(.8);
+                    -ms-transform: scale(.8);
+                    transition: transform 0.2s, opacity 0.2s;
+                    transform: scale(.8);
+                    opacity: 0;
+                }
+              
+            /* Effect 3*/
+           
+                .hovicon.effect-3:after {
+                    top: -12px;
+                    left: -12px;
+                    padding: 12px;
+                    box-shadow: 0 0 0 4px #0c85ff;
+                    -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+                    -webkit-transform: scale(.8);
+                    -moz-transition: -moz-transform 0.2s, opacity 0.2s;
+                    -moz-transform: scale(.8);
+                    -ms-transform: scale(.8);
+                    transition: transform 0.2s, opacity 0.2s;
+                    transform: scale(.8);
+                    opacity: 0;
+                }
+               
+            /* Effect 4 */
+            
+                .hovicon.effect-4:after {
+                    top: -12px;
+                    left: -12px;
+                    padding: 12px;
+                    box-shadow: 0 0 0 4px #fe9c2e;
+                    -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+                    -webkit-transform: scale(.8);
+                    -moz-transition: -moz-transform 0.2s, opacity 0.2s;
+                    -moz-transform: scale(.8);
+                    -ms-transform: scale(.8);
+                    transition: transform 0.2s, opacity 0.2s;
+                    transform: scale(.8);
+                    opacity: 0;
+                }
+              
+            /* Effect 5 */            
+                .hovicon.effect-5:after {
+                    top: -12px;
+                    left: -12px;
+                    padding: 12px;
+                    box-shadow: 0 0 0 4px #00a2d7;
+                    -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+                    -webkit-transform: scale(.8);
+                    -moz-transition: -moz-transform 0.2s, opacity 0.2s;
+                    -moz-transform: scale(.8);
+                    -ms-transform: scale(.8);
+                    transition: transform 0.2s, opacity 0.2s;
+                    transform: scale(.8);
+                    opacity: 0;
+                }
+               
+            /* Effect 6 */
+            
+                .hovicon.effect-6:after {
+                    top: -12px;
+                    left: -12px;
+                    padding: 12px;
+                    box-shadow: 0 0 0 4px  #74FFD0;                  
+                    -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+                    -webkit-transform: scale(.8);
+                    -moz-transition: -moz-transform 0.2s, opacity 0.2s;
+                    -moz-transform: scale(.8);
+                    -ms-transform: scale(.8);
+                    transition: transform 0.2s, opacity 0.2s;
+                    transform: scale(.8);
+                    opacity: 0;
+                }
+              
+        @-webkit-keyframes sonarEffect {
+            0% {
+                opacity: 0.3;
+            }
+
+            40% {
+                opacity: 0.5;
+                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+
+            100% {
+                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255, 255, 255, 0.5);
+                -webkit-transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        @-moz-keyframes sonarEffect {
+            0% {
+                opacity: 0.3;
+            }
+
+            40% {
+                opacity: 0.5;
+                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+
+            100% {
+                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255, 255, 255, 0.5);
+                -moz-transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        @keyframes sonarEffect {
+            0% {
+                opacity: 0.3;
+            }
+
+            40% {
+                opacity: 0.5;
+                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+
+            100% {
+                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255, 255, 255, 0.5);
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+.col-lg-9{
+    padding-left:0px;
+    padding-right:0px;
+}

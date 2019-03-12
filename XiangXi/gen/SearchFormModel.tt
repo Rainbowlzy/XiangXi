@@ -1,0 +1,147 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ include file="..\..\XiangXiEntities\CodeTemplates\Manager.ttinclude"#>
+<#@ output extension=".cs" #>
+<#@ import namespace="XiangXiENtities.CodeTemplates" #>
+<#@ assembly name="$(SolutionDir)\Generator\bin\Debug\Generator.dll"#>
+
+/* ------------------------------------------------------------ *
+ * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
+ * 生成时间：<#=DateTime.Now#>
+ * 生成版本：<#=g.DomainVersionTime#> 
+ * 作者：路正遥
+ * ------------------------------------------------------------ */
+using System;
+
+namespace XiangXi.Evaluators 
+{
+<#
+foreach(var table in table_schema)
+{
+	var tbl = table.Key;
+#>
+    /// <summary>
+    /// <#=table_schema2[tbl].table_name_ch#> 搜索条件实体模型
+    /// </summary>
+    public class <#=tbl#>SearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+<#
+foreach(var col in table_schema2[tbl].Columns.Where(p=>!string.IsNullOrEmpty(p.column_name))){
+#>
+<#
+if (col.dbtype.ToLower()=="int"){
+    #>
+
+        /// <summary>
+        /// 最小<#=col.column_description#>
+        /// </summary>
+        public int? Min<#=col.column_name#> { get; set; }
+
+        /// <summary>
+        /// 最大<#=col.column_description#>
+        /// </summary>
+        public int? Max<#=col.column_name#> { get; set; }
+<#
+}
+else if (col.dbtype.ToLower().Contains("decimal")){
+    #>
+
+        /// <summary>
+        /// 最小<#=col.column_description#>
+        /// </summary>
+        public <#=col.dbtype.ToLower()#>? Min<#=col.column_name#> { get; set; }
+
+        /// <summary>
+        /// 最大<#=col.column_description#>
+        /// </summary>
+        public <#=col.dbtype.ToLower()#>? Max<#=col.column_name#> { get; set; }
+<#
+}
+else if (col.dbtype.ToLower().Contains("real")){
+    #>
+
+        /// <summary>
+        /// 最小<#=col.column_description#>
+        /// </summary>
+        public int? Min<#=col.column_name#> { get; set; }
+
+        /// <summary>
+        /// 最大<#=col.column_description#>
+        /// </summary>
+        public int? Max<#=col.column_name#> { get; set; }
+<#
+}
+else if (col.dbtype.ToLower().Contains("money")){
+    #>
+
+        /// <summary>
+        /// 最小<#=col.column_description#>
+        /// </summary>
+        public decimal? Min<#=col.column_name#> { get; set; }
+
+        /// <summary>
+        /// 最大<#=col.column_description#>
+        /// </summary>
+        public decimal? Max<#=col.column_name#> { get; set; }
+<#
+}
+else if (col.dbtype.ToLower()=="datetime"){
+    #>
+
+        /// <summary>
+        /// 开始<#=col.column_description#>
+        /// </summary>
+        public DateTime? From<#=col.column_name#> { get; set; }
+
+        /// <summary>
+        /// 结束<#=col.column_description#>
+        /// </summary>
+        public DateTime? To<#=col.column_name#> { get; set; }
+<#
+}
+else if(col.column_name.ToLower().Contains("state")){
+    #>
+        /// <summary>
+        /// <#=col.column_description#>
+        /// </summary>
+        public string[] <#=col.column_name#> { get; set; }
+<#
+}
+else {
+    #>
+        /// <summary>
+        /// <#=col.column_description#>
+        /// </summary>
+        public string <#=col.column_name#> { get; set; }
+<#
+}
+
+#>
+<#
+}
+#>
+
+    }
+<#
+}
+#>
+}

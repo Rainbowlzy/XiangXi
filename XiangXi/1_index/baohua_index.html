@@ -1,0 +1,334 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <meta charset="utf-8"/>
+    <link href="../assets/css/0-common/bootstrap.css" rel="stylesheet"/>
+    <!--<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!--<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>-->
+    <!--<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <!--<script src="https://cdn.bootcss.com/holder/2.9.0/holder.min.js"></script>-->
+    <script src="../assets/js/0-common/holder.min.js"></script>
+    <script src="../assets/js/0-common/echarts.js"></script>
+    <script src="../assets/js/0-common/codemirror.js"></script>
+    <script src="../assets/js/0-common/javascript.js"></script>
+    <script src="../assets/js/0-common/echarts-all.js"></script>
+    <script src="../assets/js/0-common/pie.js"></script>
+    <!--<script src="../assets/js/0-common/jquery.min.js"></script>-->
+    <!--<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>-->
+    <!--<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>-->
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+    <script src="../assets/js/2-index/baohua_index.js"></script>
+
+    <style>
+        body { /*background: lightblue*/ }
+
+        * { font-family: 微软雅黑; }
+
+        #container {
+            height: 710px;
+            width: 1498px;
+        }
+
+        #lside {
+            /*background-color: gray;
+            border: 1px solid white;*/
+            float: left;
+            height: 710px;
+            width: 15%;
+        }
+
+        #rside {
+            /*background: gray;*/
+            /*border: 1px solid red;*/
+            float: left;
+            height: 710px;
+            width: 80%;
+        }
+
+        #down {
+            float: inherit;
+            height: 200px;
+            margin-left: 10px;
+            overflow: hidden;
+            width: 100%;
+            /*border: 1px solid red;*/
+        }
+
+        .modal-header {
+            float: left;
+            height: 200px;
+            width: 100%;
+            /*border: 1px solid red;*/
+        }
+
+        #up {
+            float: left;
+            height: 55px;
+            width: 100%;
+            /*border: 1px solid red;*/
+        }
+
+        #body {
+
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+
+        #body-left {
+            /*border: 1px solid blue;*/
+            float: left;
+            height: 455px;
+            width: 30%;
+        }
+
+        #body-right {
+            /*border: 1px solid blue;*/
+            float: left;
+            height: 455px;
+            width: 500px;
+        }
+
+        .i {
+            /*border: 4px solid blue;*/
+            display: none;
+            height: 300px;
+            width: 300px;
+        }
+
+    </style>
+    <script>
+        window.onload = function() {
+            var inputs = document.querySelectorAll('input');
+            var divs = document.querySelectorAll('.i');
+
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].index = i;
+                inputs[i].onclick = function() {
+                    for (var i = 0; i < inputs.length; i++) {
+                        inputs[i].style.background = '';
+                        divs[i].style.display = 'none';
+                    }
+                    this.style.background = 'yellow';
+                    divs[this.index].style.display = 'block';
+                };
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="app">
+    <div class="row" style="height: 100px; background-image: url('../assets/i/bj.jpg'); background-position-y: -40px;">
+
+    </div>
+    <div id="lside">
+        <div class="">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-primary">
+                    <div class="panel-heading" role="tab" id="">
+                        <h4 class="panel-title">
+                            <a href="/XiangXi/1_index/baohua_index.html">首页</a>
+                        </h4>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading" role="tab" id="">
+                        <h4 class="panel-title">
+                            <a @click="redirect({MCLink:'/XiangXi/gen/UserInformationList.html',MCTitle:'用户信息'})">用户信息</a>
+                        </h4>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading" role="tab" id="">
+                        <h4 class="panel-title">
+                            <a @click="redirect({MCLink:'/XiangXi/gen/RoleConfigurationList.html',MCTitle:'角色配置'})">角色配置</a>
+                        </h4>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading" role="tab" id="">
+                        <h4 class="panel-title">
+                            <a @click="redirect({MCLink:'/XiangXi/gen/MenuConfigurationList.html',MCTitle:'菜单配置'})">菜单配置</a>
+                        </h4>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading" role="tab" id="">
+                        <h4 class="panel-title">
+                            <a @click="redirect({MCLink:'/XiangXi/0_common/UserRoles.html',MCTitle:'用户角色配置'})">用户角色配置</a>
+                        </h4>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading" role="tab" id="">
+                        <h4 class="panel-title">
+                            <a @click="redirect({MCLink:'/XiangXi/0_common/menurole.html',MCTitle:'角色菜单配置'})">角色菜单配置</a>
+                        </h4>
+                    </div>
+                </div>
+
+                <div v-for="li in rows" class="panel panel-primary">
+                    <template v-if="li">
+                        <!--加载顶级标签-->
+                        <div class="panel-heading" role="tab" v-if="li.MCLink">
+                            <h4 class="panel-title">
+                                <a @click="redirect(li)">{{li.MCTitle}}</a>
+                            </h4>
+                        </div>
+                        <!--加载层级标签-->
+                        <div class="panel-heading" role="tab" v-else-if="li.arr">
+                            <h4 class="panel-title">
+                                <!--层级标签顶部-->
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" v-bind:href="'#'+li.MCTitle" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
+                                    {{li.MCTitle}}
+                                </a>
+                            </h4>
+                        </div>
+                        <!--加载子菜单-->
+                        <div v-bind:id="li.MCTitle" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" style="height: 0px;">
+                            <div class="list-group">
+                                <a v-for="ii in li.arr" @click="redirect(ii)" class="list-group-item">{{ii.MCTitle}}</a>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a href="/XiangXi/baohua_login.html">登录</a>
+                        </h4>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="rside">
+        <div id="main">
+            <div id="up">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="#">宝华</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户信息<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#">信息查询</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">密码修改</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </div>
+            <div id="down">
+                <div class="modal-header">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active">
+                                <img src="../assets/i/da6bb0e2-b7dd-45f9-a285-64033cb344a6.png" alt="...">
+                                <div class="carousel-caption">
+                                    图片1
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="holder.js/1196x160" alt="...">
+                                <div class="carousel-caption">
+                                    图片2
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="holder.js/1196x160" alt="...">
+                                <div class="carousel-caption">
+                                    图片3
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                            <span id="span1" class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                            <span id="span2" class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="body">
+            <div id="body-left">
+                <ul id="myTab" class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#home" data-toggle="tab" style="color: black; font-weight: bold">菜鸟教程</a>
+                    </li>
+                    <li>
+                        <a href="#ios" data-toggle="tab" style="color: black; font-weight: bold">iOS</a>
+                    </li>
+                    <li>
+                        <a href="#jmeter" data-toggle="tab" style="color: black; font-weight: bold">jmeter</a>
+                    </li>
+
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade in active" id="home">
+                        <p>
+                            菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，
+                            帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。
+                        </p>
+                    </div>
+                    <div class="tab-pane fade" id="ios">
+                        <p>
+                            iOS 是一个由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple
+                            TV。iOS 派生自 OS X，它们共享 Darwin 基础。OS X 操作系统是用在苹果电脑上，iOS 是苹果的移动版本。
+                        </p>
+                    </div>
+                    <div class="tab-pane fade" id="jmeter">
+                        <p>jMeter 是一款开源的测试软件。它是 100% 纯 Java 应用程序，用于负载和性能测试。</p>
+                    </div>
+
+                </div>
+            </div>
+            <div id="body-right">
+                <div style="height: 400px; width: 500px;" id="pie"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function setIframeHeight(iframe) {
+        if (iframe) {
+            var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+            if (iframeWin.document.body) {
+                iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+            }
+        }
+    };
+
+    window.onload = function () {
+        setIframeHeight(document.getElementsByName('iframe')[0]);
+    };
+</script>
+
+
+</body>
+</html>

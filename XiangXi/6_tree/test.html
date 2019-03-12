@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>树形图</title>
+
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/common.css" rel="stylesheet" />
+    <link href="Treant.css" rel="stylesheet">
+    <link href="test.css" rel="stylesheet">
+
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+
+    <script src="Treant.js"></script>
+    <script src="raphael.js"></script>
+
+    <style>
+        .am-btn {
+            margin: 10px 10px;
+        }
+    </style>
+    <style>
+        /*body{transform: scale(1.2);}*/
+        .c-title {
+            /*line-height: 97px;*/
+            /*height: 97px;*/
+            color: #ffffff;
+        }
+
+        .navbar-nav-cust {
+            font-size: 32px;
+        }
+
+            .navbar-nav-cust > li > a {
+                color: #ffffff;
+            }
+
+                .navbar-nav-cust > li > a:hover {
+                    background: transparent;
+                    /*font-size: 30px;*/
+                    color: rgb(255, 165, 77);
+                }
+
+        ul.nav > li > a:last-child :hover {
+            color: #ffffff !important;
+        }
+
+        #nav ul li {
+            margin: 18px 5px;
+        }
+
+        .c-shadow {
+            background-color: rgba(97, 255, 255, 0.15);
+            border-radius: 10px;
+            margin: 20px 10px;
+        }
+    </style>
+    <link href="../assets/css/2-index/business.css" rel="stylesheet" />
+
+</head>
+
+<body style="width: 100%; margin: 0 auto; overflow: auto;">
+    <div id="app">
+
+        <page-top></page-top>
+        <div id="container ">
+            <div id="dynamicTree">
+            </div>
+        </div>
+    </div>
+
+
+<script>
+    require([ 'vue', 'cmodules','raphael','Treant'],
+        function(Vue) {
+            new Vue({
+                mounted: function() {
+                    var config = {
+                            container: "#dynamicTree",
+
+                            connectors: {
+                                type: 'step'
+                            },
+                            node: {
+                                HTMLclass: 'nodeExample1'
+                            }
+                        },
+                        ceo = {
+                            text: {
+                                name: "总经理",
+                                title: "许春华",
+                            }
+                        },
+
+                        cto = {
+                            parent: ceo,
+                            text: {
+                                name: "副总经理",
+                                title: "张咏梅",
+                            },
+                            stackChildren: true,
+                        },
+                        cbo = {
+                            parent: ceo,
+                            stackChildren: true,
+                            text: {
+                                name: "副总经理",
+                                title: "葛振华",
+                            }
+                        },
+                        cio = {
+                            parent: cto,
+                            text: {
+                                name: "经营性物业管理",
+                                title: "王建荣、王建男、韩永春"
+                            }
+                        },
+                        ciso2 = {
+                            parent: cbo,
+                            text: {
+                                name: "财税",
+                                title: "朱秋媛"
+                            }
+                        },
+                        ciso3 = {
+                            parent: cbo,
+                            text: {
+                                name: "法务",
+                                title: "葛振华"
+                            }
+                        },
+                        ciso4 = {
+                            parent: cbo,
+                            text: {
+                                name: "投资",
+                                title: "葛振华"
+                            }
+                        },
+
+                        chart_config = [
+                            config,
+                            ceo,
+                            cto,
+                            cbo,
+                            cio,
+                            ciso2,
+                            ciso3,
+                            ciso4
+                        ];
+                    new Treant(chart_config);
+
+                }
+            }).$mount("#app")
+        });
+</script>
+</body>
+
+</html>

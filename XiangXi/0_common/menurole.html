@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>香溪社区管理平台</title>
+    <link href="../assets/css/0-common/bootstrap.css" rel="stylesheet" />
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+    <script src="../assets/js/0-common/menurole.js"></script>
+
+    <style>
+        h3 {
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<div id="app" style="margin-left:20px; margin-top:20px;">
+    <div class="row">
+        <div class="col-xs-6" style="margin-bottom: 20px;">
+            <a href="/XiangXi/gen/CadreList.html" id="table-back" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>返回</a>
+            <button type="button" class="btn btn-info excel-import-button-Cadre"><i class="glyphicon glyphicon-cloud-upload"></i>Excel导入</button>
+            <a href="/XiangXi/ExportSchema.ashx?title=Cadre" class="btn btn-primary">Excel模板</a>
+            <button type="button" id="submit" @click="save" class="btn  btn-info"><i class="glyphicon glyphicon-circle-arrow-up"></i>提交</button>
+            <button type="button" class="btn btn-primary" onclick="$(':checked').click();$('[type=checkbox]').click()">全选</button>
+        </div>
+    </div>
+    <div>
+        <table border="1" style="text-align:center;">
+            <tr>
+                <td>
+                    <h3>菜单\角色</h3>
+                </td>
+                <td v-for="u in roles">
+                    <h3>
+                        {{u.RCRoleName}}
+                    </h3>
+                </td>
+            </tr>
+            <tr v-for="m in menus">
+                <td>
+                    <h3>{{m.MCTitle}}</h3>
+                </td>
+                <td v-for="u in roles">
+                    <input type="checkbox"
+                           :checked="any(m.MCTitle,u.RCRoleName)"
+                           v-bind:class="u.RCRoleName+':'+m.MCTitle"
+                           style="width: 50px; height: 50px;"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

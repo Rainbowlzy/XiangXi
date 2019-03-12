@@ -1,0 +1,92 @@
+  
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>视频监控基本信息</title>
+    <meta charset="utf-8" />
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap-table.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/common.css" rel="stylesheet" />
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+    <script src="BasicInformationOfVideoSurveillanceList.js"></script>
+	<style>
+	.am-btn{
+		margin:10px 10px;
+	}
+	</style>
+</head>
+<body>
+    <div class="container">
+		<h3>视频监控基本信息</h3>
+		<div id="myAlert" class="alert alert-warning" style="display:none;">
+			<a href="#" class="close" data-dismiss="alert">&times;</a>
+			<h3></h3>
+		</div>
+		<div class="row">
+			
+        <div style="float:left;margin-top:5px;" id="buttonBasicInformationOfVideoSurveillance">
+			<a href="javascript:history.go(-1)" id="table-back" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>返回</a>
+            <!--<button id="table-remove" type="button" class="btn btn-danger" disabled="disabled"><i class="glyphicon glyphicon-remove"></i>删除</button>-->
+            <a href="javascript:location.href=location.href[0]=='f'?'BasicInformationOfVideoSurveillance.html':'/XiangXi/gen/BasicInformationOfVideoSurveillance.html?'+parseParam(GetRequest())" id="table-add" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>新增</a>
+			<div style="display:none;" >
+                <ol class="breadcrumb" id="cnavBasicInformationOfVideoSurveillance">
+				
+                </ol>
+            </div>
+        </div>
+		</div>
+        <table id="tableBasicInformationOfVideoSurveillance" data-toolbar="#toolbar"
+                data-search="true"
+                data-show-refresh="true"
+                data-show-toggle="true"
+                data-show-columns="true"
+                data-show-export="true"
+                data-pagination="true"
+                data-page-list="[10, 25, 50, 100, ALL]"
+                data-page-size="5"
+                data-id-field="id"
+                data-side-pagination="server"></table>
+				
+        </div>	
+					
+		<div class="modal fade table_excel_modal-BasicInformationOfVideoSurveillance">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Excel导入</h4>
+					</div>
+					<div class="modal-body"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<!--<button type="button" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i>确定</button>-->
+					</div>
+				</div>
+			</div>
+		</div>
+    <div class="modal fade" id="html-peek">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">预览</h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

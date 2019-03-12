@@ -1,0 +1,129 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ include file="..\..\XiangXiEntities\CodeTemplates\Manager.ttinclude"#>
+<#@ output extension=".cs" #>
+<#@ import namespace="XiangXiENtities.CodeTemplates" #>
+<#@ assembly name="$(SolutionDir)\Generator\bin\Debug\Generator.dll"#>
+
+/* ------------------------------------------------------------ *
+ * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
+ * 生成时间：<#=DateTime.Now#>
+ * 生成版本：<#=g.DomainVersionTime#> 
+ * 作者：路正遥
+ * ------------------------------------------------------------ */
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.IO;
+using System.ServiceModel;
+using System.ServiceModel.Web;
+using XiangXi.Evaluators;
+
+using XiangXi.Models;
+using System.Text;
+using System.Data.Entity.Migrations;
+using XiangXiENtities.EF;
+using XiangXiENtities.EF.NewEntities;
+
+namespace XiangXi
+{
+    public class ImportProc
+    {	
+        public static string ExportEntities(string title)
+        {
+            var buf = new StringBuilder();
+            using (var tx = new DefaultContext())
+            {
+				if(string.IsNullOrEmpty(title)) return string.Empty;
+				<#
+				foreach(var table in table_schema)
+				{
+							#>
+							
+				else if (title == "<#=table.Key#>")
+				{
+					buf.AppendLine("唯一编号\t<#=string.Join("\\t",table_schema2[table.Key].Columns.Select(p=>p.column_description))#>\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
+					var type = typeof (<#=table.Key#>);
+					foreach (var entity in tx.<#=table.Key#>)
+					{
+						buf.Append(entity.id);
+						buf.Append("\t");
+						
+						<#
+						foreach(var col in table_schema2[table.Key].Columns){
+							#>
+							
+						buf.Append(entity.<#=col.column_name#>);buf.Append("\t");
+							<#
+						}
+						#>
+
+                        buf.Append(entity.ord); buf.Append("\t");
+                        buf.Append(entity.VersionNo); buf.Append("\t");
+                        buf.Append(entity.TransactionID); buf.Append("\t");
+                        buf.Append(entity.CreateBy); buf.Append("\t");
+                        buf.Append(entity.CreateOn); buf.Append("\t");
+                        buf.Append(entity.UpdateBy); buf.Append("\t");
+                        buf.Append(entity.UpdateOn); buf.Append("\t");
+                        buf.Append(entity.DataLevel); buf.Append("\r\n");
+					}
+				}
+				<#
+							}#>
+            }
+            return buf.ToString();
+        }
+
+		public static void Proc(
+			string fileType,
+			string filePath,
+			UserInformation user,
+			out StringBuilder errorMsg){
+			errorMsg = new StringBuilder();
+            using (var tx = new DefaultContext())
+            {
+                Dictionary<string, Dictionary<string, string>> dic = null;
+                string cacheFile = "table_mapping_file<#=g.DomainVersionTime.ToString().Replace("/","-").Replace(" ","-").Replace(":","-")#>.txt";
+                if (File.Exists(cacheFile))
+                    dic = File.ReadAllText(cacheFile).Deserialize<Dictionary<string, Dictionary<string, string>>>();
+                else
+                {
+#region init
+					dic = new Dictionary<string, Dictionary<string,string>>();
+				<#
+				foreach(var table in table_schema)
+				{
+					#>
+					
+					dic.Add("<#=table.Key#>", new Dictionary<string,string>{ <#=string.Join(",",table_schema[table.Key].Select(p=>"{\""+p.column_name+"\",\""+p.column_description+"\"}"))#> });
+					<#
+				}#>
+
+					File.WriteAllText(cacheFile,dic.ToJson());
+#endregion
+				}
+				var transactionId = Guid.NewGuid().ToString();
+                var keypair = dic[fileType]; //commentses.ToDictionary(f => f.column_name, f => f.column_description);
+                if (string.IsNullOrEmpty(fileType)) return ;<#
+					//http://localhost/XiangXiNewService/Service.svc/GET?data={method:%27VTest%27}
+					foreach(var table in table_schema2)
+					{
+					#>
+
+				else if (fileType == "<#=table.Key#>") ExcelHelper.ExcelToNewEntityList<<#=table.Key#>>(keypair, filePath, out errorMsg).ForEach(one=>{
+				one.id = one.id ?? Guid.NewGuid().ToString();
+                    one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                    one.UpdateBy = user?.UILoginName ?? "未登录用户";
+                    one.CreateOn = one.CreateOn ?? DateTime.Now;
+                    one.TransactionID = transactionId;
+                    one.UpdateOn = DateTime.Now;
+                    one.IsDeleted = 0;
+                    one.DataLevel = user?.DataLevel ?? "01";
+					tx.<#=table.Key#>.AddOrUpdate(one);
+					});<#
+					}#>
+					tx.SaveChanges();
+            }
+		}
+    }
+}

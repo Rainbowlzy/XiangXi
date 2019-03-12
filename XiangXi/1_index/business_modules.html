@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <title>香溪信息工作平台</title>
+    <meta charset="utf-8"/>
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/common.css" rel="stylesheet"/>
+    <link href="../assets/css/2-index/business.css" rel="stylesheet"/>
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+
+    <!--
+    2. 首页监控作为地图悬浮，不在左侧显示。	8	进行中	韩菲
+    4. 左侧边栏可伸缩	8	进行中	韩菲
+    6. 需要有监控回看	16	进行中	路正遥
+    7. 给村长和村书记显示监控点位按钮悬浮	16	进行中	丁秋阳
+    8. 菜单选中加背景色	4	进行中	韩菲
+    10. 统计图点击查看大图	8	进行中	丁秋阳
+    11. 地图块分级显示	16	进行中	丁秋阳
+    12. 以视角显示某半径圈内的点位	16	进行中	韩菲
+    13. 类宝华信息框	16	进行中	韩菲
+    14. 配色调整	16	进行中	韩菲
+    15. 菜单配置按功能表	8	进行中	丁秋阳
+    1. 内页添加党史模块	8	进行中	韩菲
+    2. 内页添加村史模块	8	进行中	韩菲
+    3. 课堂记录改成三会一课	4	进行中	丁秋阳
+    4. 专项工作加载顶级菜单，专项工作内页设计	16	进行中	韩菲
+    5. 表格里面加定位跳转	16	进行中	丁秋阳
+    6. 工业园和三产改产业载体管理改经济管理	4	进行中	韩菲
+    7. 扁平化显示方式，例如厂房分类显示在内页	16	进行中	韩菲
+    8. 厂房改经营性物业载体	4	进行中	韩菲
+    9. 人口加一个关爱人员加权限	8	进行中	丁秋阳
+    10. 去掉家庭	4	进行中	丁秋阳
+    11. 用户信息改工作人员信息	4	进行中	丁秋阳
+    12. 基础人口排在第一	4	进行中	丁秋阳
+    13. 股民改图标，使用香溪股民证	4	进行中	韩菲
+    14. 村务管理加东山的模块加工作记录	16	进行中	丁秋阳
+    15. 信息互动加两块东西，村民反馈和处理两大模块	16	进行中	韩菲
+    16. 专项工作放在首级菜单	4	进行中	丁秋阳
+    17. 首页统计改成专项工作条目	4	进行中	韩菲
+    18. 给出app二维码，用于推广	16	进行中	王荣成
+    19. 照片审核功能	8	进行中	路正遥
+    20. 电视党建改成党建加摄影，摄影的模块改成社区专用宣传内容	16	进行中	王荣成
+    -->
+
+    <style>
+        .c-title {
+            /*line-height: 97px;*/
+            /*height: 97px;*/
+            color: #ffffff;
+        }
+
+        .navbar-nav-cust {
+            font-size: 24px;
+        }
+
+        .navbar-nav-cust > li > a {
+            color: #ffffff;
+        }
+
+        .navbar-nav-cust > li > a:hover {
+            background: transparent;
+            font-size: 30px;
+            color: rgb(255, 165, 77);
+        }
+
+    </style>
+</head>
+<body style="
+background:transparent !important;
+height: 1080px;
+width:1920px;
+overflow: hidden;
+">
+
+<script>
+    require(['vue', 'jquery', 'bootstrap', 'cmodules'], function (Vue, $) {
+        $.login()
+        var request = GetRequest() || {
+                    data: JSON.stringify({
+                        MCTitle: '首页'
+                    })
+                };
+
+//    var requiredmenu = ",村务管理,党建管理,人口管理,村务地图,信息互动,厂房管理,统计管理,运维管理,经济管理,工业园和三产,";
+        $.call("GetMenuConfigurationByAuth", {"offset": 0, "limit": 800}, function (datum) {
+            if (!datum.success) {
+                alert(datum.message);
+                return;
+            }
+            console.log(datum)
+            // category = 首页背景图片
+            $(document.body).css({
+                //"background-image": "url("+(datum.background||'../assets/i/metaicon/e.jpg')+")",
+                "height": '1080px',
+                'width': '1920px',
+                'overflow': 'hidden',
+            })
+            var secondmenu = datum.rows//.filter(i => requiredmenu.indexOf(',' + i.MCTitle + ',') != -1)
+            var menu = JSON.parse(request.data);
+            $.call('getthirdmenu', menu, function (thirdmenujson) {
+
+                Vue.filter('json', function (val) {
+                    return JSON.stringify(val);
+                })
+
+                var thirdmenu = (thirdmenujson || []).map(function (i) {
+                    return ({img: i.MCPicture, link: svcHeader + i.MCLink, title: i.MCTitle})
+                }).filter(function (e) {
+                    return e;
+                })
+
+                var vm = new Vue({
+                    el: '#container',
+                    data: {
+                        secondmenu: secondmenu,
+                        thirdmenu: thirdmenu,
+                        svcHeader: svcHeader,
+                        colorlist: "ff6c6c,ffa54d,5c9cf4,23c9d3,f4bd52,2eb8e5,ac8cf5,55c795ff6c6c,ffa54d,5c9cf4,23c9d3,f4bd52,2eb8e5,ac8cf5,55c795".split(',')
+                    },
+                    mounted: function () {
+                        var caption = JSON.parse(request.data).MCTitle;
+                        console.log($(':contains(' + caption + ')').size(), request, ':contains(' + caption + ')')
+                        $(':contains(' + caption + ')').css({
+                            'color': '#ffa54d'
+                        })
+                        if (location.href.indexOf('?') != -1)return;
+                        var mapmenu = {
+                            "id": "d0fde592-2d11-4d82-bcd8-a8087a9ac915",
+                            "MCTitle": "村务地图",
+                            "MCLink": "/XiangXi/2_map/map.html?lnglat=[120.511929,31.252366]&zoom=16",
+                            "MCPicture": "/XiangXi/Upload/Image/966385cf-13d8-4381-8d08-cd74daa5cea5.png",
+                            "MCMenuType": "首页菜单",
+                            "TransactionID": "ca1227e1-0792-499b-b6a5-dfb4a4ef72fc",
+                            "CreateBy": "xiangxi",
+                            "CreateOn": "2018-05-16T00:00:00",
+                            "UpdateBy": "xiangxi",
+                            "UpdateOn": "2018-05-16T22:51:43.79"
+                        };
+                        this.redirect(mapmenu);
+
+                    }
+                    ,
+                    methods: {
+                        isdirect: function (row) {
+                            return row && (row.MCLink || row.link) && (row.MCLink || row.link).indexOf('business.html') === -1;
+                        },
+                        redirect: function (p) {
+                            //$("iframe").remove();
+                            $('#third-menu').hide();
+                            var link = p.link || p.MCLink || '';
+                            if (link.indexOf(svcHeader) !== -1)link = link.substr(svcHeader.length);
+                            link = svcHeader + link;
+                            $('iframe').remove();
+
+                            if ($("iframe").size() == 0)
+                                var iframe = $("<iframe></iframe>")
+                                        .attr("src", link)
+                                        .attr("width", $(window).width())
+                                        .attr("height", $(window).height())
+                                        .attr("scrolling", "no")
+                                        .attr("frameborder", "0")
+                                        .css({
+//                                        "top": "144px",
+//                                        "position": "absolute",
+                                            "background": "transparent"
+                                        });
+                            else var iframe = $("iframe").attr("src", link);
+                            $(document.body).append(iframe);
+                            $(window).resize(function () {
+                                $(iframe)
+                                        .attr("width", $(window).width())
+                                        .attr("height", $(window).height())
+                            });
+
+                        }
+                    }
+                });
+            });
+        })
+    })
+</script>
+<div id="container" class="container-fluid">
+    <div class="container" v-show="thirdmenu">
+        <div id="third-menu" class="row sub_menu bus">
+            <div id="button-group">
+                <a href="#" v-for="(menut,i) in thirdmenu">
+                    <div class="col-md-4 shown" v-if="menut.img">
+                        <img v-bind:alt="menut.title"
+                             v-bind:src="menut.img"
+                             style="background: transparent"
+                             @click="redirect(menut)"/>
+                        <!--{{menut.title}}-->
+                    </div>
+                    <div class="col-md-4 shown" v-else>
+                        <img v-bind:alt="menut.title"
+                             v-bind:src="menut.img||(svcHeader+'/XiangXi/ImageHandler.ashx?label='+menut.title+'&bgcolor1='+colorlist[i]+'&bgcolor2='+colorlist[i]+'&width=400&height=380&icon='+menut.title+'.png&shape=trirect&fontSize=30')"
+                             style="background: transparent; border-radius: 10px;"
+                             @click="redirect(menut)"/>
+                        <!--{{menut.title}}-->
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

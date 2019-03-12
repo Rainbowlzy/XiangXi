@@ -1,0 +1,866 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <title>姑苏村工作平台</title>
+    <meta charset="utf-8"/>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.10.0/bootstrap-table.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-select/1.10.0/css/bootstrap-select.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
+          rel="stylesheet">
+    <link href="../assets/css/0-common/common.css" rel="stylesheet"/>
+    <link href="../assets/css/2-index/business.css" rel="stylesheet"/>
+    <script src="../assets/UEditor-utf8-net/ueditor.all.min.js"></script>
+    <script src="../assets/js/0-common/require.js"></script>
+    <!--<script src="../assets/js/0-common/require.js"></script>-->
+    <script src="../assets/js/0-common/app.js"></script>
+    <style>
+        /*body{transform: scale(1.2);}*/
+        .c-title {
+            /*line-height: 97px;*/
+            /*height: 97px;*/
+            color: #ffffff;
+        }
+
+        .navbar-nav-cust {
+            font-size: 32px;
+        }
+
+        .navbar-nav-cust > li > a {
+            color: #ffffff;
+        }
+
+        .navbar-nav-cust > li > a:hover {
+            background: transparent;
+            /*font-size: 30px;*/
+            color: rgb(255, 165, 77);
+        }
+
+        ul.nav > li > a:last-child :hover {
+            color: #ffffff !important;
+        }
+
+        #nav ul li {
+            margin: 18px 5px;
+        }
+
+        .c-shadow {
+            background-color: rgba(97, 255, 255, 0.15);
+            border-radius: 10px;
+            margin: 20px 10px;
+        }
+    </style>
+
+    <style type="text/css">#aroundbox {
+        /*padding: 10px 15px;*/
+        box-sizing: border-box;
+        /*min-height: 500px;*/
+        height: 100%;
+    }
+
+    .around-box .recommend-c {
+        height: 100px;
+        padding: 0 14px;
+        padding-top: 2px;
+        border-bottom: 1px dashed #DBDEE2;
+    }
+
+    .around-box .recommend-c .item {
+        width: 25%;
+        height: 100%;
+        float: left;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .around-box .recommend-c .item .img-c {
+        width: 46px;
+        height: 46px;
+        /*	-webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            border-radius: 50%;*/
+        overflow: hidden;
+        /*background: url("/assets/img/around.png") #f4f4f4 no-repeat 0 0;*/
+        /*margin-left: 10px;*/
+        margin: 0 auto;
+        margin-top: 15px;
+    }
+
+    .around-box .recommend-c .item.food-item .img-c {
+        /*background-color: #e94a3f;*/
+    }
+
+    .around-box .recommend-c .item.hotel-item .img-c {
+        /*background-color: #1db5ef;*/
+        background-position: -44px 0;
+    }
+
+    .around-box .recommend-c .item.scenic-item .img-c {
+        /*background-color: #36d270;*/
+        background-position: -88px 0;
+    }
+
+    .around-box .recommend-c .item.cinema-item .img-c {
+        /*background-color: #ac72f8;*/
+        background-position: -134px 0;
+    }
+
+    .around-box .recommend-c .item .img-c img {
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    .around-box .recommend-c .item .name {
+        /*width: calc(100% - 3px);
+        padding: 5px 3px 4px 3px;*/
+        font-size: 14px;
+        padding-top: 10px;
+        color: #6a788c
+    }
+
+    .around-box .recommend-c .item:hover {
+        background: #f8f8f8;
+    }
+
+    .around-box .recommend-c .item:hover .name {
+        color: #1E88E5;
+    }
+
+    .around-box .poi-history-c {
+        /*margin: 20px 0 0;*/
+        /*border-top: 1px solid #ccc;*/
+    }
+
+    .around-box .poi-history-c .poi-history .item {
+        font-size: 13px;
+        /*padding: 6px 5px 4px 5px;*/
+        cursor: pointer;
+        color: #9b9faf;
+        height: 32px;
+        line-height: 32px;
+        padding-left: 14px;
+    }
+
+    .around-box .poi-history-c .poi-history {
+        position: relative;
+        max-height: 192px;
+        margin: 4px 0;
+    }
+
+    .around-box .poi-history-c .poi-history .item:first-child {
+        /*padding-top: 8px;*/
+    }
+
+    .around-box .poi-history-c .poi-history .item:hover {
+        background-color: #FBFBFB;
+    }
+
+    .around-box .poi-history-c .poi-history .item .clock-icon {
+        /*margin: 2px 8px 0 0;*/
+        display: inline-block;
+        margin-right: 8px;
+        /*background: url("/assets/img/icon/clock-icon.png") 0 0 no-repeat;*/
+    }
+
+    .around-box .poi-history-c .poi-history .item .clock-icon .icon-time {
+        font-size: 18px;
+        color: #bbc5ca;
+    }
+
+    .around-box .poi-history-c .poi-history .item .name {
+        display: inline-block;
+        width: 269px;
+        vertical-align: top;
+    }
+
+    .around-box .poi-history-c .poi-history .item .del-item {
+        display: none;
+        line-height: 32px;
+        /*margin: 2px 0 0 2px;*/
+        vertical-align: top;
+        -webkit-transform: scale(0.6);
+        -moz-transform: scale(0.6);
+        -ms-transform: scale(0.6);
+        transform: scale(0.6);
+        opacity: .6;
+        margin-left: 4px;
+    }
+
+    .around-box .poi-history-c .poi-history .item:hover .del-item {
+        display: inline-block;
+    }
+
+    .around-box .poi-history-c .poi-history .item:hover .del-item:hover {
+        opacity: 1;
+    }
+
+    .around-box .poi-history-c .poi-history .item .del-item .iconfont {
+        font-size: 20px;
+    }
+
+    .around-box .poi-history-c .del-all {
+        color: #B2B2B2;
+        /*border-top: 1px solid #F2F5F8;*/
+    }
+
+    .around-box .poi-history-c .del-all .btn {
+        cursor: pointer;
+        padding: 8px 10px 10px;
+        float: right;
+    }
+
+    .around-box .poi-history-c .del-all .btn:hover {
+        color: #565656;
+    }
+
+    .active_banner {
+        width: 100%;
+    }
+
+    .active_banner img {
+        width: 100%;
+    }</style>
+</head>
+<body style="
+overflow: hidden;
+background-image: url('../assets/i/metaicon/e.jpg');
+background-repeat: no-repeat;
+background-size: cover;">
+<div id="app">
+    <div class="row">
+        <div style="">
+            <!--优化图片-->
+            <div style="background:url(../assets/i/metaicon/宝华首页_03.png);
+            margin: 0px 20px;
+            line-height: 50px;width: 471.1px;height: 65.8px;background-size: 100%"></div>
+            <!--<img src="../assets/i/metaicon/宝华首页_03.png"-->
+            <!--alt=""-->
+            <!--style="margin-left: 20px; margin-top: 20px; margin-right: 20px; height: 75px; line-height: 50px;">-->
+
+            <!--优化图片-->
+
+        </div>
+        <!--<div class="col-xs-9">
+            <div class="row">
+                <a href="/XiangXi/1_index/business.html">
+                    <h1 class="c-title"
+                        style="font-size:50px;height:50px; line-height: 50px;">姑苏村信息工作平台</h1>
+                </a>
+            </div>
+        </div>-->
+    </div>
+    <!--顶部菜单-->
+    <div class="row" style="display:none; position:relative; top:-7px;" v-show="secondmenu">
+        <div id="nav">
+            <ul class="nav navbar-nav navbar-nav-cust nav-pills">
+                <li class="nav-item">
+                    <a class="active" href="/XiangXi/1_index/index.html"
+                       :style="current_menu==='首页'?'color:#ffa54d':''">
+                        首页
+                    </a>
+                </li>
+                <li v-for="row in secondmenu" class="nav-item">
+                    <a v-if="isdirect(row)" @click="redirect(row)" href="javascript:void(0)"
+                       :style="current_menu===row.MCTitle?'color:#ffa54d':''">
+                        {{row.MCTitle}}
+                    </a>
+                    <a v-else v-bind:href="row.MCLink || '../1_index/business.html?data='+JSON.stringify(row)"
+                       :style="current_menu===row.MCTitle?'color:#ffa54d':''">
+                        {{row.MCTitle}}
+                    </a>
+                </li>
+                <li id="exit" style="position:absolute; right:30px;">
+                    <a href="../4_login/login.html">
+                        <!--<div style="border-radius: 10px; border: #ffffff 2px solid; padding: 6px 10px; margin-top:-8px;">
+                            <img src="../assets/i/metaicon/退出(1).png" style="height: 20px;">
+                            退出
+                        </div>-->
+                        <div style="margin-top:-13px;">
+                            <img src="../assets/i/metaicon/退出(1).png" style="height: 45px; width:130px;">
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--地图-->
+    <div class="row" style="height: 1000px;">
+        <div class="row" style="height: 100%;">
+            <div class="map_top_nav"
+                 style="font-size: 12px; position:fixed ; z-index: 2000; margin:20px 80px;"
+                 v-show="categories && categories.length>0">
+
+                <div class="col-sm-5" id="so">
+                    <div class="input-group">
+                        <input type="text" class="form-control" @keydown="search" v-model="searchkey"/>
+                        <span class="input-group-addon" @click="search"><a href="#"><i
+                                class="glyphicon glyphicon-search"><span>  搜索  </span></i></a></span>
+                    </div>
+                </div>
+
+                <div v-for="(category,i) in categories" style="margin: 20px 20px;">
+                    <a href="javascript:void(0)" @click="toggle(category)">
+                        <div><img :src="category.data.MCPicture" width="32"></div>
+                        <div>
+                        <span style="color:#000" class="map_span">
+                            <!--{{category.title}}-->
+                        </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="map_right_nav" hidden="hidden" style="display:none; position: fixed; z-index:2000;"
+                 v-show="sub_categories && sub_categories.length">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default" v-for="(sub,i) in sub_categories">
+                        <div class="panel-heading" role="tab" id="heading">
+                            <h4 class="panel-title">
+                                <a role="button"
+                                   href="javascript:void(0)"
+                                   type="population" href="#all"
+                                   @click="toggle_sub(sub)"
+                                   v-bind:class="sub.title"
+                                   aria-expanded="true">
+                                    <i class="glyphicon glyphicon-chevron-right"></i>{{sub.title}}
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="amap" style="
+        width:100%;
+        height:100%;
+        overflow: hidden; border-radius:10px;margin:10px 10px;">
+            </div>
+        </div>
+    </div>
+    <!--豆腐块-->
+    <div class="" v-show="thirdmenu" style="display: none;">
+        <div id="third-menu" class="row sub_menu bus" style="margin:80px 80px;">
+            <div id="button-group" style="margin-top:30px;  margin:auto; vertical-align:central;">
+                <a href="#" v-for="(menut,i) in thirdmenu">
+                    <div class="col-xs-2 shown" v-if="menut.img" style="margin:15px 20px;">
+                        <img v-bind:alt="menut.title" v-bind:src="menut.img"
+                             style="background: transparent; border-radius: 10px; width:180px;height:171px;margin:-10px -10px;"
+                             @click="redirect(menut)"/>
+                    </div>
+                    <div class="col-xs-2 shown" v-else style="margin:15px 20px;">
+                        <img :alt="menut.title"
+                             style="background: transparent; border-radius: 10px;border:#ffffff 1px solid; width:180px;height:171px;margin:-10px -10px;"
+                             @click="redirect(menut)"
+                             :src="menut.img||(svcHeader+'/XiangXi/ImageHandler.ashx?label='+menut.title+'&bgcolor2='+colorlist[i*2]+'&bgcolor1='+colorlist[i*2+1]+'&width=400&height=380&icon='+menut.title+'.png&shape=trirect&fontSize=30')"/>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
+
+
+<script>
+    require(['vue', 'jquery', 'amap'
+        //, '../assets/js/0-common/initfakedmap'
+    ], function (Vue, $) {
+        $(function () {
+            var w = window.screen.width;
+            var zoom = w / 1920;
+            $("#container").css({
+                "zoom": zoom,
+                "-moz-transform": "scale(" + zoom + ")",
+                "-moz-transform-origin": "top left"
+            });
+        });
+        $(function urlborder() {
+            $.call('GetMenuConfigurationByAuth', {}, function (resp) {
+                resp.colorlist = "ff6c6c,ffa54d,5c9cf4,23c9d3,f4bd52,2eb8e5,ac8cf5,55c795,ff6c6c,ffa54d,5c9cf4,23c9d3,f4bd52,2eb8e5,ac8cf5,55c795".split(',')
+                resp.svcHeader = svcHeader;
+                resp.categories = [];
+                resp.sub_categories = [];
+                var vm = new Vue({
+                    mounted: function () {
+                        $('#m6').on("click", function () {
+                            alert("该模块还在开发中！")
+                        });
+                        var request = GetRequest();
+                        if (request) {
+                            if (request.lnglat)
+                                var lnglat = JSON.parse(request.lnglat);
+                            if (request.zoom)
+                                var zoom = JSON.parse(request.zoom);
+                            if (request.markers)
+                                var markers = JSON.parse(request.markers);
+                        }
+
+                        var map = this.map = new AMap.Map('amap', {
+                            resizeEnable: true,
+                            zoom: zoom || 14,
+                            layers: [
+                                new AMap.TileLayer()//高德默认标准图层
+                            ],
+                            center: lnglat || [120.511929, 31.252366]
+                        });
+                        // 绘制姑苏村社区边框图开始
+                        // 据说要不到点位，所以随便画好了。
+                        var address = "香溪社区外框图";
+                        $.call("getpoilist", {search: address, limit: 4000, sort: 'ord'}, function (resp) {
+                            if (!resp) return;
+                            if (!resp.rows) return;
+
+                            var border_points = resp.rows.map(function (t) {
+                                return [t.Longitude, t.Latitude].map(function (k) {
+                                    return parseFloat(k)
+                                });
+                            });
+                            var polygon = new AMap.Polygon({
+                                map: map,
+                                path: border_points,
+                                fillColor: 'blue',
+                                fillOpacity: 0.3,
+                            });
+
+                            var position = $.calcCenter(border_points);
+
+                            var marker = new AMap.Marker({
+                                map: map,
+                                position: [120.511929, 31.252366],
+                                title: "姑苏村社区",
+                                icon: "../assets/i/mapicon/cangf.png"
+                            });
+
+                            marker.on('click',
+                                function (e) {
+                                    var summary = '<p class="MsoNormal">	<b></b></p><p class="MsoNormal" style="text-indent:24.1pt;">	<span style="font-size:18px;">2003年，金星村与镇区三个居委会合并改名为姑苏村社区。姑苏村社区位于木渎中心地段，紧靠镇郊和灵岩山风景区，社区所辖面积1.8平方公里，现有总户数2003户，户籍人口6159户，党员220人。一直以来，社区党委始终坚持以经济发展为中心，以“为民服务”为宗旨，创新发展，转型升级，加强服务，规范管理，全面提升社区的综合实力和服务水平。</span></p><p class="MsoNormal" style="text-indent:24.1pt;">	<span style="font-size:18px;">为加快社区城乡一体化建设，2001年成立江苏省首家社区资产股份合作社，十多年来，社区始终坚持科学发展观，积极探索农村股份合作改革，不断做大做强集体经济，保障村民收益。2017年，社区三个股份合作社固定资产达5亿元，集体收益3657万元，每个股民分红13400元，位居苏州前列。</span></p><p class="MsoNormal" style="text-indent:24.1pt;">	<span style="font-size:18px;">在大力发展经济的同时，社区党委坚持走群众路线，加大投入实施民生工程，真正为民办实事，做好事，受到了上级的肯定和群众的拥护。近几年来，先后获得“全国和谐示范社区、江苏省民主法治示范社区、江苏省科普示范社区，江苏省社会主义新农村建设先进村，苏州市十佳农村新型合作经济组织、苏州市绿色社区”等荣誉称号。</span></p>';
+                                    this.openWindow('<div style="width:800px;"><a href="/XiangXi/0_common/map_editor_tool.html?addr=姑苏村社区外框图&lnglat=' + this.getPosition() + '"><b><span style="font-size:18px;">姑苏村社区简介</span></b></a>' + summary + '</div>');
+                                });
+                            map.setFitView();
+
+                            var summary = '<p class="MsoNormal">	<b></b></p><p class="MsoNormal" style="text-indent:24.1pt;">	<span style="font-size:18px;">2003年，金星村与镇区三个居委会合并改名为姑苏村社区。姑苏村社区位于木渎中心地段，紧靠镇郊和灵岩山风景区，社区所辖面积1.8平方公里，现有总户数2003户，户籍人口6159户，党员220人。一直以来，社区党委始终坚持以经济发展为中心，以“为民服务”为宗旨，创新发展，转型升级，加强服务，规范管理，全面提升社区的综合实力和服务水平。</span></p><p class="MsoNormal" style="text-indent:24.1pt;">	<span style="font-size:18px;">为加快社区城乡一体化建设，2001年成立江苏省首家社区资产股份合作社，十多年来，社区始终坚持科学发展观，积极探索农村股份合作改革，不断做大做强集体经济，保障村民收益。2017年，社区三个股份合作社固定资产达5亿元，集体收益3657万元，每个股民分红13400元，位居苏州前列。</span></p><p class="MsoNormal" style="text-indent:24.1pt;">	<span style="font-size:18px;">在大力发展经济的同时，社区党委坚持走群众路线，加大投入实施民生工程，真正为民办实事，做好事，受到了上级的肯定和群众的拥护。近几年来，先后获得“全国和谐示范社区、江苏省民主法治示范社区、江苏省科普示范社区，江苏省社会主义新农村建设先进村，苏州市十佳农村新型合作经济组织、苏州市绿色社区”等荣誉称号。</span></p>';
+                            marker.openWindow('<div style="width:800px;"><a href="/XiangXi/0_common/map_editor_tool.html?addr=姑苏村社区外框图&lnglat=' + marker.getPosition() + '"><b><span style="font-size:18px;">姑苏村社区简介</span></b></a>' + summary + '</div>');
+                            map.setZoom(17);
+
+                        })
+                        // 绘制姑苏村社区边框图结束
+                        $.call('getSpecialWorklist', {limit: 4000}, function (data) {
+                            new Vue({
+                                data: data
+                            }).$mount('#right')
+                        })
+
+                        AMap.Marker.prototype.openWindow = function (content) {
+                            var map = this.getMap();
+                            var position = this.getPosition();
+                            position = [position.lng, position.lat];
+                            var lnglat = new AMap.LngLat(position[0], position[1]);
+                            ;
+                            var recalc_center = lnglat.offset(0, 140);
+                            var w = new AMap.InfoWindow({
+                                content: content || '<iframe frameborder="0" src="../2_map/inner_population.html?address=' + this.getTitle() + '" width="500" height="380"></iframe>',
+                                showShadow: true,
+                            });
+                            w.open(map, position);
+                            map.panTo(recalc_center)
+                            map.setZoom(18);
+                        };
+
+                        //产业园
+                        $("#heading1").click(function () {
+                            map.clearMap();
+                            $('.map_right_nav').collapse("hide");
+                            $.call('MapQueryBuilding', {type: '厂房'}, function (data) {
+                                if (!data || data.length === 0) {
+                                    alert('未找到数据')
+                                    return;
+                                }
+                                map.clearMap();
+                                $.each(data, function () {
+                                    let e = this;
+                                    let position = [parseFloat(e.Longitude || '0'), parseFloat(e.Latitude || '0')];
+                                    var marker = new AMap.Marker({
+                                        map: map,
+                                        position: position,
+                                        title: this.PAddress,
+                                        icon: "../assets/i/mapicon/cangf.png"
+                                    })
+                                    marker.on('click', function (e) {
+                                        this.openWindow('<iframe frameborder="0" src="../2_map/inner_building.html?address=' + this.getTitle() + '" width="500" height="380"></iframe>');
+                                    })
+                                    map.setFitView();
+                                    map.panTo(position)
+                                })
+                            })
+                        })
+
+                        function area() {
+                            map.plugin(["AMap.MouseTool"], function () {
+                                var mouseTool = new AMap.MouseTool(map);
+                                //鼠标工具插件添加draw事件监听
+                                AMap.event.addListener(mouseTool, "draw", function callback(e) {
+                                    var eObject = e.obj;//obj属性就是鼠标事件完成所绘制的覆盖物对象。
+                                });
+                                mouseTool.measureArea();  //调用鼠标工具的面积量测功能
+                            });
+                        }
+
+                        AMap.plugin(['AMap.ToolBar', 'AMap.Scale', 'AMap.OverView'], function () {
+                            map.addControl(new AMap.ToolBar());
+                            map.addControl(new AMap.Scale());
+                            map.addControl(new AMap.OverView({isOpen: true}));
+                        })//鹰眼
+                        map.plugin(["AMap.RangingTool"], function () {
+                            ruler1 = new AMap.RangingTool(map);
+                            AMap.event.addListener(ruler1, "end", function (e) {
+                                ruler1.turnOff();
+                            });
+                            var sMarker = {
+                                icon: new AMap.Icon({
+                                    size: new AMap.Size(19, 31),//图标大小
+                                    image: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b1.png"
+                                })
+                            };
+                            var eMarker = {
+                                icon: new AMap.Icon({
+                                    size: new AMap.Size(19, 31),//图标大小
+                                    image: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b2.png"
+                                }),
+                                offset: new AMap.Pixel(-9, -31)
+                            };
+                            var lOptions = {
+                                strokeStyle: "solid",
+                                strokeColor: "#FF33FF",
+                                strokeOpacity: 1,
+                                strokeWeight: 2
+                            };
+                            var rulerOptions = {
+                                startMarkerOptions: sMarker,
+                                endMarkerOptions: eMarker,
+                                lineOptions: lOptions
+                            };
+                            ruler2 = new AMap.RangingTool(map, rulerOptions);
+                        });
+
+                        //启用默认样式测距
+                        function startRuler1() {
+                            ruler2.turnOff();
+                            ruler1.turnOn();
+                        }
+
+                        //启用自定义样式测距
+                        function startRuler2() {
+                            ruler1.turnOff();
+                            ruler2.turnOn();
+                        }
+
+                        //测距
+                        var contextMenu = new AMap.ContextMenu();  //创建右键菜单
+                        //右键放大
+                        contextMenu.addItem("放大一级", function () {
+                            map.zoomIn();
+                        }, 0);
+                        //右键缩小
+                        contextMenu.addItem("缩小一级", function () {
+                            map.zoomOut();
+                        }, 1);
+                        //右键显示全国范围
+                        contextMenu.addItem("缩放至全国范围", function (e) {
+                            map.setZoomAndCenter(4, [108.946609, 34.262324]);
+                        }, 2);
+                        //右键添加Marker标记
+                        // contextMenu.addItem("添加标记", function (e) {
+                        //     var marker = new AMap.Marker({
+                        //         map: map,
+                        //         position: contextMenuPositon //基点位置
+                        //     });
+                        // }, 3);
+                        contextMenu.addItem("添加标记", function (e) {
+                            var marker = new AMap.Marker({
+                                map: map,
+                                position: contextMenuPositon //基点位置
+                            });
+                        }, 3);
+                        //地图绑定鼠标右击事件——弹出右键菜单
+                        map.on('rightclick', function (e) {
+                            contextMenu.open(map, e.lnglat);
+                            contextMenuPositon = e.lnglat;
+                        });
+                        map.plugin(["AMap.ToolBar"], function () {
+                            map.addControl(new AMap.ToolBar());
+                        });
+                        map.plugin(["AMap.Scale"], function () {
+                            map.addControl(new AMap.Scale());
+                        });
+                        map.plugin(["AMap.Geolocation"], function () {
+                            map.addControl(new AMap.Geolocation());
+                        });
+                    },
+                    data: function () {
+                        return $.extend(resp, {
+                            current_menu: "首页",
+                            secondmenu: [],
+                            thirdmenu: [],
+                            svcHeader: svcHeader,
+                            imglist: '../assets/i/emptyimage/1.png,../assets/i/emptyimage/11.png,../assets/i/emptyimage/111.png,../assets/i/emptyimage/123.png,../assets/i/emptyimage/12312315.png,../assets/i/emptyimage/2.png,../assets/i/emptyimage/22 (2).png,../assets/i/emptyimage/22.png,../assets/i/emptyimage/222 (2).png,../assets/i/emptyimage/222.png,../assets/i/emptyimage/2231.png,../assets/i/emptyimage/256.png,../assets/i/emptyimage/3.png,../assets/i/emptyimage/33 (2).png,../assets/i/emptyimage/33.png,../assets/i/emptyimage/44.png,../assets/i/emptyimage/45463.png,../assets/i/emptyimage/45465.png,../assets/i/emptyimage/5456.png,../assets/i/emptyimage/55.png,../assets/i/emptyimage/78.png,../assets/i/emptyimage/78423.png,../assets/i/emptyimage/888.png,../assets/i/emptyimage/895.png,../assets/i/emptyimage/denglurizhi.png,../assets/i/emptyimage/list.txt,../assets/i/emptyimage/tu (2).png,../assets/i/emptyimage/tu.png,../assets/i/emptyimage/tutututu.png,../assets/i/emptyimage/tututuu.png,../assets/i/emptyimage/组1拷贝19.png'.split(","),
+                            colorlist: "CCDB4C#A8B81F#739DFB#5381E7#BB8BC6#A077A9#FB9A73#E87C51#E2767D#D83D47#5F9FC9#4B83A7#82DC66#54B935#5F9FC9#4B83A7#D04AD5#BB28C0#CCDB4C#A8B81F#739DFB#5381E7#BB8BC6#A077A9#FB9A73#E87C51#E2767D#D83D47#5F9FC9#4B83A7#82DC66#54B935#5F9FC9#4B83A7#D04AD5#BB28C0".split('#').reverse()
+                        })
+                    },
+                    state: {
+                        switch: false
+                    },
+                    methods: {
+                        random: function random() {
+                            return Math.random() * this.imglist.length;
+                        },
+                        isdirect: function isdirect(row) {
+                            return row && (row.MCLink || row.link) && (row.MCLink || row.link).indexOf('business.html') === -1;
+                        },
+                        switch_layer: function () {
+                            if (this.current_layer) {
+                                this.map.remove(this.current_layer);
+                                this.current_layer = null;
+                                $(".map_span").css({'color': '#000'});
+                                return;
+                            }
+                            this.current_layer = new AMap.TileLayer.Satellite();
+                            this.map.add(this.current_layer);
+                            $(".map_span").css({'color': '#fff'});
+                        },
+                        toggle: function (category) {
+                            if (!category.children || category.children.length <= 0) {
+                                this.toggle_sub(category);
+                                return;
+                            }
+                            this.$data.sub_categories = category.children;
+                            $('.map_right_nav').toggle('toggle');
+                        },
+                        toggle_sub: function (sub) {
+                            var label = sub.title.split(' ')[0];
+                            console.log(label)
+                            if (label === '切换地图') {
+                                this.switch_layer();
+                                return;
+                            }
+                            var options = {
+                                全部: {
+                                    method: "MapQueryPopulation",
+                                    icon: "../assets/i/mapicon/renkou.png",
+                                    page: "../2_map/inner_population.html"
+                                },
+                                党员: {
+                                    method: "MapQueryPartyMember",
+                                    icon: "../assets/i/mapicon/dangyuan.png",
+                                    page: "../2_map/inner_population.html"
+                                },
+                                老年人: {
+                                    method: "MapQueryOldMann",
+                                    icon: "../assets/i/mapicon/laonian.png",
+                                    page: "../2_map/inner_population.html"
+                                },
+                                残疾人: {
+                                    method: "MapQueryDisabledMan",
+                                    icon: "../assets/i/mapicon/canji.png",
+                                    page: "../2_map/inner_population.html"
+                                },
+                                民兵: {
+                                    method: "MapQueryMilitia",
+                                    icon: "../assets/i/mapicon/minbing.png",
+                                    page: "../2_map/inner_population.html"
+                                },
+                                干部: {
+                                    method: "MapQueryCadre",
+                                    icon: "../assets/i/mapicon/ganbu.png",
+                                    page: "../2_map/inner_population.html"
+                                },
+                                厂房: {
+                                    params: {BIndustrialParkName: label},
+                                    method: "MapQueryBuilding",
+                                    icon: "../assets/i/mapicon/cangf.png",
+                                    page: "../2_map/inner_building.html"
+                                },
+                                观山工业园: {
+                                    params: {BIndustrialParkName: label},
+                                    method: "MapQueryBuilding",
+                                    icon: "../assets/i/mapicon/cangf.png",
+                                    page: "../2_map/inner_building.html"
+                                },
+                                横泾工业园二期: {
+                                    params: {BIndustrialParkName: label},
+                                    summary: '<pre><span style="background-color:#e4e4ff;">横泾工业园二期</span></pre></pre><pre>2012年6月1日收购，占地90亩，一期建筑面积3.2万平方米，二期建筑面积2.9万平方米，总面积6.1万平方米，总投资约为1.25亿元。</pre>',
+                                    method: "MapQueryBuilding",
+                                    icon: "../assets/i/mapicon/cangf.png",
+                                    page: "../2_map/inner_building.html"
+                                },
+                                横泾工业园一期: {
+                                    params: {BIndustrialParkName: label},
+                                    summary: '<pre><span style="background-color:#e4e4ff;">横泾工业园一期</span></pre></pre><pre>2012年6月1日收购，占地90亩，一期建筑面积3.2万平方米，二期建筑面积2.9万平方米，总面积6.1万平方米，总投资约为1.25亿元。</pre>',
+                                    method: "MapQueryBuilding",
+                                    icon: "../assets/i/mapicon/cangf.png",
+                                    page: "../2_map/inner_building.html"
+                                },
+                                马舍工业园: {
+                                    params: {BIndustrialParkName: label},
+                                    method: "MapQueryBuilding",
+                                    icon: "../assets/i/mapicon/cangf.png",
+                                    page: "../2_map/inner_building.html"
+                                },
+                                摄像头: {
+                                    // method: "MapQueryCamera", icon: "../assets/i/mapicon/jiank.png", page: "/XiangXi/2_map/RTSP.aspx"
+                                    method: "MapQueryNewCamera",
+                                    icon: "../assets/i/mapicon/jiank.png",
+                                    page: "/XiangXi/2_map/hls.html"
+                                }
+                            }
+
+                            var option = options[label];
+                            if (!option) {
+                                console.error("未找到标签" + label);
+                            }
+
+                            var map = this.map;
+                            $('.map_right_nav').hide();
+                            $('.map_right_com').hide();
+                            $.call(option.method, $.extend({limit: 4000}, option.params), function (data) {
+                                if (!data || data.length === 0) {
+                                    alert('未找到数据')
+                                    return;
+                                }
+                                $('.map_right_nav').hide();
+                                map.clearMap();
+                                var recalc_center = null;
+                                var groups = (data.rows || data).groupby('PAddress');
+
+                                function paint_ent(map, k, ent) {
+                                    let points = ent.map(function (e) {
+                                        return [parseFloat(e.Longitude || '0'), parseFloat(e.Latitude || '0')]
+                                    }).filter(function (w) {
+                                        return w[0] && w[1];
+                                    });
+                                    if (!points || points.length <= 0) return;
+                                    var marker = null;
+                                    if (points.length > 1) {
+                                        let center = $.calcCenter(points);
+                                        var title = k;
+                                        new AMap.Polygon({
+                                            map: map,
+                                            path: points,
+                                            fillColor: 'blue',
+                                            fillOpacity: 0.3,
+                                        });
+                                        marker = new AMap.Marker({
+                                            map: map,
+                                            position: center,
+                                            title: title,
+                                            icon: option.icon
+                                        });
+                                        var lnglat = new AMap.LngLat(center[0], center[1]);
+                                        var recalc_center = lnglat.offset(0, -50);
+                                        if (option.summary) marker.openWindow(option.summary)
+                                    } else {
+                                        var point = points[0];
+                                        marker = new AMap.Marker({
+                                            map: map,
+                                            position: point,
+                                            title: k,
+                                            icon: option.icon
+                                        });
+                                        marker.ent = ent;
+                                        var lnglat = new AMap.LngLat(point[0], point[1]);
+                                        var recalc_center = lnglat.offset(0, -80);
+                                    }
+                                    marker.on('click', function (e) {
+                                        var markerTitle = this.getTitle();
+                                        var position = this.getPosition();
+                                        var ifurl = option.page + '?url=&VPIAddress=' + markerTitle + '&address=' + markerTitle + '&position=' + position;
+                                        var width = "1000";
+                                        var height = "800";
+                                        if (this.ent[0]) {
+                                            var camera_link = "" + encodeURIComponent(this.ent[0].url);
+                                            ifurl = option.page + '?url=' + this.ent[0].url
+                                        }
+                                        this.openWindow('<iframe frameborder="0" src=\"' + ifurl + '" width="' + width + '" height="' + height + '"></iframe>');
+                                    });
+                                }
+
+                                if (groups)
+                                    for (var k in groups) {
+                                        paint_ent(map, k, groups[k])
+                                    }
+                                // Object.values(groups).map(function(ent){
+                                //     return paint_ent(map,ent[0].PAddress,ent);
+                                // })
+                                map.panTo(recalc_center || [120.511929, 31.252366])
+                                map.setFitView()
+                            });
+                        },
+                        redirect: function (li) {
+                            var link = li.MCLink;
+                            if (link.indexOf('business.html') !== -1) parent.location.href = link;
+                            location.href = link
+                        },
+                        editorswitch: function () {
+                            this.state.switch = !this.state.switch;
+                        }
+                    }
+                }).$mount('#app')
+                $.call("GetMapCategoryEvaluator", null, function (categories) {
+                    vm.$data.categories = categories;
+                })
+                var request = GetRequest();
+                if (request && request.data) {
+                    var m = JSON.parse(request.data);
+                    if (m) {
+                        vm.$data.current_menu = m.MCTitle;
+                    }
+                }
+                $.call("GetMenuConfigurationByAuth", {"offset": 0, "limit": 800, sort: 'MCOrder'}, function (datum) {
+                    // 这里请求顶部菜单数据
+                    if (!datum.success) {
+                        alert(datum.message);
+                        return;
+                    }
+                    vm.$data.secondmenu = datum.rows;
+
+                    // category = 首页背景图片
+                    $(document.body).css({
+                        //"background-image": "url("+(datum.background||'../assets/i/metaicon/e.jpg')+")",
+                        //                "height": '1080px',
+                        //'width': '1920px',
+                        'background-repeat': 'no-repeat',
+                        'background-size': 'cover'
+                        //                'overflow': 'hidden',
+                    });
+                    if (!request || !request.data) return;
+
+
+                    var parent = JSON.parse(request.data);
+                    var menu = {
+                        "offset": 0,
+                        "limit": 800,
+                        "sort": "MCOrder",
+                        "order": "asc",
+                        "MCParentTitle": parent.MCTitle
+                    };
+                    $.call('getmenuconfigurationlist', menu, function (resp) {
+                        vm.$data.thirdmenu = resp.rows.map(function (i) {
+                            return {id: i.id, img: i.MCPicture, link: svcHeader + i.MCLink, title: i.MCTitle};
+                        }).filter(function (e) {
+                            return e;
+                        });
+                    });
+                });
+
+            })
+
+        })
+    })
+
+</script>

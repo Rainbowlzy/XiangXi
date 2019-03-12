@@ -1,0 +1,73 @@
+  
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>厂房楼栋</title>
+    <meta charset="utf-8" />
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/common.css" rel="stylesheet" />
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+   <style>
+                                                            .am-btn{
+                                                                margin:10px 10px;
+                                                            }
+                                                        </style>
+    <style>
+        /*body{transform: scale(1.2);}*/
+        .c-title {
+            /*line-height: 97px;*/
+            /*height: 97px;*/
+            color: #ffffff;
+        }
+
+        .navbar-nav-cust {
+            font-size: 32px;
+        }
+
+        .navbar-nav-cust > li > a {
+            color: #ffffff;
+        }
+
+        .navbar-nav-cust > li > a:hover {
+            background: transparent;
+            /*font-size: 30px;*/
+            color: rgb(255, 165, 77);
+        }
+
+        ul.nav > li > a:last-child :hover {
+            color: #ffffff !important;
+        }
+
+        #nav ul li {
+            margin: 18px 5px;
+        }
+
+        .c-shadow {
+            background-color: rgba(97, 255, 255, 0.15);
+            border-radius: 10px;
+            margin: 20px 10px;
+        }
+    </style>
+    <link href="../assets/css/2-index/business.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="app">
+		<page-top></page-top>
+		<div class="container" style="margin:50px auto;">
+			<c-histogram-date title="厂房楼栋" url="/XiangXi/DefaultHandler.ashx?method=FactoryBuildingCount" style="width:1000px;height:500px;"></c-histogram-date>
+		</div>
+	</div>
+	<script>
+	require(['vue','jquery','cmodules'],function(Vue,$){
+		new Vue().$mount('#app');
+	})
+	</script>
+</body>
+</html>
+

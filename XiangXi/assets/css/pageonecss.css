@@ -1,0 +1,14 @@
+﻿.c-title { color: #ffffff; }
+.navbar-nav-cust { font-size: 32px; }
+.navbar-nav-cust > li > a { color: #ffffff; }
+.navbar-nav-cust > li > a:hover {
+    background: transparent;
+    color: rgb(255, 165, 77);
+}
+ul.nav > li > a:last-child :hover { color: #ffffff !important; }
+#nav ul li { margin: 18px 5px; }
+.c-shadow {
+    background-color: rgba(97, 255, 255, 0.15);
+    border-radius: 10px;
+    margin: 20px 10px;
+}

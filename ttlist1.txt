@@ -1,0 +1,12 @@
+D:\code\XiangXi\XiangXi\Evaluators\EvaluatorGen.tt
+D:\code\XiangXi\XiangXi\gen\Analysis.tt
+D:\code\XiangXi\XiangXi\gen\DongShan.tt
+D:\code\XiangXi\XiangXi\gen\ImportProc.tt
+D:\code\XiangXi\XiangXi\gen\PageListHTML.tt
+D:\code\XiangXi\XiangXi\gen\PageListJS.tt
+D:\code\XiangXi\XiangXi\gen\PageOneHTML.tt
+D:\code\XiangXi\XiangXi\gen\PageOneJS.tt
+D:\code\XiangXi\XiangXi\gen\SearchFormModel.tt
+D:\code\XiangXi\XiangXi\gen\XiangXiDocument.tt
+D:\code\XiangXi\XiangXiENtities\EF\DefaultContext.tt
+D:\code\XiangXi\XiangXiENtities\sql\scriptall.tt

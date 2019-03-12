@@ -1,0 +1,191 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ include file="$(SolutionDir)\XiangXiEntities\CodeTemplates\Manager.ttinclude"#>
+<#@ output extension=".html" #>
+<#@ import namespace="XiangXiENtities.CodeTemplates" #>
+<#@ assembly name="$(SolutionDir)\Generator\bin\Debug\Generator.dll"#>
+
+<# var manager = Manager.Create(Host, GenerationEnvironment); #>
+<#
+foreach(var table in table_schema)
+{
+	var tbl = table.Key;
+#>
+<# manager.StartNewFile(string.Format("{0}.html",tbl)); #>  
+<!-------------------------------------------------------------------------------------------------------------------
+ * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
+ * 生成时间：<#=DateTime.Now#>
+ * 生成版本：<#=g.DomainVersionTime#> 
+ * 作者：路正遥
+*-------------------------------------------------------------------------------------------------------------------> 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <title><#=table_schema[tbl].FirstOrDefault().table_name_ch#></title>
+    <link rel="shortcut icon" href="../assets/i/bitbug_favicon.ico" />
+    <meta charset="utf-8"/>
+    <link href="../assets/css/pageonecss.css" rel="stylesheet" />
+    <link href="../assets/css/2-index/business.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap-table.css" rel="stylesheet">
+    <link href="../node_modules/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../assets/css/0-common/common.css" rel="stylesheet"/>
+    <link href="../assets/css/2-index/business.css" rel="stylesheet"/>
+    <link href="../assets/css/docs.css" rel="stylesheet"/>
+    <link href="../assets/UEditor-utf8-net/themes/iframe.css" rel="stylesheet" />
+    <link href="../assets/UEditor-utf8-net/themes/default/css/ueditor.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap-table.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/fileinput.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/common.css" rel="stylesheet"/>
+	
+    <script src="../assets/js/0-common/third-party/zeroclipboard/ZeroClipboard.js"></script>
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+    <script src="<#=tbl#>.js"></script>
+</head>
+<body>
+<div  id="<#=tbl#>">
+	<div v-if="!(request||{}).hidden_title"><page-top></page-top></div>
+<div class="container">
+	<h3><#=table_schema[tbl].FirstOrDefault().table_name_ch#></h3>
+		<form role="form" class="col-xs-11 form-horizontal">
+
+<div class=""  style="margin-top:5px;">
+	<div class="container" style="margin-bottom: 20px;">
+			<a href="javascript:history.go(-1)" id="table-back" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>返回</a>
+			<button type="button" class="btn btn-info excel-import-button-<#=tbl#>"><i class="glyphicon glyphicon-cloud-upload"></i>Excel导入</button>
+			<a href="/XiangXi/ExportSchema.ashx?title=<#=tbl#>" class="btn btn-primary">Excel导出</a>
+			<button type="button" id="submit" @click="save" class="btn  btn-info"><i class="glyphicon glyphicon-circle-arrow-up"></i>提交</button>
+	</div>
+
+    <div class="modal fade table_excel_modal-<#=tbl#>">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Excel导入</h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <!--<button type="button" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i>确定</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+				<div v-if="table">
+					<div class="row" ><#
+					var full_rows = new List<V_Table_Comments>();
+					foreach(var col in table_schema[tbl].Where(p=>!string.IsNullOrEmpty(p.column_name)))
+					{
+						//if("id,districtID,TransactionID,VersionNo,IsDeleted,CreateOn,UpdateOn,CreateBy,UpdateBy".IndexOf(col.column_name)!=-1) continue;
+			            if("id,districtID,TransactionID,VersionNo,IsDeleted".IndexOf(col.column_name)!=-1) continue;
+						if ("content summary remark".Split(new []{ ' ' }, StringSplitOptions.RemoveEmptyEntries).Any(s=>col.column_name.ToLower().Contains(s))) 
+						{
+							full_rows.Add(col);
+							continue;
+						}
+						#>
+						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="<#=col.column_name #>">
+									<#=col.column_description.Trim("@".ToCharArray()) #>
+								</label>
+                                <div class="col-sm-8">
+									<#if(col.column_description[0]=='@'){
+										var parentTableName = col.column_name.Substring(table.Key.ToCharArray().Count(q=>q>='A'&&q<='Z' ));
+										var parentColumnName = table_schema2[parentTableName].Columns[0].column_name;
+										#>
+										<c-typeahead class="<#=parentColumnName#>" :url="'/XiangXi/DefaultHandler.ashx?method=get<#=parentTableName #>list&limit=4000'" v-model="<#=col.column_name#>" :field="'<#=parentColumnName#>'"></c-typeahead><#
+									}
+									else if(col.dbtype.ToLower()=="datetime"){
+									
+									#>
+									<input	size="16" id="<#=col.column_name #>" type="text" v-model="<#=col.column_name #>" @change="val=><#=col.column_name #>=val"class="<#=col.column_name #> form_datetime form-control"><#
+
+									} else if (
+									"portrait,photo,picture,upload,accessory,image".Split(',').Any(s=>col.column_name.ToLower().IndexOf(s)!=-1)||
+									 col.column_name.ToLower().IndexOf("photo")!=-1 ||
+									 col.column_name.ToLower().IndexOf("picture")!=-1 || 
+									 col.column_name.ToLower().IndexOf("image")!=-1){
+
+									#>
+									
+                                <div>
+                                    <c-fileinput v-model="<#=col.column_name #>"></c-fileinput>
+                                </div>
+                                <input v-model="<#=col.column_name #>" class="imageURL" hidden="hidden" @change="val=><#=col.column_name #>=val"  />
+								
+									<#
+
+									}else{
+									#>
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="<#=col.column_name #>" 
+											v-model="<#=col.column_name #>" 
+											placeholder=""><#
+
+									}#>
+                                </div>
+                            </div>
+                        </div><#
+					}
+        foreach(var col in full_rows){
+
+									#>
+                    </div>
+									<div class="container">
+										<div class="row">
+                                            <label class="col-sm-1 control-label" for="<#=col.column_name #>">
+									            <#=col.column_description #>
+								            </label>
+										</div>
+									    <div class="row">
+								            <c-uedit v-model="<#=col.column_name #>"></c-uedit>
+                                        </div>
+                                    </div>
+
+									<#
+        }
+
+
+					#></div>
+					</div>
+					</div>
+					</form>
+            </div>
+<div class="modal fade" id="common-alert">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</body>
+</html>
+<#
+					}
+					#>
+<# manager.EndBlock(); #>  
+<# manager.Process(true); #> 

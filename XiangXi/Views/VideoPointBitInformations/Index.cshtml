@@ -1,0 +1,147 @@
+﻿@model IEnumerable<XiangXiENtities.EF.VideoPointInformation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.VPBISerialNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VPISerialNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VPBIMonitoringPointNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VPBIAffiliatedOrganization)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VPBIBelongToTheRegion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VPBIPlatform)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VPBILongitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VPBILatitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VersionNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TransactionID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataLevel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Polyline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Polygon)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.VPBISerialNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VPISerialNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VPBIMonitoringPointNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VPBIAffiliatedOrganization)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VPBIBelongToTheRegion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VPBIPlatform)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VPBILongitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VPBILatitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VersionNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TransactionID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataLevel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Latitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Longitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDeleted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Polyline)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Polygon)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

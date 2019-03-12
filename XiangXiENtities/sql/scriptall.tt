@@ -1,0 +1,340 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ include file="..\CodeTemplates\Manager.ttinclude"#>  
+
+<#@ assembly name="E:\code\XiangXi\XiangXiENtities\bin\Debug\XiangXiENtities.dll"#>
+<# var g = new XiangXiENtities.CodeTemplates.Generator();var table_schema2 = g.table_schema2;var dropdowns = g.dropdowns;var table_schema = g.table_schema;#>
+
+<#@ output extension=".sql" #>
+
+/* 共有表 <#=table_schema2.Keys.Count()#> 张 */
+
+BACKUP DATABASE XiangXi to disk='D:\XiangXi_<#=DateTime.Now.ToString("yyyy_M_d")#>.bak'
+
+USE [XiangXi]
+GO
+if exists (select name from sys.objects where name='AddComments') DROP PROCEDURE AddComments
+GO
+/****** Object:  StoredProcedure [dbo].[AddComments]    Script Date: 04/07/2018 23:45:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		路正遥
+-- Create date: 2018-3-31
+-- Description:	编写字段注释
+-- =============================================
+CREATE PROCEDURE [dbo].[AddComments]
+
+	@table [NVARCHAR](200)=N'',
+	@column [NVARCHAR](200)=N'',
+	@comments [NVARCHAR](4000)=N''
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	EXEC sys.sp_addextendedproperty 
+		@name=N'MS_Description'
+		,@value=@comments 
+		,@level0type=N'SCHEMA'
+		,@level0name=N'dbo'
+		,@level1type=N'TABLE'
+		,@level1name=@table
+		,@level2type=N'COLUMN'
+		,@level2name=@column
+END
+GO
+
+USE [XiangXi]
+GO
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+USE [XiangXi]
+GO
+
+if exists (select name from sys.objects where name='SYS_Code') -- drop table SYS_Code
+/****** Object:  Table [dbo].[SYS_Code]    Script Date: 03/28/2018 14:52:54 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+if not exists (select name from sys.objects where name='SYS_Code') 
+CREATE TABLE [dbo].[SYS_Code]( --系统配置（最初用于配置化下拉框，后续可以扩展到任意功能）
+	[id] INT IDENTITY(1,1) NOT NULL, --主键ID
+	[type] [NVARCHAR](50) NOT NULL, --使用类别（如：system/dropdown/selection/radio）
+	[category] [NVARCHAR](50) NOT NULL,--范畴（如：AGR_Product.type）
+	[title] [NVARCHAR](200) NOT NULL,--配置名称
+	[val] [NVARCHAR](200) NOT NULL,--配置值
+	[ord] INT NULL,--排序值
+	[VersionNo] INT NULL, --数据锁
+	[TransactionID] [NVARCHAR](50) NULL, --事务同步机制
+	[CreateBy] [NVARCHAR](50) NULL,	--创建人
+	[CreateOn] DATETIME NULL,	--创建时间
+	[UpdateBy] [NVARCHAR](50) NULL, --更新人
+	[UpdateOn] DATETIME NULL, --更新时间
+	[IsDeleted] INT NULL, --是否删除
+ CONSTRAINT [PK_SYS_Code] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+exec AddComments N'SYS_Code',N'id',N'配置编号'
+exec AddComments N'SYS_Code',N'type',N'使用类别'
+exec AddComments N'SYS_Code',N'category',N'范畴'
+exec AddComments N'SYS_Code',N'title',N'配置名称'
+exec AddComments N'SYS_Code',N'val',N'配置值'
+exec AddComments N'SYS_Code',N'ord',N'排序值'
+
+<#
+foreach(var key in table_schema.Keys.AsParallel()){
+	var line = table_schema[key].FirstOrDefault();
+	var tableName = line.table_name_ch;
+	var pascalCaseTableName = line.table_name_en;
+	var fields = table_schema[key];
+	var prefix = string.Concat(pascalCaseTableName.Where(c=>c>='A' && c<='Z'));
+#>
+GO
+-- IF EXISTS (SELECT NAME FROM SYS.OBJECTS WHERE NAME='<#=pascalCaseTableName#>') -- drop table <#=pascalCaseTableName#>
+IF NOT EXISTS (SELECT NAME FROM SYS.OBJECTS WHERE NAME='<#=pascalCaseTableName#>')
+CREATE TABLE [dbo].[<#=pascalCaseTableName#>] ( --<#=tableName#>
+	[id] [NVARCHAR](50) NOT NULL, --主键ID
+	<#
+	foreach(var field in fields.AsParallel()){
+	var column_name = field.column_name;
+	var pfield = column_name;
+	var type=field.dbtype;
+	
+	#>[<#=pfield#>] <#=type#> NULL, --<#=(field.column_description)#>
+	<#
+	}
+	#>[VersionNo] INT NULL, --数据锁
+	[TransactionID] [NVARCHAR](50) NULL, --事务同步机制
+	[CreateBy] [NVARCHAR](50) NULL,	--创建人
+	[CreateOn] DATETIME NULL,	--创建时间
+	[UpdateBy] [NVARCHAR](50) NULL, --更新人
+	[UpdateOn] DATETIME NULL, --更新时间
+	[DataLevel] [NVARCHAR](200) NULL, --数据级别
+	[Latitude] [NVARCHAR](200) NULL, --纬度
+	[Longitude] [NVARCHAR](200) NULL, --经度
+	[IsDeleted] INT NULL, --是否删除
+	[Polyline] [NVARCHAR](MAX) NULL, 
+	[Polygon] [NVARCHAR](MAX) NULL, 
+	[ord] INT NULL, --排序值
+CONSTRAINT [PK_<#=pascalCaseTableName#>] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+<#
+foreach(var field in fields){
+	var column_name = field.column_name;
+	var pfield = column_name;
+#>
+
+IF NOT EXISTS (SELECT obj.name,prop.value FROM sys.extended_properties prop JOIN sys.objects obj ON prop.major_id=obj.object_id
+WHERE obj.name='<#=pascalCaseTableName#>' AND prop.value='<#=(field.column_description)#>') 
+	EXEC sys.sp_addextendedproperty @name=N'MS_Description',@value=N'<#=(field.column_description)#>',@level0type=N'SCHEMA',@level0name=N'dbo',@level1type=N'TABLE',@level1name=<#=pascalCaseTableName#>,@level2type=N'COLUMN',@level2name=N'<#=pfield#>'	
+<#
+}
+#>
+
+IF NOT EXISTS (SELECT obj.name,prop.value FROM sys.extended_properties prop JOIN sys.objects obj ON prop.major_id=obj.object_id
+WHERE obj.name='<#=pascalCaseTableName#>' AND prop.value='编号') 
+BEGIN
+	EXEC sys.sp_addextendedproperty N'MS_Description',N'<#=tableName#>',N'user',N'dbo',N'table',N'<#=pascalCaseTableName#>',null,null;  
+	EXEC sys.sp_addextendedproperty @name=N'MS_Description',@value=N'编号',@level0type=N'SCHEMA',@level0name=N'dbo',@level1type=N'TABLE',@level1name=<#=pascalCaseTableName#>,@level2type=N'COLUMN',@level2name=N'id'	
+	EXEC sys.sp_addextendedproperty @name=N'MS_Description',@value=	N'数据锁',@level0type=N'SCHEMA',@level0name=N'dbo',@level1type=N'TABLE',@level1name=<#=pascalCaseTableName#>,@level2type=N'COLUMN',@level2name=N'VersionNo'	
+	EXEC sys.sp_addextendedproperty @name=N'MS_Description',@value=	N'事务同步机制',@level0type=N'SCHEMA',@level0name=N'dbo',@level1type=N'TABLE',@level1name=<#=pascalCaseTableName#>,@level2type=N'COLUMN',@level2name=N'TransactionID'	
+	EXEC sys.sp_addextendedproperty @name=N'MS_Description',@value=	N'创建人',@level0type=N'SCHEMA',@level0name=N'dbo',@level1type=N'TABLE',@level1name=<#=pascalCaseTableName#>,@level2type=N'COLUMN',@level2name=N'CreateBy'				
+	EXEC sys.sp_addextendedproperty @name=N'MS_Description',@value=	N'创建时间',@level0type=N'SCHEMA',@level0name=N'dbo',@level1type=N'TABLE',@level1name=<#=pascalCaseTableName#>,@level2type=N'COLUMN',@level2name=N'CreateOn'				
+	EXEC sys.sp_addextendedproperty @name=N'MS_Description',@value=	N'更新人',@level0type=N'SCHEMA',@level0name=N'dbo',@level1type=N'TABLE',@level1name=<#=pascalCaseTableName#>,@level2type=N'COLUMN',@level2name=N'UpdateBy'				
+	EXEC sys.sp_addextendedproperty @name=N'MS_Description',@value=	N'数据级别',@level0type=N'SCHEMA',@level0name=N'dbo',@level1type=N'TABLE',@level1name=<#=pascalCaseTableName#>,@level2type=N'COLUMN',@level2name=N'DataLevel'				
+	EXEC sys.sp_addextendedproperty @name=N'MS_Description',@value=	N'更新时间',@level0type=N'SCHEMA',@level0name=N'dbo',@level1type=N'TABLE',@level1name=<#=pascalCaseTableName#>,@level2type=N'COLUMN',@level2name=N'UpdateOn'				
+	EXEC sys.sp_addextendedproperty @name=N'MS_Description',@value=	N'是否删除',@level0type=N'SCHEMA',@level0name=N'dbo',@level1type=N'TABLE',@level1name=<#=pascalCaseTableName#>,@level2type=N'COLUMN',@level2name=N'IsDeleted'			
+	EXEC sys.sp_addextendedproperty @name=N'MS_Description',@value=	N'纬度',@level0type=N'SCHEMA',@level0name=N'dbo',@level1type=N'TABLE',@level1name=<#=pascalCaseTableName#>,@level2type=N'COLUMN',@level2name=N'Latitude'			
+	EXEC sys.sp_addextendedproperty @name=N'MS_Description',@value=	N'经度',@level0type=N'SCHEMA',@level0name=N'dbo',@level1type=N'TABLE',@level1name=<#=pascalCaseTableName#>,@level2type=N'COLUMN',@level2name=N'Longitude'			
+	EXEC sys.sp_addextendedproperty @name=N'MS_Description',@value=	N'多段线条',@level0type=N'SCHEMA',@level0name=N'dbo',@level1type=N'TABLE',@level1name=<#=pascalCaseTableName#>,@level2type=N'COLUMN',@level2name=N'Polyline'			
+	EXEC sys.sp_addextendedproperty @name=N'MS_Description',@value=	N'多边形',@level0type=N'SCHEMA',@level0name=N'dbo',@level1type=N'TABLE',@level1name=<#=pascalCaseTableName#>,@level2type=N'COLUMN',@level2name=N'Polygon'			
+	EXEC sys.sp_addextendedproperty @name=N'MS_Description',@value=	N'排序',@level0type=N'SCHEMA',@level0name=N'dbo',@level1type=N'TABLE',@level1name=<#=pascalCaseTableName#>,@level2type=N'COLUMN',@level2name=N'ord'			
+
+
+END
+GO
+
+<#
+	foreach(var field in fields){
+	var column_name = field.column_name;
+	var pfield = column_name;
+	var type=field.dbtype;
+	
+	#>
+
+
+
+IF NOT EXISTS ( SELECT  *
+                FROM    sys.columns c
+                        JOIN sys.objects o ON o.name = '<#=field.table_name#>'
+                                              AND o.type = 'U'
+                                              AND c.name = '<#=pfield#>'
+                                              AND c.object_id = o.object_id )
+    BEGIN
+        ALTER TABLE dbo.<#=field.table_name#>
+        ADD [<#=pfield#>] <#=type#>;
+    END;
+ELSE
+	BEGIN
+        ALTER TABLE dbo.<#=field.table_name#>
+        ALTER COLUMN [<#=pfield#>] <#=type#>;
+	END;
+	<#
+	}
+	#>
+
+<#
+}
+#>
+
+/* 生成预定义下拉列表 */
+<#
+
+foreach(var line in dropdowns){
+	var tableName = line.tableNameEn;
+	var fieldName = line.fieldNameEn;
+	var vals = line.vals;
+	foreach(var val in vals){
+	#>
+
+IF NOT EXISTS (SELECT 1 FROM dbo.SYS_Code 
+	WHERE	type='dropdown' 
+		AND category='<#=tableName#>' 
+		AND title='<#=fieldName#>' 
+		AND val='<#=val#>')
+INSERT INTO dbo.SYS_Code
+        ( type, category, title, val, ord )
+VALUES  ( N'dropdown', -- type - [NVARCHAR](50)
+          N'<#=tableName#>', -- category - [NVARCHAR](50)
+          N'<#=fieldName#>', -- title - [NVARCHAR](200)
+          N'<#=val#>',  -- val - [NVARCHAR](200)
+          0
+          )
+	<#
+	}
+}
+
+foreach(var key in table_schema.Keys){
+	var line = table_schema[key].FirstOrDefault();
+	var tableName = line.table_name_ch;
+	var pascalCaseTableName = line.table_name_en;
+	var fields = table_schema[key];
+	var prefix = string.Concat(pascalCaseTableName.Where(c=>c>='A' && c<='Z'));
+	foreach(var dfield in dropdowns.Where(p=>p.tableName==tableName)){
+		foreach(var val in dfield.vals){
+		
+	#>
+		/*状态菜单配置*/
+        IF NOT EXISTS (SELECT 1 FROM dbo.MenuConfiguration WHERE MCCaption='<#=tableName#><#=val#>')
+		INSERT INTO dbo.MenuConfiguration
+				( id ,
+				  MCCaption ,
+				  MCLink ,
+				  MCPicture ,
+				  MCParentTitle ,
+				  MCMenuType ,
+				  VersionNo ,
+				  CreateBy ,
+				  UpdateBy ,
+				  IsDeleted
+				)
+		VALUES  ( NEWID() , -- id - [NVARCHAR](50)
+				  N'<#=tableName#><#=val#>' , -- MCCaption - [NVARCHAR](50)
+				  N'/XiangXi/gen/<#=pascalCaseTableName#>List.html?<#=dfield.fieldNameEn#>=<#=val #>' , -- MCLink - [NVARCHAR](50)
+				  N'' , -- MCPicture - [NVARCHAR](50)
+				  N'' , -- MCParentTitle - [NVARCHAR](50)
+				  N'' , -- MCMenuType - [NVARCHAR](50)
+				  1 , -- VersionNo - int
+				  N'GENERATOR' , -- CreateBy - [NVARCHAR](50)
+				  N'GENERATOR' , -- UpdateBy - [NVARCHAR](50)
+				  0  -- IsDeleted - int
+				)
+	<#
+		}
+	}
+#>  
+
+IF NOT EXISTS (SELECT 1 FROM dbo.MenuConfiguration WHERE MCCaption='<#=tableName#>')
+INSERT INTO dbo.MenuConfiguration
+        ( id ,
+          MCCaption ,
+          MCLink ,
+          MCPicture ,
+          MCParentTitle ,
+          MCMenuType ,
+          VersionNo ,
+          CreateBy ,
+          UpdateBy ,
+          IsDeleted
+        )
+VALUES  ( NEWID() , -- id - [NVARCHAR](50)
+          N'<#=tableName#>' , -- MCCaption - [NVARCHAR](50)
+          N'/XiangXi/gen/<#=pascalCaseTableName#>List.html' , -- MCLink - [NVARCHAR](50)
+          N'' , -- MCPicture - [NVARCHAR](50)
+          N'' , -- MCParentTitle - [NVARCHAR](50)
+          N'' , -- MCMenuType - [NVARCHAR](50)
+          1 , -- VersionNo - int
+          N'GENERATOR' , -- CreateBy - [NVARCHAR](50)
+          N'GENERATOR' , -- UpdateBy - [NVARCHAR](50)
+          0  -- IsDeleted - int
+        )
+IF NOT EXISTS (SELECT 1 FROM dbo.MenuConfiguration WHERE	MCCaption='<#=tableName#>统计')
+INSERT INTO dbo.MenuConfiguration
+        ( id ,
+          MCCaption ,
+          MCLink ,
+          MCPicture ,
+          MCParentTitle ,
+          MCMenuType ,
+          VersionNo ,
+          CreateBy ,
+          UpdateBy ,
+          IsDeleted
+        )
+VALUES  ( NEWID() , -- id - [NVARCHAR](50)
+          N'<#=tableName#>统计' , -- MCCaption - [NVARCHAR](50)
+          N'/XiangXi/gen/<#=pascalCaseTableName#>Analysis.html' , -- MCLink - [NVARCHAR](50)
+          N'' , -- MCPicture - [NVARCHAR](50)
+          N'' , -- MCParentTitle - [NVARCHAR](50)
+          N'' , -- MCMenuType - [NVARCHAR](50)
+          1 , -- VersionNo - int
+          N'GENERATOR' , -- CreateBy - [NVARCHAR](50)
+          N'GENERATOR' , -- UpdateBy - [NVARCHAR](50)
+          0  -- IsDeleted - int
+        )
+IF NOT EXISTS (SELECT 1 FROM dbo.SYS_Code WHERE	type='dropdown' AND category='MenuConfiguration' AND title='MCParentTitle' AND val='<#=tableName#>')
+INSERT INTO dbo.SYS_Code
+        ( type, category, title, val, ord )
+VALUES  ( N'dropdown', -- type - [NVARCHAR](50)
+          N'MenuConfiguration', -- category - [NVARCHAR](50)
+          N'MCParentTitle', -- title - [NVARCHAR](200)
+          N'<#=tableName#>',  -- val - [NVARCHAR](200)
+          0
+          )
+IF NOT EXISTS (SELECT 1 FROM dbo.SYS_Code WHERE	type='dropdown' AND category='MenuConfiguration' AND title='RMMenuTitle' AND val='<#=tableName#>')
+INSERT INTO dbo.SYS_Code
+        ( type, category, title, val, ord )
+VALUES  ( N'dropdown', -- type - [NVARCHAR](50)
+          N'RoleMenu', -- category - [NVARCHAR](50)
+          N'RMMenuTitle', -- title - [NVARCHAR](200)
+          N'<#=tableName#>',  -- val - [NVARCHAR](200)
+          0
+          )
+GO
+<#
+}
+#>

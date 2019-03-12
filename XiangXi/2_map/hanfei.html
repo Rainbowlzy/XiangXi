@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery.min.js"></script>
+</head>
+<body>
+<div>
+    <p>项目名称</p>
+    <input id="sr7"/>
+    <p>交底结束时间</p>
+    <input name="txtstime" type="date" id="txtstime">
+    <p>交底单位名称</p>
+    <input id="sr1"/>
+    <p>回复日期</p>
+    <input name="txtstime" type="date" id="txtstime2">
+    <p>分数</p>
+    <input id="sr3"/>
+    <p>现场联系人</p>
+    <input id="sr4"/>
+    <p>联系方式</p>
+    <input id="sr5"/>
+    <p>交底信息</p>
+    <input id="sr6"/>
+</div>
+<button id="tijiao" style="margin-top: 20px;">提交</button>
+</body>
+<script>
+    function r(s,a,b){
+        if(s && s.indexOf(a)!==-1){
+            var k = s.replace(a, b);
+            if(k && k.indexOf(a)!=-1){
+                return r(k,a,b);
+            }
+            return k;
+        }
+    }
+    $('#tijiao').click(function () {
+
+    $.ajax({
+        url:"http://192.168.31.162:8011/GuanXian/insertjiaodi",
+        data:{
+            "managename":$('#sr7').val(),
+            "endtime": r($('#txtstime').val(), '-', '/'),
+            "danweiname":$('#sr1').val(),
+            "huifutime":r($('#txtstime2').val(), '-', '/'),
+            "score":$('#sr3').val(),
+            "lianxiren2":$('#sr4').val(),
+            "phone2":$('#sr5').val(),
+            "miaoshu":$('#sr6').val(),
+        },
+        success: function (data) {
+            alert("添加成功！");
+
+        }
+
+
+    })
+
+    })
+</script>
+</html>

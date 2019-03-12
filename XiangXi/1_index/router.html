@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link href="../assets/css/0-common/bootstrap.css" rel="stylesheet" />
+    <!--<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!--<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>-->
+    <!--<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <!--<script src="https://cdn.bootcss.com/holder/2.9.0/holder.min.js"></script>-->
+    <script src="../assets/js/0-common/holder.min.js"></script>
+    <script src="../assets/js/0-common/echarts.js"></script>
+    <script src="../assets/js/0-common/codemirror.js"></script>
+    <script src="../assets/js/0-common/javascript.js"></script>
+    <script src="../assets/js/0-common/echarts-all.js"></script>
+    <script src="../assets/js/0-common/pie.js"></script>
+    <!--<script src="../assets/js/0-common/jquery.min.js"></script>-->
+    <!--<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>-->
+    <!--<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>-->
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+    <script src="../assets/js/2-index/router.js"></script>
+    
+    <script >
+        window.onload = function() {
+            var inputs = document.querySelectorAll('input');
+            var divs = document.querySelectorAll('.i');
+
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].index = i;
+                inputs[i].onclick = function() {
+                    for (var i = 0; i < inputs.length; i++) {
+                        inputs[i].style.background = '';
+                        divs[i].style.display = 'none';
+                    }
+                    this.style.background = 'yellow';
+                    divs[this.index].style.display = 'block';
+                };
+            }
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>

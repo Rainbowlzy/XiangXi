@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>香溪地图</title>
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet"/>
+    <!--<link href="../assets/css/0-common/bootstrap-table.css" rel="stylesheet"/>-->
+    <!--<link href="../assets/css/0-common/bootstrap-datetimepicker.min.css" rel="stylesheet"/>-->
+    <!--<link href="../assets/css/0-common/bootstrap-select.min.css" rel="stylesheet"/>-->
+    <!--<link href="../assets/css/0-common/fileinput.min.css" rel="stylesheet"/>-->
+    <!--<link href="../assets/css/0-common/common.css" rel="stylesheet"/>-->
+
+    <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main1119.css"/>
+    <link rel="stylesheet" href="../assets/css/main.css"/>
+    <script src="https://cache.amap.com/lbs/static/es5.min.js"></script>
+    <script src="https://webapi.amap.com/maps?v=1.4.8&key=d19bd922e0ef902491adfea1eb684502"></script>
+    <!--<script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>-->
+
+    <!--<script src="https://unpkg.com/lodash@4.16.6"></script>-->
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+    <!--<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>-->
+
+</head>
+<body>
+<div id="app" style="display: none !important; " v-show="svcHeader">
+    <div class="container-fluid">
+        <div class="row" style="background:lightgray; padding:5px 10px;">
+            <div class="col-xs-3">
+                <div class="row">
+                    <div class="col-xs-6"><a href="../1_index/business.html">首页</a></div>
+                </div>
+            </div>
+            <div class="col-xs-offset-11"><a href="../4_login/login.html">登陆</a></div>
+        </div>
+        <div class="row">
+            <div style="margin:10px 5px;">
+                <div class="col-xs-3">
+                    <a href="">
+                        <span class="col-xs-3"><img src="../assets/i/metaicon/QQ图片20180605101023.png" alt="佳图智绘地图"
+                                                    height="60"/></span>
+                        <span class="col-xs-9"><h3>香溪地图</h3></span>
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <div class="row">
+                        <input type="text" placeholder="请输入要搜索的地点" class="form-control" v-model="search_key_word"/>
+                    </div>
+                    <div class="row" style="margin:10px 15px;">
+                        <div class="col-xs-3"><a href="">
+                            <div style="display: block;width: 20px;height: 20px;background-image: url(../assets/i/search_menu_icon.png);background-repeat: no-repeat;background-position: -3px -291px"></div>
+                        </a></div>
+                        <div class="col-xs-3"><a href="">
+                            <div style="display: block;width: 20px;height: 20px;background-image: url(../assets/i/search_menu_icon.png);background-repeat: no-repeat;background-position: -3px -291px"></div>
+                        </a></div>
+                    </div>
+                </div>
+                <div class="col-xs-2" style="margin:6px 5px;">
+                    <a @click="search" class="map-search-button"></a>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin:10px 15px;">
+            <div class="col-xs-3">
+                <div class="row" v-show="search_result_list.length>0" style="display:none; ">
+                    <div class="row" style="background: #EEEEEE;">
+                        <div class="col-xs-11" style="margin:5px 5px;">
+                            <div style="float: left;">
+                                <a href="javascript:void(0)" @click="clean">
+                                    返回
+                                </a>
+                            </div>
+                            <div style="float: right;">
+                                在当前地图找到<b>{{search_result_list.length}}</b>条结果
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row"
+                         v-for="(sr,i) in search_result_list"
+                         style="border-bottom: #EEEEEE 1px solid;">
+                        <div class="row"
+                             @click="pin(sr)">
+                            <div class="col-xs-2">
+                                <div style="border-radius: 15px;background:red; color:white;text-align: center;margin:10px 3px;">
+                                    {{i+1}}
+                                </div>
+                            </div>
+                            <div class="col-xs-10">
+                                <div class="row">
+                                    <h5>{{sr.label}}</h5>
+                                </div>
+                                <div class="row">
+                                    <div v-for="(e,i) in sr.stars" style="float: left;margin:0px 2px;">
+                                        <div style="display:inline-block;width:11px;height:11px;background:url(../assets/i/stars.png) no-repeat left bottom"></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h5>{{sr.tel}}</h5>
+                                </div>
+                                <div class="row">
+                                    <h5>{{sr.addr}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" v-show="search_result_list.length==0">
+                    <div class="row">
+                        <div class="col-xs-3 left-icon-button">
+                            <a href="javascript:void(0)" @click="left_search('监控')">
+                                <div class="left-icon-monitor"></div>
+                                <span class="left-icon-label">监控</span>
+                            </a>
+                        </div>
+                        <div class="col-xs-3 left-icon-button">
+                            <a href="javascript:void(0)" @click="left_search('人口')">
+                                <div class="left-icon-population"></div>
+                                <span class="left-icon-label">人口</span>
+                            </a>
+                        </div>
+                        <div class="col-xs-3 left-icon-button">
+                            <a href="javascript:void(0)" @click="left_search('楼栋')">
+                                <div class="left-icon-building"></div>
+                                <span class="left-icon-label">楼栋</span>
+                            </a>
+                        </div>
+                        <div class="col-xs-3 left-icon-button">
+                            <a href="javascript:void(0)" @click="left_search('党员')">
+                                <div class="left-icon-party-member"></div>
+                                <span class="left-icon-label">党员</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3 left-icon-button">
+                            <a href="javascript:void(0)" @click="left_search('老人')">
+                                <div class="left-icon-older-man"></div>
+                                <span class="left-icon-label">老人</span>
+                            </a>
+                        </div>
+                        <div class="col-xs-3 left-icon-button">
+                            <a href="javascript:void(0)" @click="left_search('关爱')">
+                                <div class="left-icon-health-care"></div>
+                                <span class="left-icon-label">关爱</span>
+                            </a>
+                        </div>
+                        <div class="col-xs-3 left-icon-button">
+                            <a href="javascript:void(0)" @click="left_search('监控')">
+                                <div class="left-icon-party-member"></div>
+                                <span class="left-icon-label">党员</span>
+                            </a>
+                        </div>
+                        <div class="col-xs-3 left-icon-button">
+                            <a href="javascript:void(0)" @click="left_search('党员')">
+                                <div class="left-icon-party-member"></div>
+                                <span class="left-icon-label">党员</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <img src="../assets/i/mobile_link.jpg" alt=""/>
+                </div>
+                <div class="row">
+                    <img src="../assets/i/mobile_link.jpg" alt=""/>
+                </div>
+            </div>
+            <div class="col-xs-9">
+                <div style="border-left:black 1px solid;border-top:black 1px solid;">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="row">
+                                <div class="col-xs-3"><a href="">苏州市</a></div>
+                                <div class="col-xs-3"><a href="">苏州市</a></div>
+                                <div class="col-xs-3"><a href="">苏州市</a></div>
+                                <div class="col-xs-3"><a href="">苏州市</a></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="container" style="min-height: 500px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div class="c-title">-->
+<!--<h1>-->
+<!--<div style="background:deepskyblue;color: #ffffff;float:left;padding:5px 15px;"> THIS IS A</div>-->
+<!--<div style="padding:5px 5px;margin:0px 15px;">PLAYGROUND</div>-->
+<!--</h1>-->
+<!--</div>-->
+<!--<script src="../assets/js/0-common/playground.js"></script>-->
+<script>
+
+</script>
+
+
+<script src="../assets/js/0-common/inner_map.js"></script>
+
+</body>
+</html>

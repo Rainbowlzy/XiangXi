@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Playground</title>
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/bootstrap-table.css" rel="stylesheet"/>
+    <!--<link href="../assets/css/0-common/bootstrap-datetimepicker.min.css" rel="stylesheet"/>-->
+    <!--<link href="../assets/css/0-common/bootstrap-select.min.css" rel="stylesheet"/>-->
+    <!--<link href="../assets/css/0-common/fileinput.min.css" rel="stylesheet"/>-->
+    <!--<link href="../assets/css/0-common/common.css" rel="stylesheet"/>-->
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="row">
+        <div class="col-xs-2"><label for="" class="control-label">最小序列</label></div>
+        <div class="col-xs-4"><input type="number" v-model="searchForm.MinMCOrder" @change="refresh"/></div>
+        <div class="col-xs-2">最大序列</div>
+        <div class="col-xs-4"><input type="number" v-model="searchForm.MaxMCOrder" @change="refresh"/></div>
+    </div>
+    <table id="tableUserInformation"
+           data-toolbar="#toolbar"
+           data-search="true"
+           data-show-refresh="true"
+           data-show-toggle="true"
+           data-show-columns="true"
+           data-show-export="true"
+           data-pagination="true"
+           data-page-list="[10, 25, 50, 100, ALL]"
+           data-page-size="5"
+           data-id-field="id"
+           data-url="/XiangXi/DefaultHandler.ashx?method=getmenuconfigurationlist"
+           data-side-pagination="server"></table>
+</div>
+
+<script>
+    require(['vue','jquery','cmodules'], function (Vue, $) {
+        new Vue({
+            data:{
+                searchForm:{
+                    MinMCOrder:2,
+                    MaxMCOrder:3,
+                }
+            },
+            methods:{
+                refresh: function () {
+                    $("#tableUserInformation").bootstrapTable("refresh");
+                }
+            },
+            mounted: function () {
+                var vm = this;
+                $("#tableUserInformation").bootstrapTable({
+                    queryParams: function (params) {
+                        return $.extend(params,{
+                            data:JSON.stringify(vm.$data.searchForm)
+                        })
+                    },
+                    columns:[[{						field: "MCTitle",
+                        title: "标题",
+                        sortable: true,
+                        align: "center"
+                    },
+                        {
+                            formatter: linkFormatter('MCLink'),						field: "MCLink",
+                            title: "链接",
+                            sortable: true,
+                            align: "center"
+                        },
+                        {
+                            formatter: imgFormatter('MCPicture'),						field: "MCPicture",
+                            title: "图片",
+                            sortable: true,
+                            align: "center"
+                        },
+                        {
+                            formatter: limitFormatter('MCParentTitle'),						field: "MCParentTitle",
+                            title: "父级标题",
+                            sortable: true,
+                            align: "center"
+                        },
+                        {						field: "MCMenuType",
+                            title: "菜单类型",
+                            sortable: true,
+                            align: "center"
+                        },
+                        {						field: "MCOrder",
+                            title: "顺序",
+                            sortable: true,
+                            align: "center"
+                        },
+                        {
+                            field: "operate",
+                            title: "操作",
+                            align: "center",
+//                    events: operateEvents,
+//                    formatter: operateFormatter
+                        }
+                    ]
+                    ]
+                });
+            }
+        }).$mount("#app");
+    })
+</script>
+</body>
+</html>

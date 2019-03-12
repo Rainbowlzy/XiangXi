@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Playground</title>
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap-table.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main1119.css" />
+    <script src="https://cache.amap.com/lbs/static/es5.min.js"></script>
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+    <style>
+        /*body{transform: scale(1.2);}*/
+        .c-title {
+            /*line-height: 97px;*/
+            /*height: 97px;*/
+            color: #ffffff;
+        }
+
+        .navbar-nav-cust {
+            font-size: 32px;
+        }
+
+            .navbar-nav-cust > li > a {
+                color: #ffffff;
+            }
+
+                .navbar-nav-cust > li > a:hover {
+                    background: transparent;
+                    /*font-size: 30px;*/
+                    color: rgb(255, 165, 77);
+                }
+
+        ul.nav > li > a:last-child :hover {
+            color: #ffffff !important;
+        }
+
+        #nav ul li {
+            margin: 18px 5px;
+        }
+
+        .c-shadow {
+            background-color: rgba(97, 255, 255, 0.15);
+            border-radius: 10px;
+            margin: 20px 10px;
+        }
+    </style>
+    <link href="../assets/css/2-index/business.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="app">
+        <page-top></page-top>
+    </div>
+    <script>
+        require(['vue', 'jquery', 'jquery.cookie','cmodules'], function (Vue) {
+
+            new Vue().$mount("#app");
+        })
+    </script>
+</body>
+</html>

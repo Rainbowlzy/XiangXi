@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/common.css" rel="stylesheet" />
+
+    <!--Leaflet-->
+    <link href="../assets/css/0-common/leaflet.css" rel="stylesheet" />
+    <link href="../assets/Leaflet/plugins/Leaflet.contextmenu/leaflet.contextmenu.css" rel="stylesheet" />
+    <link href="../assets/Leaflet/plugins/Leaflet-MiniMap-master/Control.MiniMap.css" rel="stylesheet" />
+    <link href="../assets/Leaflet/plugins/Leaflet.zoomslider-0.6.1/L.Control.Zoomslider.css" rel="stylesheet" />
+    <link href="../assets/Leaflet/plugins/Leaflet-usermarker-master/leaflet.usermarker.css" rel="stylesheet" />
+    <link href="../assets/Leaflet/plugins/Leaflet.defaultextent-master/leaflet.defaultextent.css" rel="stylesheet" />
+    <link href="../assets/Leaflet/plugins/Leaflet.markercluster/MarkerCluster.css" rel="stylesheet" />
+    <link href="../assets/Leaflet/plugins/Leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet" />
+    <!--[if lte IE 8]>
+        <link href="../assets/Leaflet/plugins/Leaflet.zoomslider-0.6.1/L.Control.Zoomslider.ie.css" rel="stylesheet" />
+    <![endif]-->
+    <link href="../assets/Leaflet/plugins/Leaflet.fullscreen-gh-pages/leaflet.fullscreen.css" rel="stylesheet" />
+    <!--[if lte IE 8]>
+        <link href="../assets/Leaflet/plugins/Leaflet.draw-master/leaflet.draw.ie.css" rel="stylesheet" />
+    <![endif]-->
+    <link href="../assets/Leaflet/plugins/Leaflet.MeasureControl-gh-pages/leaflet.measurecontrol.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/baguetteBox.css" rel="stylesheet" />
+
+
+
+    <link href="../assets/Leaflet/plugins/Leaflet.draw-master/leaflet.draw.css" rel="stylesheet" />
+    <link href="../assets/css/3-map/map.css" rel="stylesheet" />
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+    <script src="../assets/js/3-map/map_Z.js"></script>
+</head>
+<body>
+    <div class="main-navigation navbar" id="common_module-nav" style="z-index:1"></div>
+    <div id="map" style="position: fixed; top: 68px; right: 0; bottom: 0; left: 0;"></div>
+    <!--<div id="map" style="width:800px;height:500px"></div>-->
+    <div class="panel panel-default" id="map_analysis_panel" style="z-index:1001;position: fixed; top: 150px; right:10px; ">
+        <div class="panel-body"></div>
+    </div>
+    <div style="z-index:1001;position: fixed; top: 80px; right:410px; " hidden="hidden">
+        <select id="map_search_type" class="form-control  input-lg">
+            <option value="1">人口</option>
+            <option value="2">农业</option>
+            <option value="3">景区</option>
+        </select>
+    </div>
+    <div class="input-group" style="z-index:1001;position: fixed; top: 80px; right: 10px;width:400px; ">
+        <input type="text" id="map_search" class="form-control input-lg" placeholder="搜索关键字......" onkeydown='if(event.keyCode==13){map_search_btn.click()}'/>
+        <span class="input-group-btn">
+            <button class="btn btn-info btn-lg" id="map_search_btn" type="button"><i class="glyphicon glyphicon-search"></i></button>
+        </span>
+    </div><!-- /input-group -->
+    <div id="search_list" hidden="hidden" style="max-height:400px; z-index:1001;position: fixed; top: 135px; right: 10px;width:400px;background:#ffffff">
+
+        <div class="list-group" style="max-height:400px;overflow:auto;">
+        </div>
+        <!--<nav>
+            <ul class="pager">
+                <li class="previous disabled"><a href="#">上一页</a></li>
+                <li class="next disabled"><a href="#" class="disabled">下一页</a></li>
+            </ul>
+        </nav>-->
+    </div>
+    <div id="population_detail" hidden="hidden" style="border-radius:15px; width:50px;height:50px;position:fixed; bottom:80px; left:20px;z-index:1001;background:#ffffff;padding:30px;">
+        <div style="position:absolute;top:15px;right:15px;"><a class="population_detail-close" href="#"><i class="glyphicon glyphicon-remove"></i></a></div>
+        <div class="row">
+            <div class="col-xs-6 col-md-3">
+                <a href="https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1468209233989&di=c7ad3af8f93df0a91e84345700e1f800&imgtype=jpg&src=http%3A%2F%2Fwww.iconpng.com%2Fpng%2Fwindows8_icons2%2Fcontacts.png" target="_blank" class="thumbnail">
+                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1468209233989&di=c7ad3af8f93df0a91e84345700e1f800&imgtype=jpg&src=http%3A%2F%2Fwww.iconpng.com%2Fpng%2Fwindows8_icons2%2Fcontacts.png" alt="...">
+                </a>
+            </div>
+            <div class="col-xs-6 col-md-9">
+                <blockquote>
+                    <p id="population_detail-name"></p>
+                    <footer id="population_detail-IDCard"></footer>
+                </blockquote>
+            </div>
+            <div class="col-xs-12 col-md-12">
+                <table class="table">
+                    <tr>
+                        <td class="info">户籍地址：</td>
+                        <td id="population_detail-censusRegister"></td>
+                        <td class="info">性别：</td>
+                        <td id="population_detail-sex"></td>
+                    </tr>
+                    <tr>
+                        <td class="info">区域：</td>
+                        <td id="population_detail-district"></td>
+                        <td class="info">住址：</td>
+                        <td id="population_detail-address"></td>
+                    </tr>
+                    <tr>
+                        <td class="info">户口本号：</td>
+                        <td id="population_detail-bookletNum"></td>
+                        <td class="info">婚姻状况：</td>
+                        <td id="population_detail-marriageStatus"></td>
+                    </tr>
+                    <tr>
+                        <td class="info">民族：</td>
+                        <td id="population_detail-nation"></td>
+                        <td class="info">人口类型：</td>
+                        <td id="population_detail-populationType"></td>
+                    </tr>
+                    <tr>
+                        <td class="info">政治面貌：</td>
+                        <td id="population_detail-politicsStatus"></td>
+                        <td class="info">教育水平：</td>
+                        <td id="population_detail-educationDegree"></td>
+                    </tr>
+                    <tr>
+                        <td class="info">工作单位：</td>
+                        <td id="population_detail-workPlace"></td>
+                        <td class="info">电话：</td>
+                        <td id="population_detail-phone"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="map_right_nav" hidden="hidden"></div>
+    <div class="map_left_nav"></div>
+    <div class="map_top_nav">
+        <div><a href="javascript:void(0)" id="map_btn-population"><img src="../assets/i/People_Circle.png" /></a><span>人口地图</span></div>
+        <div><a href="javascript:void(0)" id="map_btn-agriculture"><img src="../assets/i/Farmer_Circle.png" /></a><span>农业地图</span></div>
+        <div><a href="javascript:void(0)" id="District_Marker"><img src="../assets/i/District_Circle.png" /></a><span>叠加区域</span></div>
+        <div><a href="javascript:void(0)" id="Plane_Marker"><img src="../assets/i/Plane_Circle.png" /></a><span>文旅信息</span></div>
+        <div><a href="javascript:void(0)" id="Clear_Marker"><img src="../assets/i/Clean_Circle.png" /></a><span>清空全图</span></div>
+    </div>
+
+</body>
+</html>

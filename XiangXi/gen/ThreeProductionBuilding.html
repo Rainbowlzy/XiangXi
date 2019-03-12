@@ -1,0 +1,256 @@
+  
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <title>三产楼栋</title>
+    <meta charset="utf-8"/>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="https://cdn.bootcss.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="../assets/css/docs.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/2.3.2/css/bootstrap-responsive.min.css"/>
+    <link rel="stylesheet" href="https://v2.bootcss.com/assets/js/google-code-prettify/prettify.css"/>
+    <link rel="stylesheet" href="../assets/UEditor-utf8-net/themes/iframe.css"/>
+    <link href="../assets/UEditor-utf8-net/themes/default/css/ueditor.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap-table.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/fileinput.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/common.css" rel="stylesheet"/>
+    <script src="https://cdn.bootcss.com/require.js/2.3.5/require.min.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+    <script src="ThreeProductionBuilding.js"></script>
+</head>
+<body>
+
+<div class="container">
+	<h3>三产楼栋</h3>
+		<form role="form" class="col-xs-11 form-horizontal">
+
+<div class=""  id="ThreeProductionBuilding" style="margin-top:5px;">
+	<div class="container" style="margin-bottom: 20px;">
+			<a href="javascript:history.go(-1)" id="table-back" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>返回</a>
+			<button type="button" class="btn btn-info excel-import-button-ThreeProductionBuilding"><i class="glyphicon glyphicon-cloud-upload"></i>Excel导入</button>
+			<a href="/XiangXi/ExportSchema.ashx?title=ThreeProductionBuilding" class="btn btn-primary">Excel模板</a>
+			<button type="button" id="submit" @click="save" class="btn  btn-info"><i class="glyphicon glyphicon-circle-arrow-up"></i>提交</button>
+	</div>
+
+    <div class="modal fade table_excel_modal-ThreeProductionBuilding">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Excel导入</h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <!--<button type="button" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i>确定</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+				<div v-if="table">
+					<div class="row" >						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="TPBName">
+									名称
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="TPBName" 
+											v-model="TPBName" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="TPBAddress">
+									地址
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="TPBAddress" 
+											v-model="TPBAddress" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="TPBBuildingNumber">
+									楼号
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="TPBBuildingNumber" 
+											v-model="TPBBuildingNumber" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="TPBUnitNumber">
+									单元号
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="TPBUnitNumber" 
+											v-model="TPBUnitNumber" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="TPBDoorNumber">
+									门牌号
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="TPBDoorNumber" 
+											v-model="TPBDoorNumber" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="TPBTheNameOfEnterprise">
+									入驻企业名称
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="TPBTheNameOfEnterprise" 
+											v-model="TPBTheNameOfEnterprise" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="TPBSuperinrtendent">
+									负责人
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="TPBSuperinrtendent" 
+											v-model="TPBSuperinrtendent" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="TPBContactModeOfThePersonInCharge">
+									负责人联系方式
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="TPBContactModeOfThePersonInCharge" 
+											v-model="TPBContactModeOfThePersonInCharge" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="TPBExtent">
+									范围
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="TPBExtent" 
+											v-model="TPBExtent" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>                    </div>
+									<div class="container">
+										<div class="row">
+                                            <label class="col-sm-1 control-label" for="TPBRemarks">
+									            备注
+								            </label>
+										</div>
+									    <div class="row">
+								            <c-uedit v-model="TPBRemarks"></c-uedit>
+                                        </div>
+                                    </div>
+
+									</div>
+					</div>
+					</div>
+					</form>
+            </div>
+<div class="modal fade" id="account-info-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">当前用户</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-5">
+                    </div>
+                    <div class="col-md-7">
+                        <ul class="list-group">
+                            <li class="list-group-item"><span class="list-group-item-title">姓名：</span>超级管理员</li>
+                            <li class="list-group-item"><span class="list-group-item-title">职位：</span>超级管理员</li>
+                            <li class="list-group-item"><span class="list-group-item-title">街道：</span>东山镇</li>
+                            <li class="list-group-item"><span class="list-group-item-title">社区：</span>潦里村</li>
+                            <li class="list-group-item"><span class="list-group-item-title">最后登录时间：</span>2016年6月23日20:38:36</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="logout()" class="btn btn-primary" style="float: left">注销</button>
+                <a class="btn btn-default">修改个人信息>></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="common-alert">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

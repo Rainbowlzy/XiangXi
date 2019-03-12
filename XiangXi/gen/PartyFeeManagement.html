@@ -1,0 +1,185 @@
+  
+<!-------------------------------------------------------------------------------------------------------------------
+ * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
+ * 生成时间：03/12/2019 13:34:37
+ * 生成版本：03/12/2019 13:33:51 
+ * 作者：路正遥
+*-------------------------------------------------------------------------------------------------------------------> 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <title>党费管理</title>
+    <link rel="shortcut icon" href="../assets/i/bitbug_favicon.ico" />
+    <meta charset="utf-8"/>
+    <link href="../assets/css/pageonecss.css" rel="stylesheet" />
+    <link href="../assets/css/2-index/business.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap-table.css" rel="stylesheet">
+    <link href="../node_modules/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../assets/css/0-common/common.css" rel="stylesheet"/>
+    <link href="../assets/css/2-index/business.css" rel="stylesheet"/>
+    <link href="../assets/css/docs.css" rel="stylesheet"/>
+    <link href="../assets/UEditor-utf8-net/themes/iframe.css" rel="stylesheet" />
+    <link href="../assets/UEditor-utf8-net/themes/default/css/ueditor.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap-table.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/fileinput.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/common.css" rel="stylesheet"/>
+	
+    <script src="../assets/js/0-common/third-party/zeroclipboard/ZeroClipboard.js"></script>
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+    <script src="PartyFeeManagement.js"></script>
+</head>
+<body>
+<div  id="PartyFeeManagement">
+	<div v-if="!(request||{}).hidden_title"><page-top></page-top></div>
+<div class="container">
+	<h3>党费管理</h3>
+		<form role="form" class="col-xs-11 form-horizontal">
+
+<div class=""  style="margin-top:5px;">
+	<div class="container" style="margin-bottom: 20px;">
+			<a href="javascript:history.go(-1)" id="table-back" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>返回</a>
+			<button type="button" class="btn btn-info excel-import-button-PartyFeeManagement"><i class="glyphicon glyphicon-cloud-upload"></i>Excel导入</button>
+			<a href="/XiangXi/ExportSchema.ashx?title=PartyFeeManagement" class="btn btn-primary">Excel导出</a>
+			<button type="button" id="submit" @click="save" class="btn  btn-info"><i class="glyphicon glyphicon-circle-arrow-up"></i>提交</button>
+	</div>
+
+    <div class="modal fade table_excel_modal-PartyFeeManagement">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Excel导入</h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <!--<button type="button" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i>确定</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+				<div v-if="table">
+					<div class="row" >						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="PFMFullName">
+									姓名
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="PFMFullName" 
+											v-model="PFMFullName" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="PFMIdNumber">
+									身份证号
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="PFMIdNumber" 
+											v-model="PFMIdNumber" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="PFMAge">
+									年龄
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="PFMAge" 
+											v-model="PFMAge" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="PFMPartyBranch">
+									所在党支部
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="PFMPartyBranch" 
+											v-model="PFMPartyBranch" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="PFMMonthlyIncome">
+									月收入
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="PFMMonthlyIncome" 
+											v-model="PFMMonthlyIncome" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="PFMMonthlyPartyMembershipFee">
+									月党费
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="PFMMonthlyPartyMembershipFee" 
+											v-model="PFMMonthlyPartyMembershipFee" 
+											placeholder="">                                </div>
+                            </div>
+                        </div></div>
+					</div>
+					</div>
+					</form>
+            </div>
+<div class="modal fade" id="common-alert">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</body>
+</html>

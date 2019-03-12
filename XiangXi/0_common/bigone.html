@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Playground</title>
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/bootstrap-table.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/bootstrap-select.min.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/fileinput.min.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/common.css" rel="stylesheet"/>
+
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+    <script src="http://api.tianditu.com/api?v=4.0" type="text/javascript"></script>
+</head>
+<body>
+<div id="app" style="margin-top: 10px; margin-left: 10px;">
+    <div class="row">
+        <div id="panel" style="font-size: 280px;"></div>
+    </div>
+</div>
+<script>
+    require(['vue', 'jquery', 'cmodules'], function (Vue, $) {
+        new Vue().$mount('#app')
+        var i = 0;
+        var s = "一定要做滴大气一点".split("")
+        $.setTimeoutQueue(s.map(function (item) {
+            return function () {
+                console.log(item)
+                $("#panel").text($("#panel").text()+item);
+            }
+        }), 500)
+    })
+</script>
+</body>
+</html>

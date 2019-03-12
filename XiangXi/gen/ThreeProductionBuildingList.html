@@ -1,0 +1,98 @@
+  
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>三产楼栋</title>
+    <meta charset="utf-8" />
+
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap-table.css" rel="stylesheet">
+    <link href="../node_modules/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../assets/css/0-common/common.css" rel="stylesheet"/>
+    <link href="../assets/css/2-index/business.css" rel="stylesheet"/>
+    <script src="../assets/UEditor-utf8-net/ueditor.all.min.js"></script>
+    <script src="../assets/js/0-common/require.js"></script>
+
+    <link href="../assets/css/0-common/common.css" rel="stylesheet" />
+    <script src="../assets/js/0-common/app.js"></script>
+    <script src="ThreeProductionBuildingList.js"></script>
+	<style>
+	.am-btn{
+		margin:10px 10px;
+	}
+	</style>
+</head>
+<body>
+    <div class="container" id="cnavThreeProductionBuilding">
+		<div id="myAlert" class="alert alert-warning" style="display:none;">
+			<a href="#" class="close" data-dismiss="alert">&times;</a>
+		</div>
+		<div class="row">
+			<div style="float:left;margin-top:5px;" id="buttonThreeProductionBuilding">
+				<a href="#"><h3>三产楼栋</h3></a>
+				<a href="javascript:history.go(-1)" id="table-back" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>返回</a>
+				<!--<button id="table-remove" type="button" class="btn btn-danger" disabled="disabled"><i class="glyphicon glyphicon-remove"></i>删除</button>-->
+				<a href="/XiangXi/gen/ThreeProductionBuilding.html" id="table-add" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>新增</a>
+			</div>
+		</div>
+		<div class="row">
+			<nav class="navbar navbar-default navbar-fixed-top">
+			  <div class="container">
+				<a href="/XiangXi/2_map/map.html" class="navbar-brand">首页</a>
+				<ul class="nav navbar-nav" v-if="nav_list">
+					<li :class="i==nav_list.length-1?'active':''" v-for="(nav,i) in nav_list"><a v-if="nav && nav.MCCaption!=='后台首页' && nav.MCCaption!=='后台首页左侧'" :href="nav.MCLink||parseEmpty(nav)">{{nav.MCCaption}}</a></li>
+				</ul>
+			  </div>
+			</nav>
+		</div>
+        <table id="tableThreeProductionBuilding"
+                data-search="true"
+                data-show-refresh="true"
+                data-show-columns="true"
+                data-pagination="true"
+                data-page-list="[10, 25, 50, 100, ALL]"
+                data-page-size="8"
+                data-id-field="id"
+                data-side-pagination="server"></table>
+				
+        </div>	
+					
+		<div class="modal fade table_excel_modal-ThreeProductionBuilding">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Excel导入</h4>
+					</div>
+					<div class="modal-body"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<!--<button type="button" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i>确定</button>-->
+					</div>
+				</div>
+			</div>
+		</div>
+    <div class="modal fade" id="html-peek">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">预览</h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

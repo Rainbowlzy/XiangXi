@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>香溪社区管理平台</title>
+    <link href="../assets/css/0-common/bootstrap.css" rel="stylesheet" />
+    <!--<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
+    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>-->
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+    <script src="../assets/js/0-common/UserRoles.js"></script>
+
+    <style>
+        h3 {
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<div id="app" style="margin-left:20px; margin-top:20px;">
+    <div class="row">
+        <div class="col-xs-6" style="margin-bottom: 20px;">
+            <a href="/XiangXi/gen/CadreList.html" id="table-back" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>返回</a>
+            <button type="button" class="btn btn-info excel-import-button-Cadre"><i class="glyphicon glyphicon-cloud-upload"></i>Excel导入</button>
+            <a href="/XiangXi/ExportSchema.ashx?title=Cadre" class="btn btn-primary">Excel模板</a>
+            <button type="button" id="submit" @click="save" class="btn  btn-info"><i class="glyphicon glyphicon-circle-arrow-up"></i>提交</button>
+        </div>
+    </div>
+    <div>
+        <table border="1" style="text-align:center;">
+            <tr>
+                <td>
+                    <h3>用户名</h3>
+                </td>
+                <td v-for="u in users">
+                    <h3>
+                        {{u.UILoginName}}
+                    </h3>
+                </td>
+            </tr>
+            <tr v-for="m in roles">
+                <td>
+                    <h3>{{m.RCRoleName}}</h3>
+                </td>
+                <td v-for="u in users">
+                    <input type="checkbox"
+                           :checked="any(m.RCRoleName,u.UILoginName)"
+                           v-bind:class="u.UILoginName+':'+m.RCRoleName"
+                           style="width: 50px; height: 50px;"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

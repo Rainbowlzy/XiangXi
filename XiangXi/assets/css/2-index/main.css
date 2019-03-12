@@ -1,0 +1,37 @@
+﻿
+body {
+    margin: 0 auto;
+    padding: 0;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+#logo {
+    height: 18px;
+    line-height: 20px;
+}
+
+#logo span {
+    font-size: 18px;
+    color: black;
+    margin-top: 2px;
+}
+
+#left, #right {
+    color: white;
+}
+
+#part1 ul {
+    list-style: none;
+}
+
+#part1 li {
+    float: left;
+}
+
+
+#part1 a {
+    color: white;
+}

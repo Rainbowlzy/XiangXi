@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="XiangXi.SVC" CodeBehind="gen/SVC.svc.cs" Factory="System.ServiceModel.Activation.WebServiceHostFactory" %>

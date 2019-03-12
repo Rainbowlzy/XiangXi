@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Playground</title>
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/bootstrap-table.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/bootstrap-select.min.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/fileinput.min.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/common.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="../assets/UEditor-utf8-net/themes/default/css/ueditor.css"/>
+
+    <script src="../assets/UEditor-utf8-net/ueditor.config.js"></script>
+    <script src="../assets/UEditor-utf8-net/ueditor.all.js"></script>
+    <script src="../assets/UEditor-utf8-net/lang/zh-cn/zh-cn.js"></script>
+
+    <script src="https://unpkg.com/lodash@4.16.6"></script>
+
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+
+</head>
+<body>
+<div id="" style="margin-top: 10px; margin-left: 10px;">
+    <h1>
+        <div style="background:deepskyblue;color: #ffffff;float:left;padding:5px 5px;"> THIS IS A</div>
+        <div style=";padding:5px 5px;">PLAYGROUND</div>
+    </h1>
+    <div class="container">
+        <div id="app">
+            <div class="row" v-if="img">
+                <div class="col-xs-9">
+                    <a v-bind:href="img">{{img}}</a>
+                </div>
+            </div>
+            <div class="row" v-if="img">
+                {{img.substr(16)}}
+            </div>
+            <div class="row">
+                <div class="col-xs-5" v-if="img">
+                    <img v-bind:src="img"
+                         alt=""
+                         style="border:black 1px solid"
+                         v-bind:width="width"
+                         v-bind:height="height"/>
+                </div>
+                <div class="col-xs-4">
+                    <div class="row"><input type="text" class="form-control" @change="change" v-model="width"
+                                            placeholder="width"/></div>
+                    <div class="row"><input type="text" class="form-control" @change="change" v-model="height"
+                                            placeholder="height"/></div>
+                    <div class="row"><input type="text" class="form-control" @change="change" v-model="label"
+                                            placeholder="label"/></div>
+                    <div class="row"><input type="text" class="form-control" @change="change" v-model="bgcolor2"
+                                            placeholder="bgcolor2"/></div>
+                    <div class="row"><input type="text" class="form-control" @change="change" v-model="icon"
+                                            placeholder="icon"/></div>
+                    <div class="row"><input type="text" class="form-control" @change="change" v-model="bgcolor1"
+                                            placeholder="bgcolor1"/></div>
+                    <div class="row"><input type="text" class="form-control" @change="change" v-model="shape"
+                                            placeholder="shape"/></div>
+                    <div class="row"><input type="text" class="form-control" @change="change" v-model="fontSize"
+                                            placeholder="fontSize"/></div>
+                    <div class="row"><input type="text" class="form-control" @change="change" v-model="nolabel"
+                                            placeholder="nolabel"/></div>
+                    <div class="row"><input type="text" class="form-control" @change="change" v-model="noshadow"
+                                            placeholder="nolabel"/></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>/**
+ * Created by rainb on 2018/7/6.
+ */
+
+function component() {
+    var element = document.createElement('div');
+    // Lodash, currently included via a script, is required for this line to work
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    return element;
+}
+document.body.appendChild(component());
+
+require(['vue', 'jquery'
+    //, 'cmodules'
+    //,'../assets/UEditor-utf8-net/ueditor.config','../assets/UEditor-utf8-net/ueditor.all','../assets/UEditor-utf8-net/lang/zh-cn/zh-cn.js'
+], function (Vue, $) {
+
+    var data = {
+        "label": "用户管理",
+        "bgcolor2": "BB28C0",
+        "bgcolor1": "D04AD5",
+        "width": "400",
+        "height": "380",
+        "icon": "用户管理.png",
+        "shape": "trirect",
+        "fontSize": "30",
+        "nolabel": "",
+        "noshadow": "",
+        "img": null
+    };
+    var vm = new Vue({
+        data: data,
+        mounted: function () {
+            this.change();
+        },
+        methods: {
+            change: function (val) {
+                this.img = `http://localhost/XiangXi/ImageHandler.ashx?label=${data.label}&bgcolor2=${data.bgcolor2}&bgcolor1=${data.bgcolor1}&width=${data.width}&height=${data.height}&icon=${data.icon}&shape=${data.shape}&fontSize=${data.fontSize}&nolabel=${data.nolabel}&noshadow=${data.noshadow}`;
+                console.log(this.img)
+            }
+        }
+    }).$mount('#app')
+
+
+})
+</script>
+</body>
+</html>

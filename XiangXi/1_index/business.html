@@ -1,0 +1,139 @@
+﻿﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>香溪信息工作平台</title>
+    <meta charset="utf-8" />
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap-table.css" rel="stylesheet">
+    <link href="../node_modules/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../assets/css/0-common/common.css" rel="stylesheet" />
+    <link href="../assets/css/2-index/business.css" rel="stylesheet" />
+    <script src="../assets/UEditor-utf8-net/ueditor.all.min.js"></script>
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+    <link rel="shortcut icon" href="../assets/i/bitbug_favicon.ico" />
+
+    <style>
+        /*body{transform: scale(1.2);}*/
+        .c-title {
+            /*line-height: 97px;*/
+            /*height: 97px;*/
+            color: #ffffff;
+        }
+
+        .navbar-nav-cust {
+            font-size: 25px;
+        }
+
+            .navbar-nav-cust > li > a {
+                color: #ffffff;
+            }
+
+                .navbar-nav-cust > li > a:hover {
+                    background: transparent;
+                    /*font-size: 30px;*/
+                    color: rgb(255, 165, 77);
+                }
+
+        ul.nav > li > a:last-child :hover {
+            color: #ffffff !important;
+        }
+
+        #nav ul li {
+            margin: 18px 5px;
+        }
+    </style>
+</head>
+<body style="
+overflow: hidden;
+background-image: url('../assets/i/metaicon/e.jpg');
+background-repeat: no-repeat;
+background-size: cover;">
+<div id="container">
+    <div class="row">
+        <div style="">
+            <!--优化图片-->
+            <div style="background:url(../assets/i/metaicon/宝华首页_03.png);
+            margin: 0px 20px;
+            line-height: 50px;width: 471.1px;height: 65.8px;background-size: 100%"></div>
+            <!--<img src="../assets/i/metaicon/宝华首页_03.png"-->
+                 <!--alt=""-->
+                 <!--style="margin-left: 20px; margin-top: 20px; margin-right: 20px; height: 75px; line-height: 50px;">-->
+
+            <!--优化图片-->
+
+        </div>
+        <!--<div class="col-xs-9">
+            <div class="row">
+                <a href="/XiangXi/1_index/business.html">
+                    <h1 class="c-title"
+                        style="font-size:50px;height:50px; line-height: 50px;">香溪信息工作平台</h1>
+                </a>
+            </div>
+        </div>-->
+    </div>
+    <!--顶部菜单-->
+    <div class="row" style="display:none; position:relative; top:-7px; width: 65535px;" v-show="secondmenu">
+        <div id="nav">
+            <ul class="nav navbar-nav navbar-nav-cust nav-pills">
+                <li class="nav-item">
+                    <a class="active" href="/XiangXi/1_index/index.html" :style="current_menu==='首页'?'color:#ffa54d':''">
+                        首页
+                    </a>
+                </li>
+                <li v-for="row in secondmenu" class="nav-item">
+                    <a v-if="isdirect(row)" @click="redirect(row)" href="javascript:void(0)"
+                       :style="current_menu===row.MCTitle?'color:#ffa54d':''">
+                        {{row.MCDisplayName}}
+                    </a>
+                    <a v-else v-bind:href="row.MCLink || '../1_index/business.html?data='+JSON.stringify(row)"
+                       :style="current_menu===row.MCTitle?'color:#ffa54d':''">
+                        {{row.MCDisplayName}}
+                    </a>
+                </li>
+                <li>
+                    <a href="#" @click="exit">
+                        <div style="margin-top:-13px;">
+                            <img src="../assets/i/metaicon/退出(1).png" style="height: 45px; width:45px;">
+                        </div>
+                    </a>
+                </li>
+                <li id="exit" style="position:absolute; right:30px;">
+                    <a href="../4_login/login.html">
+                        <!-- 退出按钮 -->
+                        <!-- <div style="margin-top:-13px;"> -->
+                        <!--     <img src="../assets/i/metaicon/退出(1).png" style="height: 45px; width:130px;"> -->
+                        <!-- </div> -->
+                        <!-- 退出按钮 -->
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!--豆腐块-->
+    <div class="container" v-show="thirdmenu" style="display: none;">
+        <div id="third-menu" class="row sub_menu bus" style="margin:80px 80px;">
+            <div id="button-group" style="margin-top:30px;  margin:auto; vertical-align:central;">
+                <a href="#" v-for="(menut,i) in thirdmenu">
+                    <div class="col-xs-2 shown" v-if="menut.img" style="margin:15px 20px;">
+                        <img v-bind:alt="menut.title" v-bind:src="menut.img" style="background: transparent; border-radius: 10px; width:180px;height:171px;margin:-10px -10px;" @click="redirect(menut)"/>
+                    </div>
+                    <div class="col-xs-2 shown" v-else style="margin:15px 20px;">
+                        <img :alt="menut.title" style="background: transparent; border-radius: 10px;border:#ffffff 1px solid; width:180px;height:171px;margin:-10px -10px;" @click="redirect(menut)"
+                             :src="menut.img||(svcHeader+'/XiangXi/ImageHandler.ashx?label='+menut.title+'&bgcolor2='+colorlist[i*2]+'&bgcolor1='+colorlist[i*2+1]+'&width=400&height=380&icon='+menut.title+'.png&shape=trirect&fontSize=30')"/>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/js/2-index/business.js" async></script>
+</body>
+</html>

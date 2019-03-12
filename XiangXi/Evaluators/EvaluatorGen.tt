@@ -1,0 +1,279 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ include file="..\..\XiangXiEntities\CodeTemplates\Manager.ttinclude"#>
+<#@ output extension=".cs" #>
+<#@ import namespace="XiangXiENtities.CodeTemplates" #>
+/* ------------------------------------------------------------ *
+ * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
+ * 生成时间：<#=DateTime.Now#>
+ * 生成版本：<#=g.DomainVersionTime#> 
+ * 作者：路正遥
+ * ------------------------------------------------------------ */
+
+using XiangXiENtities.EF;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using XiangXi.Models;
+using Newtonsoft.Json;
+using System.Data.Entity.Migrations;
+using static System.Data.Objects.EntityFunctions;
+using static System.DateTime;
+using static System.Linq.Enumerable;
+using XiangXiENtities.EF.NewEntities;
+
+namespace XiangXi.Evaluators
+{
+<# 
+var manager = Manager.Create(Host, GenerationEnvironment); 
+foreach(var table_name in table_schema2.Keys){
+	var evalname = string.Format("{0}Evaluator",table_name);
+	var evalFile = string.Format("{0}.cs",evalname);
+	var table = table_schema2[table_name];
+	var table_name_ch = table.table_name_ch;
+
+#>
+
+    /// <summary>
+    /// 【<#=table_name_ch#>】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// </summary>
+    public partial class <#=table_name#>CountEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
+                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
+                var list = dates.Select(p => ctx.<#=table_name#>.Count(m => m.CreateOn==p)).ToList();
+                return new
+                {
+                    sum = list.Sum(),
+                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
+                    series = list
+                };
+            }
+        }
+        public override string Comments=> "【<#=table_name_ch#>】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+    }
+	
+    /// <summary>
+    /// 删除【<#=table_name_ch#>】
+    /// </summary>
+    public partial class Delete<#=table_name#>Evaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var data = JsonConvert.DeserializeObject<<#=table_name#>>(request.data);
+            if (data == null)
+                return new CommonOutputT<string>
+                {
+                    success = false,
+                    message = "删除成功"
+                };
+            using (var ctx = new DefaultContext())
+            {
+                var one = ctx.<#=table_name#>.Find(data.id);
+				if(one==null){
+					return new CommonOutputT<string>
+					{
+						success = false,
+						message = "未找到需要删除的数据"
+					};
+				}
+                one.IsDeleted = 1;
+				ctx.<#=table_name#>.AddOrUpdate(one);
+				ctx.SaveChanges();
+				return new CommonOutputT<string>
+				{
+					success = true,
+					message = "删除成功"
+				};
+            }
+			
+        }
+        public override string Comments=> "删除一条<#=table_name_ch#>记录";
+    }
+	
+    /// <summary>
+    /// 保存【<#=table_name_ch#>】
+    /// </summary>
+    public partial class Save<#=table_name#>Evaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var user = CurrentUserInformation;
+            if (user==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "请登录"
+                };
+            }
+            using (var ctx = new DefaultContext())
+            {
+				var s = request.data;
+				var entity = JsonConvert.DeserializeObject<<#=table_name#>>(s);
+				// 行级排他锁开始
+                var transactionId = Guid.NewGuid().ToString();
+                var isnew = entity.id == null;
+                if (!isnew)
+                {
+                    var one = ctx.<#=table_name#>.FirstOrDefault(p=>p.id==entity.id);
+                    if(one==null) return new
+                    {
+                        success = false,
+                        message = "编辑错误，未找到ID"
+                    };
+                    if (one.VersionNo != entity.VersionNo) return new
+                    {
+                        success = false,
+                        message = "发生数据写冲突"
+                    };
+                    one.VersionNo++;
+                    one.TransactionID = transactionId;
+					ctx.<#=table_name#>.AddOrUpdate(one);
+                    ctx.SaveChanges();
+                    entity.VersionNo = one.VersionNo;
+                }
+				
+
+				<#
+foreach(var col in table.Columns.Where(p=>p.dbtype.Contains("NVARCHAR"))){
+	#>
+				// <#=col.dbtype#>
+				entity.<#=col.column_name#> = HttpUtility.UrlDecode(entity.<#=col.column_name#>);
+	<#
+}
+				#>
+
+                entity.id = entity.id ?? Guid.NewGuid().ToString();
+                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
+                entity.CreateOn = entity.CreateOn ?? Now;
+                entity.TransactionID = transactionId;
+                entity.UpdateOn = Now;
+                entity.IsDeleted = 0;
+                entity.DataLevel = user?.DataLevel ?? "01";
+				ctx.<#=table_name#>.AddOrUpdate(entity);
+                ctx.SaveChanges();
+				// 行级排他锁结束
+                return new
+                {
+                    success = true,
+                    message = "操作成功"
+                };
+            }
+        }
+        public override string Comments=> "保存一条<#=table_name#>记录";
+    }
+	
+    /// <summary>
+    /// 查询空的【<#=table_name_ch#>】
+    /// </summary>
+    public partial class Get<#=table_name#>EmptyEvaluator:Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            return new <#=table_name#>();
+        }
+        public override string Comments=> "获取空的<#=table_name_ch#>记录";
+    }
+	
+    /// <summary>
+    /// 查询【<#=table_name_ch#>】列表
+    /// </summary>
+    public partial class Get<#=table_name#>ListEvaluator : Evaluator
+    {
+        public override string Comments=> "获取<#=table_name#>列表 ";
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+				var datalevel = CurrentUserInformation?.DataLevel;
+                var searchModel = request.data.Deserialize<<#=table_name#>SearchModel>() ?? new <#=table_name#>SearchModel();
+                var query = ctx.<#=table_name#>.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var @params = request.context.Request.Params;
+                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
+				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
+                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
+                var isordered = false;
+                var search = searchModel.SearchKey ?? @params["search"];
+                var sort = searchModel.Sort ?? @params["sort"];
+<#
+var column_to_search = new List<string>();
+foreach(var col in table.Columns.Where(p=>!string.IsNullOrEmpty(p.column_name))){
+#>
+				// <#=col.column_name#> <#=col.dbtype#> <#=col.column_description#> 
+<#
+if (col.dbtype.ToLower()=="int"){
+    #>
+                if(searchModel.Min<#=col.column_name#>!=null) query = query.Where(t=>t.<#=col.column_name#>>=searchModel.Min<#=col.column_name#>);
+                if(searchModel.Max<#=col.column_name#>!=null) query = query.Where(t=>t.<#=col.column_name#><=searchModel.Max<#=col.column_name#>);
+<#
+}
+else if (col.dbtype.ToLower().Contains("decimal") || col.dbtype.ToLower().Contains("real") || col.dbtype.ToLower().Contains("money")){
+    #>
+                if(searchModel.Min<#=col.column_name#>!=null) query = query.Where(t=>t.<#=col.column_name#>>=searchModel.Min<#=col.column_name#>);
+                if(searchModel.Max<#=col.column_name#>!=null) query = query.Where(t=>t.<#=col.column_name#><=searchModel.Max<#=col.column_name#>);
+<#
+}
+else if (col.dbtype.ToLower()=="datetime"){
+    #>
+                if(searchModel.From<#=col.column_name#>!=null) query = query.Where(t=>t.<#=col.column_name#>>=searchModel.From<#=col.column_name#>);
+                if(searchModel.To<#=col.column_name#>!=null) query = query.Where(t=>t.<#=col.column_name#><=searchModel.To<#=col.column_name#>);
+<#
+}
+else if(col.column_name.ToLower().Contains("state") && col.dbtype.ToLower().Contains("varchar")){
+	column_to_search.Add(col.column_name);
+    #>
+                if(searchModel.<#=col.column_name#>!=null && searchModel.<#=col.column_name#>.Length!=0) query = query.Where(t=>searchModel.<#=col.column_name#>.Contains(t.<#=col.column_name#>));
+<#
+}
+else {
+	column_to_search.Add(col.column_name);
+    #>
+                if(!string.IsNullOrEmpty(searchModel.<#=col.column_name#>)) query = query.Where(t=>t.<#=col.column_name#>.Contains(searchModel.<#=col.column_name#>));
+<#
+}
+#>
+                if(sort=="<#=col.column_name#>")
+                {
+					query = @params["order"]=="asc"?query.OrderBy(t=>t.<#=col.column_name#>):query.OrderByDescending(t=>t.<#=col.column_name#>);
+                    isordered = true;
+                }
+<#
+}
+if(column_to_search.Any()){
+#>
+				if(!string.IsNullOrEmpty(search)){
+					query = query.Where(t=>t.id.Contains(search)<#
+								foreach(var col in column_to_search){
+								#>||t.<#=col#>.Contains(search)<#
+								}
+								#>);
+				}
+<# } #>
+                if(sort=="ord")
+                {
+					query = @params["order"]=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
+                    isordered = true;
+                }
+
+                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
+                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
+                var total = query.Count();
+                var sql = query.ToString();
+                return new CommonOutputList<<#=table_name#>>
+                {
+                    success = true, rows = rows, total = total, message="查询成功"
+                };
+            }
+        }
+    }
+
+<#
+}
+#>
+}

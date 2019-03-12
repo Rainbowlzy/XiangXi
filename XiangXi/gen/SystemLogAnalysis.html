@@ -1,0 +1,31 @@
+  
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>系统登陆日志</title>
+    <meta charset="utf-8" />
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/common.css" rel="stylesheet" />
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+   
+</head>
+<body>
+
+    <div id="app" class="container" style="margin:50px auto;">
+		<c-histogram-date title="系统登陆日志" url="/XiangXi/DefaultHandler.ashx?method=SystemLogCount" style="width:1000px;height:500px;"></c-histogram-date>
+    </div>
+	<script>
+	require(['vue','jquery','cmodules'],function(Vue,$){
+		new Vue().$mount('#app');
+	})
+	</script>
+</body>
+</html>
+
+

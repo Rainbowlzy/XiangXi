@@ -1,0 +1,240 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ include file="$(SolutionDir)\XiangXiEntities\CodeTemplates\Manager.ttinclude"#>
+<#@ output extension=".html" #>
+<#@ import namespace="XiangXiENtities.CodeTemplates" #>
+<#@ assembly name="$(SolutionDir)\Generator\bin\Debug\Generator.dll"#>
+
+<# var manager = Manager.Create(Host, GenerationEnvironment); #>
+
+<#
+foreach(var table in table_schema)
+{
+	var tbl = table.Key;
+	var drops = table_schema[tbl].Join(dropdowns, col=>col.column_name, drop=>drop.fieldNameEn, (col,drop)=>drop);
+	var current_table = table_schema2[tbl];
+	var table_name_ch = current_table.table_name_ch;
+#>
+<# manager.StartNewFile(string.Format("{0}List.js",tbl)); #>  
+/* ------------------------------------------------------------ *
+ * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
+ * 生成时间：<#=DateTime.Now#>
+ * 生成版本：<#=g.DomainVersionTime#> 
+ * 作者：路正遥
+ * ------------------------------------------------------------ */
+console.group("正在加载脚本")
+require([
+	"vue", 
+	"jquery", 
+	"jquery.cookie", 
+	"bootstrap", 
+	"bootstrap-table", 
+	"bootstrap-select", 
+    "bootstrap-table-zh-CN",
+	"bootstrap-datetimepicker", 
+//	"bootstrap-datetimepicker.zh-CN",
+	"fileinput",
+	"fileinput_locale_zh",
+	"cmodules"
+], function(Vue,$) {
+console.log("正在加载自定义逻辑")
+$(document).ready(function(){
+		$.call('GetMenuConfigurationEmpty')
+		var vm = new Vue({
+			el:"#cnav<#=tbl#>",
+			data:{
+				request:GetRequest(),
+				nav_list:[],
+				current_menu:'<#=table_name_ch#>'
+			},
+			methods:{
+				parseEmpty: function(nav){
+					return "javascript:parent.location.href='/XiangXi/1_index/business.html?data="+encodeURIComponent(JSON.stringify(nav))+"'"
+				}
+			},
+			mounted:function(){
+				
+				$('.excel-import-button-<#=tbl#>').click(function () {
+						$('.table_add_modal').modal('hide');
+						$('.table_excel_modal-<#=tbl#>').on('shown.bs.modal',function(){
+							$('.table_excel_modal-<#=tbl#> .modal-body').html('<input class="excel_file input-file form-control" type="file">');
+							$(".excel_file").fileinput({
+								language: 'zh', //设置语言
+								uploadUrl: "/XiangXi/ExcelImport.ashx?fileType=<#=tbl#>", //上传的地址
+								allowedFileExtensions: ['xls','xlsx'],//接收的文件后缀,
+								showUpload: true, //是否显示上传按钮
+								dropZoneEnabled: true,
+								showCaption: true,//是否显示标题
+								browseClass: "btn btn-primary", //按钮样式             
+								previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+								msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！"
+							});
+							$(".excel_file").on("fileuploaded",function(){
+								window.location.href = site_gen+"<#=tbl#>List.html"
+							});
+						})
+
+						$('.table_excel_modal-<#=tbl#>').modal('show');
+					})
+				
+				var $table = $("#table<#=tbl#>")
+				//表格传区域ID参数
+				var url = "";
+				$table.attr("data-url", "/XiangXi/DefaultHandler.ashx?method=get<#=tbl#>List&data=" + JSON.stringify(GetRequest()) + "&");
+	
+				//具体操作：打开网页，编辑，删除
+				var operateEvents = {
+					//编辑
+					'click .edit': function(e, value, row, index) {
+						for(var p in row){
+							if(row[p]&&row[p][0]==='/'&&row[p].indexOf('/Date')===0) row[p] = slashDate2yyyyMMdd(row[p])
+						}
+						window.location.href = "/XiangXi/gen/<#=tbl#>.html?table=<#=tbl#>&data=" + encodeURIComponent(JSON.stringify(row));
+					},
+					//删除
+					'click .remove': function(e, value, row, index) {
+						//前台删除
+						$table.bootstrapTable("remove", {
+							field: "id",
+							values: [row.id]
+						});
+						//后台删除
+						$.call('Delete<#=tbl#>',row,function(data){
+								$table.bootstrapTable("refresh");
+						})
+					}
+				};
+				$table.bootstrapTable({
+					striped: true,
+					height: getHeight(),
+					columns: [[
+							{
+								field: "id",
+								title: "编号",
+								sortable: true,
+								visible: false,
+								align: "center"
+							}, 
+						<#
+							int i = 0;
+							foreach(var col in table_schema[tbl].Where(p=>!string.IsNullOrEmpty(p.column_name))){
+								#>{<#
+					
+								if(col.dbtype.ToLower()=="datetime"){
+								#>	
+								formatter: slashDate2yyyyMMdd,<#
+								}else if("image,picture,photo".Split(',').Any(s=>col.column_name.ToLower().IndexOf(s)!=-1)){
+								#>	
+								formatter: imgFormatter('<#=col.column_name#>'),<#
+								}else if("link".Split(',').Any(s=>col.column_name.ToLower().IndexOf(s)!=-1)){
+								#>	
+								formatter: linkFormatter('<#=col.column_name#>'),<#
+								}else if("content,title".Split(',').Any(s=>col.column_name.ToLower().IndexOf(s)!=-1)){
+								#>	
+								formatter: limitFormatter('<#=col.column_name#>'),<#
+								}
+								#>
+
+								field: "<#=col.column_name#>",
+								title: "<#=col.column_description.Trim("@".ToCharArray())#>",
+			<#            if(i>5){
+						#>
+								visible: false,<#
+			}#>
+
+								sortable: true,
+								align: "center"
+							}, 
+							<#
+								#><#
+					++i;
+							}
+								#>
+							{
+								field: "CreateBy",
+								title: "创建人",
+								sortable: true,
+								visible: false,
+								align: "center"
+							}
+								,
+							{
+								field: "CreateOn",
+								title: "创建时间",
+								sortable: true,
+								formatter: slashDate2yyyyMMdd,
+								visible: false,
+								align: "center"
+							}
+								,
+							{
+								field: "UpdateBy",
+								title: "更新人",
+								sortable: true,
+								visible: false,
+								align: "center"
+							}
+								,
+							{
+								field: "UpdateOn",
+								title: "更新时间",
+								sortable: true,
+								formatter: slashDate2yyyyMMdd,
+								visible: false,
+								align: "center"
+							}
+								,
+							{
+								field: "DataLevel",
+								title: "数据级别",
+								sortable: true,
+								visible: false,
+								align: "center"
+							},
+							{
+								field: "TransactionID",
+								title: "事务编号",
+								sortable: true,
+								visible: false,
+								align: "center"
+							}
+								,{
+								field: "operate",
+								title: "操作",
+								align: "center",
+								events: operateEvents,
+								formatter: operateFormatter
+							}
+						]
+					]
+				});
+		
+				$table.bootstrapTable('refresh');
+				$("input[type=text]:first").focus();
+				setTimeout(function(){
+				$table.bootstrapTable('refresh');},5000)
+				
+				var request = GetRequest();
+				if(request && request.nav){
+					try{
+
+                        $.call("querynav2",JSON.parse(request.nav),function(resp){
+                            vm.$data.nav_list = resp
+                        })
+					}catch (e) {
+						console.error(e)
+                    }
+				}
+			}
+		})
+	})
+	console.log("加载自定义逻辑完毕")
+})
+console.log("加载脚本完毕")
+console.groupEnd();
+<#
+				}
+#>
+
+<# manager.EndBlock(); #>  
+
+<# manager.Process(true); #> 

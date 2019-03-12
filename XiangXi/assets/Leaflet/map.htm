@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet 地图示例</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="leaflet.css" rel="stylesheet" type="text/css" />
+    <script src="leaflet.js" type="text/javascript"></script>
+    <script src="DCILMap.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var map = null;
+        function bindMap() {
+            var cities = new L.LayerGroup();
+
+            L.marker([31.205296873564, 120.57343602643], { title: "越溪街道龙翔社区居民委员会" }).bindPopup('<b>越溪街道龙翔社区居民委员会</b>').addTo(cities);
+            L.marker([31.20186922283, 120.56948062423], { title: "社区卫生服务越溪街道龙翔站" }).bindPopup('社区卫生服务越溪街道龙翔站').addTo(cities);
+
+            L.marker([31.205323919691, 120.57328912006], { title: "吴中区越溪派出所龙翔社区警务室" }).bindPopup('<b>吴中区越溪派出所龙翔社区警务室</b>').addTo(cities);
+            L.marker([31.201742915475, 120.56912389031], { title: "苏州市吴中区越溪街道龙翔社区服务中心" }).bindPopup('苏州市吴中区越溪街道龙翔社区服务中心').addTo(cities);
+
+            L.marker([31.201742908507, 120.56906093402], { title: "苏州市吴中区越溪街道龙翔社区总支委员会" }).bindPopup('苏州市吴中区越溪街道龙翔社区总支委员会').addTo(cities);
+            L.marker([31.201751932331, 120.56910290353], { title: "苏州市吴中区越溪街道龙翔社区居民委员会" }).bindPopup('苏州市吴中区越溪街道龙翔社区居民委员会').addTo(cities);
+
+            var mbAttr = 'test';
+            var SZMAP_url = 'http://mt{s}.szgis.cn/v2/gettile/?level={z}&row={y}&col={x}&maptype=map&imgtype=png';
+            var SZSATELLITE_utl = "http://mt{s}.szgis.cn/v2/gettile/?level={z}&row={y}&col={x}&maptype=satellite&imgtype=jpg";
+            var SZMAP = L.tileLayer(SZMAP_url, { attribution: "苏州地图  审图号：苏S（2012）084号",
+                errorTileUrl: "",
+                maxZoom: 11,
+                minZoom: 0,
+                opacity: 1,
+                subdomains: [1, 2, 3, 4],
+                tileSize: 256,
+                unloadInvisibleTiles: false,
+                updateWhenIdle: false,
+                zoomOffset: 0
+            });
+
+            var SZSATELLITE = L.tileLayer(SZSATELLITE_utl, { attribution: "苏州影像  审图号：苏S（2012）084号",
+                errorTileUrl: "",
+                maxZoom: 11,
+                minZoom: 0,
+                opacity: 1,
+                subdomains: [1, 2, 3, 4],
+                tileSize: 256,
+                unloadInvisibleTiles: false,
+                updateWhenIdle: false,
+                zoomOffset: 0
+            });
+            map = L.map('map', {
+                center: [31.29954032620578, 120.62441035426534],
+                zoom: 3,
+                crs: L.CRS.EPSG320500,
+                layers: [SZMAP, cities]
+            });
+
+            map.on('click', function (e) {
+                //                alert(e.latlng);
+            });
+
+            var baseLayers = {
+                "Grayscale": SZMAP,
+                "Streets": SZSATELLITE
+            };
+
+            var overlays = {
+                "Cities": cities
+            };
+
+            L.control.layers(baseLayers, overlays).addTo(map);
+        }
+        function locateMark() {
+            var latlng = new L.LatLng(31.205296873564, 120.57343602643);
+            var popupContent = getPopupContent({ title: "越溪街道龙翔社区居民委员会" }, true);
+            map.setView(latlng, 8);
+            var popup = L.popup({
+                offset: new L.Point(0, -20)
+            }).setLatLng(latlng).setContent(popupContent);
+            popup.openOn(map);
+        }
+
+        function getPopupContent(item) {
+            var a = "<div style=\"width: 400px; height: 300px\">" + item.title + "</div>";
+            return a;
+
+        }
+
+        function Button1_onclick() {
+            map_container.innerHTML = "<div id=\"map\" style=\"width: 800px; height: 600px\"></div>";
+            bindMap();
+        }
+
+        function Button2_onclick() {
+            map.remove();
+            map_container.innerHTML = "";
+        }
+
+    </script>
+</head>
+<body>
+    <input id="Button1" type="button" value="绑定" onclick="return Button1_onclick()" /><br />
+    <input id="Button2" type="button" value="清除" onclick="return Button2_onclick()" /><br/>
+    <input id="Button3" type="button" value="定位" onclick="return locateMark()" /><br/>
+    <div id="map_container">
+        <div id="map" style="width: 800px; height: 600px">
+        </div>
+    </div>
+</body>
+</html>

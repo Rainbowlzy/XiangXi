@@ -1,0 +1,21 @@
+.map-search-button { display: block; width: 20px; height: 20px; background: url(http://localhost/XiangXi/assets/i/search-icon.png) no-repeat top left; -webkit-background-size: 20px 20px !important; }
+
+.left-icon-label { margin: 0px 6px; }
+
+.left-icon-button { margin: 5px 0px; }
+
+.left-icon, .left-icon-monitor, .left-icon-population, .left-icon-building, .left-icon-party-member, .left-icon-older-man, .left-icon-health-care { margin: 2px 0px; width: 38px; height: 38px; -webkit-background-size: 38px 38px !important; background-size: 38px 38px !important; }
+
+.left-icon-monitor { background: url("http://localhost/XiangXi/ImageHandler.ashx?bgcolor2=FF6B4C&bgcolor1=FF6B4C&width=380&height=380&icon=%E7%9B%91%E6%8E%A7.png&shape=pie&fontSize=30&nolabel=nolabel&noshadow=noshadow") no-repeat top left; }
+
+.left-icon-population { background: url("http://localhost/XiangXi/ImageHandler.ashx?bgcolor2=FFBC3B&bgcolor1=FFBC3B&width=380&height=380&icon=%E4%BA%BA%E5%8F%A3%E4%BF%A1%E6%81%AF.png&shape=pie&fontSize=30&nolabel=nolabel&noshadow=noshadow") no-repeat top left; }
+
+.left-icon-building { background: url("http://localhost/XiangXi/ImageHandler.ashx?bgcolor2=7CCA37&bgcolor1=7CCA37&width=380&height=380&icon=%E5%8E%82%E6%88%BF%E6%A5%BC%E6%A0%8B.png&shape=pie&fontSize=30&nolabel=nolabel&noshadow=noshadow") no-repeat top left; }
+
+.left-icon-party-member { background: url("http://localhost/XiangXi/ImageHandler.ashx?bgcolor2=61ACF9&bgcolor1=61ACF9&width=380&height=380&icon=%E5%85%9A%E5%91%98.png&shape=pie&fontSize=30&nolabel=nolabel&noshadow=noshadow") no-repeat top left; }
+
+.left-icon-older-man { background: url("http://localhost/XiangXi/ImageHandler.ashx?bgcolor2=FF9445&bgcolor1=FF9445&width=380&height=380&icon=%E8%80%81%E4%BA%BA.png&shape=pie&fontSize=30&nolabel=nolabel&noshadow=noshadow") no-repeat top left; }
+
+.left-icon-health-care { background: url("http://localhost/XiangXi/ImageHandler.ashx?bgcolor2=DC6FF4&bgcolor1=DC6FF4&width=380&height=380&icon=%E5%85%B3%E7%88%B1.png&shape=pie&fontSize=30&nolabel=nolabel&noshadow=noshadow") no-repeat top left; }
+
+/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,2172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CB81E6D4-2B90-433F-9EFF-584F5A3F271F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XiangXi</RootNamespace>
+    <AssemblyName>XiangXi</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <ApplicationInsightsResourceId />
+    <Use64BitIISExpress>true</Use64BitIISExpress>
+    <TargetFrameworkProfile />
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <TypeScriptTarget>ES2015</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptModuleKind>None</TypeScriptModuleKind>
+    <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>False</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Caching, Version=5.0.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Caching.5.0.505.0\lib\NET35\Microsoft.Practices.EnterpriseLibrary.Caching.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Validation, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Validation.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Validation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OOXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.6\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.6\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="0_common\bigone.html" />
+    <Content Include="0_common\calendar.html" />
+    <Content Include="0_common\imageeditor.html" />
+    <Content Include="0_common\inner_map.html" />
+    <Content Include="0_common\map_editor.html" />
+    <Content Include="0_common\map_editor_tool.html" />
+    <Content Include="0_common\menurole.html" />
+    <Content Include="0_common\playground - 复制.html" />
+    <Content Include="0_common\playground.html" />
+    <Content Include="0_common\playground_backup.html" />
+    <Content Include="0_common\submenulist.html" />
+    <Content Include="0_common\uploadedimage.html" />
+    <Content Include="0_common\userrole.html" />
+    <Content Include="1_index\baohua_index.html" />
+    <Content Include="1_index\business.html" />
+    <Content Include="1_index\business_backup.html" />
+    <Content Include="1_index\business_modules.html" />
+    <Content Include="1_index\C-business.html" />
+    <Content Include="1_index\gusucun.html" />
+    <Content Include="1_index\index.html" />
+    <Content Include="1_index\main.html" />
+    <Content Include="1_index\router.html" />
+    <Content Include="2_map\full_map.html" />
+    <Content Include="2_map\RTSP.aspx" />
+    <Content Include="3_maintain\change_password.html" />
+    <Content Include="4_login\C-login.html" />
+    <Content Include="4_login\login.html" />
+    <Content Include="5_specialwork\SpecialWork.html" />
+    <Content Include="6_tree\raphael.js" />
+    <Content Include="6_tree\test.css" />
+    <Content Include="6_tree\test.html" />
+    <Content Include="6_tree\Treant.css" />
+    <Content Include="6_tree\Treant.js" />
+    <Content Include="assets\css\docs.css" />
+    <Content Include="assets\css\pageonecss.css" />
+    <Content Include="assets\i\bitbug_favicon.ico" />
+    <Content Include="assets\js\0-common\app-compiled.js" />
+    <Content Include="assets\js\0-common\app-local.js" />
+    <Content Include="assets\js\0-common\app.js" />
+    <Content Include="assets\js\0-common\baguetteBox.js" />
+    <Content Include="assets\js\0-common\bootstrap-datetimepicker.min.js" />
+    <Content Include="assets\js\0-common\bootstrap-datetimepicker.zh-CN.js" />
+    <Content Include="assets\js\0-common\bootstrap-editable.js" />
+    <Content Include="assets\js\0-common\bootstrap-select.min.js" />
+    <Content Include="assets\js\0-common\bootstrap-table-editable.js" />
+    <Content Include="assets\js\0-common\bootstrap-table-export.js" />
+    <Content Include="assets\js\0-common\bootstrap-table-zh-CN.js" />
+    <Content Include="assets\js\0-common\bootstrap-table-zh-CN.min.js" />
+    <Content Include="assets\js\0-common\bootstrap-table.js" />
+    <Content Include="assets\js\0-common\bootstrap.js" />
+    <Content Include="assets\js\0-common\bootstrap.min.js" />
+    <Content Include="assets\js\0-common\C-cmodules.js" />
+    <Content Include="assets\js\0-common\calendar.js" />
+    <Content Include="assets\js\0-common\cmodules-compiled.js" />
+    <Content Include="assets\js\0-common\cmodules.js" />
+    <Content Include="assets\js\0-common\codemirror.js" />
+    <Content Include="assets\js\0-common\echarts-all.js" />
+    <Content Include="assets\js\0-common\echarts-gl.js" />
+    <Content Include="assets\js\0-common\echarts.js" />
+    <Content Include="assets\js\0-common\echarts.min.js" />
+    <Content Include="assets\js\0-common\fileinput.min.js" />
+    <Content Include="assets\js\0-common\fileinput_locale_zh.js" />
+    <Content Include="assets\js\0-common\fullcalendar-zh-cn.js" />
+    <Content Include="assets\js\0-common\fullcalendar.min.js" />
+    <Content Include="assets\js\0-common\full_map-compiled-compiled.js" />
+    <Content Include="assets\js\0-common\full_map-compiled.js" />
+    <Content Include="assets\js\0-common\full_map.js" />
+    <Content Include="assets\js\0-common\holder.min.js" />
+    <Content Include="assets\js\0-common\initfakedmap.js" />
+    <Content Include="assets\js\0-common\inner_map-compiled.js" />
+    <Content Include="assets\js\0-common\inner_map.js" />
+    <Content Include="assets\js\0-common\javascript.js" />
+    <Content Include="assets\js\0-common\jquery.cookie.js" />
+    <Content Include="assets\js\0-common\jquery.ztree.all.min.js" />
+    <Content Include="assets\js\0-common\leaflet-compiled.js" />
+    <Content Include="assets\js\0-common\leaflet.js" />
+    <Content Include="assets\js\0-common\loadpagelist.js" />
+    <Content Include="assets\js\0-common\main.js" />
+    <Content Include="assets\js\0-common\MD5.js" />
+    <Content Include="assets\js\0-common\menurole-compiled.js" />
+    <Content Include="assets\js\0-common\menurole.js" />
+    <Content Include="assets\js\0-common\moment.min.js" />
+    <Content Include="assets\js\0-common\pie.js" />
+    <Content Include="assets\js\0-common\playground.js" />
+    <Content Include="assets\js\0-common\require-compiled.js" />
+    <Content Include="assets\js\0-common\require.js" />
+    <Content Include="assets\js\0-common\submenulist.js" />
+    <Content Include="assets\js\0-common\tableExport.js" />
+    <Content Include="assets\js\0-common\third-party\lang\en\en.js" />
+    <Content Include="assets\js\0-common\third-party\lang\en\images\addimage.png" />
+    <Content Include="assets\js\0-common\third-party\lang\en\images\alldeletebtnhoverskin.png" />
+    <Content Include="assets\js\0-common\third-party\lang\en\images\alldeletebtnupskin.png" />
+    <Content Include="assets\js\0-common\third-party\lang\en\images\background.png" />
+    <Content Include="assets\js\0-common\third-party\lang\en\images\button.png" />
+    <Content Include="assets\js\0-common\third-party\lang\en\images\copy.png" />
+    <Content Include="assets\js\0-common\third-party\lang\en\images\deletedisable.png" />
+    <Content Include="assets\js\0-common\third-party\lang\en\images\deleteenable.png" />
+    <Content Include="assets\js\0-common\third-party\lang\en\images\listbackground.png" />
+    <Content Include="assets\js\0-common\third-party\lang\en\images\localimage.png" />
+    <Content Include="assets\js\0-common\third-party\lang\en\images\music.png" />
+    <Content Include="assets\js\0-common\third-party\lang\en\images\rotateleftdisable.png" />
+    <Content Include="assets\js\0-common\third-party\lang\en\images\rotateleftenable.png" />
+    <Content Include="assets\js\0-common\third-party\lang\en\images\rotaterightdisable.png" />
+    <Content Include="assets\js\0-common\third-party\lang\en\images\rotaterightenable.png" />
+    <Content Include="assets\js\0-common\third-party\lang\en\images\upload.png" />
+    <Content Include="assets\js\0-common\third-party\lang\zh-cn\images\copy.png" />
+    <Content Include="assets\js\0-common\third-party\lang\zh-cn\images\localimage.png" />
+    <Content Include="assets\js\0-common\third-party\lang\zh-cn\images\music.png" />
+    <Content Include="assets\js\0-common\third-party\lang\zh-cn\images\upload.png" />
+    <Content Include="assets\js\0-common\third-party\lang\zh-cn\zh-cn.js" />
+    <Content Include="assets\js\0-common\third-party\zeroclipboard\ZeroClipboard.js" />
+    <Content Include="assets\js\0-common\TileHeadPic.js" />
+    <Content Include="assets\js\0-common\ueditor.all.js" />
+    <Content Include="assets\js\0-common\ueditor.all.min.js" />
+    <Content Include="assets\js\0-common\ueditor.config.js" />
+    <Content Include="assets\js\0-common\userrole-compiled.js" />
+    <Content Include="assets\js\0-common\userrole.js" />
+    <Content Include="assets\js\0-common\vue.js" />
+    <Content Include="assets\js\0-common\vue.min.js" />
+    <Content Include="assets\js\0-common\webuploader.min.js" />
+    <Content Include="assets\js\jquery-3.1.0.js" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Evaluators\EvaluatorGen.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EvaluatorGen.cs</LastGenOutput>
+    </Content>
+    <Content Include="gen\ActiveInspection.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ActiveInspection.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ActiveInspectionAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ActiveInspectionList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ActiveInspectionList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Analysis.html">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Analysis.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Analysis.html</LastGenOutput>
+    </Content>
+    <Content Include="gen\Assets.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Assets.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\AssetsAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\AssetsList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\AssetsList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BeautifulCountryside.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BeautifulCountryside.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BeautifulCountrysideAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BeautifulCountrysideList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BeautifulCountrysideList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BonusRecord.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BonusRecord.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BonusRecordAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BonusRecordList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BonusRecordList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BuildingParkAnalysis.html" />
+    <Content Include="gen\BusinessAppointment.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessAppointment.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessAppointmentAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessAppointmentList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessAppointmentList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessGuide.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessGuide.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessGuideAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessGuideList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessGuideList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessManagement.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessManagement.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessManagementAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessManagementList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessManagementList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Cadre.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Cadre.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CadreAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CadreList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CadreList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CareForTheObject.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CareForTheObject.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CareForTheObjectAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CareForTheObjectList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CareForTheObjectList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CategoriesOfPolicyDocuments.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CategoriesOfPolicyDocuments.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CategoriesOfPolicyDocumentsAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CategoriesOfPolicyDocumentsList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CategoriesOfPolicyDocumentsList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CharacteristicOfXiangxi.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CharacteristicOfXiangxi.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CharacteristicOfXiangxiAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CharacteristicOfXiangxiList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CharacteristicOfXiangxiList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CommunalFacilities.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CommunalFacilities.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CommunalFacilitiesAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CommunalFacilitiesList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CommunalFacilitiesList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CommunistYouthLeague.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CommunistYouthLeague.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CommunistYouthLeagueAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CommunistYouthLeagueList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CommunistYouthLeagueList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ContractManagement.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ContractManagement.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ContractManagementAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ContractManagementList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ContractManagementList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ConvenienceGuide.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ConvenienceGuide.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ConvenienceGuideAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ConvenienceGuideList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ConvenienceGuideList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ConvenientLife.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ConvenientLife.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ConvenientLifeAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ConvenientLifeList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ConvenientLifeList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CPopulationAnalysis.html" />
+    <Content Include="gen\DangerousHousing.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DangerousHousing.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DangerousHousingAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DangerousHousingList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DangerousHousingList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DemandCollection.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DemandCollection.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DemandCollectionAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DemandCollectionList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DemandCollectionList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DocumentManagement.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DocumentManagement.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DocumentManagementAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DocumentManagementList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DocumentManagementList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DongShan1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DongShan.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DrawWaterUpaHill.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DrawWaterUpaHill.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DrawWaterUpaHillAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DrawWaterUpaHillList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DrawWaterUpaHillList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ElectricityChargePaymentRecord.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ElectricityChargePaymentRecord.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ElectricityChargePaymentRecordAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ElectricityChargePaymentRecordList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ElectricityChargePaymentRecordList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\EmploymentAssistance.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\EmploymentAssistance.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\EmploymentAssistanceAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\EmploymentAssistanceList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\EmploymentAssistanceList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ExpertManagement.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ExpertManagement.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ExpertManagementAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ExpertManagementList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ExpertManagementList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FactoryBuilding.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FactoryBuilding.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FactoryBuildingAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FactoryBuildingList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FactoryBuildingList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Family.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Family.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FamilyAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FamilyList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FamilyList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FisheryAdministration.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FisheryAdministration.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FisheryAdministrationAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FisheryAdministrationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FisheryAdministrationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FreeToShoot.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FreeToShoot.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FreeToShootAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FreeToShootList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FreeToShootList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Guardian.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Guardian.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\GuardianAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\GuardianList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\GuardianList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\HandlingOfGusuVillageProblem.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\HandlingOfGusuVillageProblem.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\HandlingOfGusuVillageProblemAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\HandlingOfGusuVillageProblemList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\HandlingOfGusuVillageProblemList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\HouseProperty.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\HouseProperty.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\HousePropertyAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\HousePropertyList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\HousePropertyList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ImportProc.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ImportProc.svc.cs</LastGenOutput>
+    </Content>
+    <Content Include="gen\IndustrialParkHousingReceipt.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\IndustrialParkHousingReceipt.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\IndustrialParkHousingReceiptAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\IndustrialParkHousingReceiptList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\IndustrialParkHousingReceiptList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\InformationManagementOfPartyMembers.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\InformationManagementOfPartyMembers.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\InformationManagementOfPartyMembersAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\InformationManagementOfPartyMembersList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\InformationManagementOfPartyMembersList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\InformationManagementOfPartyOrganizations.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\InformationManagementOfPartyOrganizations.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\InformationManagementOfPartyOrganizationsAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\InformationManagementOfPartyOrganizationsList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\InformationManagementOfPartyOrganizationsList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Investors.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Investors.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\InvestorsAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\InvestorsList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\InvestorsList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\JobDiary.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\JobDiary.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\JobDiaryAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\JobDiaryList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\JobDiaryList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\KeyPersonnel.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\KeyPersonnel.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\KeyPersonnelAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\KeyPersonnelList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\KeyPersonnelList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\LabourUnion.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\LabourUnion.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\LabourUnionAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\LabourUnionList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\LabourUnionList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\LettersAndVisits.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\LettersAndVisits.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\LettersAndVisitsAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\LettersAndVisitsList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\LettersAndVisitsList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ListOfActiveServicemen.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ListOfActiveServicemen.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ListOfActiveServicemenAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ListOfActiveServicemenList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ListOfActiveServicemenList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ListOfConscripts.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ListOfConscripts.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ListOfConscriptsAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ListOfConscriptsList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ListOfConscriptsList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ListOfExecutiveCommitteesOfWomensFederation.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ListOfExecutiveCommitteesOfWomensFederation.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ListOfExecutiveCommitteesOfWomensFederationAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ListOfExecutiveCommitteesOfWomensFederationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ListOfExecutiveCommitteesOfWomensFederationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\LoginRecord.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\LoginRecord.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\LoginRecordAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\LoginRecordList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\LoginRecordList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MailList.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MailList.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MailListAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MailListList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MailListList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ManagementOfPartyBuildingNews.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ManagementOfPartyBuildingNews.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ManagementOfPartyBuildingNewsAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ManagementOfPartyBuildingNewsList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ManagementOfPartyBuildingNewsList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ManagementOfPartyFeePayment.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ManagementOfPartyFeePayment.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ManagementOfPartyFeePaymentAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ManagementOfPartyFeePaymentList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ManagementOfPartyFeePaymentList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MedicalInsuranceForChildren.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MedicalInsuranceForChildren.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MedicalInsuranceForChildrenAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MedicalInsuranceForChildrenList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MedicalInsuranceForChildrenList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MenuConfiguration.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MenuConfiguration.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MenuConfigurationAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MenuConfigurationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MenuConfigurationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Militia.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Militia.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MilitiaAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MilitiaList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MilitiaList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Newborn.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Newborn.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\NewbornAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\NewbornList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\NewbornList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Notice.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Notice.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\NoticeAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\NoticeList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\NoticeList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Organization.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Organization.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\OrganizationAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\OrganizationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\OrganizationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PageListHTML.html">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PageListJS.html">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PageOneHTML.html">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PageOneHTML.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PageOneHTML.html</LastGenOutput>
+    </Content>
+    <Content Include="gen\PageOneJS.html">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PageOneJS.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PageOneJS.html</LastGenOutput>
+    </Content>
+    <Content Include="gen\PartyAffairsGuide.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyAffairsGuide.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyAffairsGuideAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyAffairsGuideList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyAffairsGuideList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyAndGroupFormation.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyAndGroupFormation.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyAndGroupFormationAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyAndGroupFormationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyAndGroupFormationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyBuilding.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyBuilding.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyBuildingAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyBuildingList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyBuildingList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyFeeManagement.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyFeeManagement.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyFeeManagementAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyFeeManagementList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyFeeManagementList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyMemberActivities.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyMemberActivities.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyMemberActivitiesAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyMemberActivitiesList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyMemberActivitiesList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyRecord.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyRecord.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyRecordAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyRecordList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyRecordList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PermissionAccess.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PermissionAccess.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PermissionAccessAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PermissionAccessList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PermissionAccessList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PersonalInformation.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PersonalInformation.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PersonalInformationAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PersonalInformationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PersonalInformationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Personnel.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Personnel.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PersonnelAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PersonnelList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PersonnelList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Photo.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Photo.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PhotoAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PhotoList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PhotoList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Poi.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Poi.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PoiAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PoiList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PoiList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PolicyDocument.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PolicyDocument.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PolicyDocumentAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PolicyDocumentList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PolicyDocumentList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Population.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Population.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PopulationAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PopulationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PopulationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Propaganda.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Propaganda.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PropagandaAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PropagandaList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PropagandaList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ProposedTreatment.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ProposedTreatment.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ProposedTreatmentAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ProposedTreatmentList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ProposedTreatmentList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RecordOfRecommendations.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RecordOfRecommendations.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RecordOfRecommendationsAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RecordOfRecommendationsList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RecordOfRecommendationsList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RecruitmentAndEmploymentModule.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RecruitmentAndEmploymentModule.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RecruitmentAndEmploymentModuleAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RecruitmentAndEmploymentModuleList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RecruitmentAndEmploymentModuleList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ReimbursementList.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ReimbursementList.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ReimbursementListAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ReimbursementListList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ReimbursementListList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RentCollectionRecords.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RentCollectionRecords.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RentCollectionRecordsAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RentCollectionRecordsList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RentCollectionRecordsList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RoleConfiguration.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RoleConfiguration.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RoleConfigurationAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RoleConfigurationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RoleConfigurationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RoleMenu.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RoleMenu.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RoleMenuAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RoleMenuList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RoleMenuList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RuralMedicalTreatment.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RuralMedicalTreatment.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RuralMedicalTreatmentAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RuralMedicalTreatmentList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RuralMedicalTreatmentList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ScheduleManagement.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ScheduleManagement.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ScheduleManagementAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ScheduleManagementList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ScheduleManagementList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ScheduleWork.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ScheduleWork.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ScheduleWorkAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ScheduleWorkList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ScheduleWorkList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SearchFormModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SearchFormModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="gen\DongShan.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DongShan1.txt</LastGenOutput>
+    </Content>
+    <Content Include="gen\ServiceAppointment.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ServiceAppointment.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ServiceAppointmentAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ServiceAppointmentList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ServiceAppointmentList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SpecialTopicOnPartyBuilding.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SpecialTopicOnPartyBuilding.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SpecialTopicOnPartyBuildingAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SpecialTopicOnPartyBuildingList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SpecialTopicOnPartyBuildingList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SpecialWork.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SpecialWork.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SpecialWorkAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SpecialWorkList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SpecialWorkList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\StudyOnPartyStyleAndCleanGovernment.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\StudyOnPartyStyleAndCleanGovernment.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\StudyOnPartyStyleAndCleanGovernmentAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\StudyOnPartyStyleAndCleanGovernmentList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\StudyOnPartyStyleAndCleanGovernmentList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SystemConfiguration.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SystemConfiguration.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SystemConfigurationAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SystemConfigurationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SystemConfigurationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ThematicLearning.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ThematicLearning.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ThematicLearningAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ThematicLearningList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ThematicLearningList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\TheTwoCategoryOfPersonnel.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\TheTwoCategoryOfPersonnel.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\TheTwoCategoryOfPersonnelAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\TheTwoCategoryOfPersonnelList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\TheTwoCategoryOfPersonnelList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ThreeSessions.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ThreeSessions.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ThreeSessionsAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ThreeSessionsList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ThreeSessionsList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\TradeUnionMembers.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\TradeUnionMembers.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\TradeUnionMembersAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\TradeUnionMembersList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\TradeUnionMembersList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UnitedFrontMilitia.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UnitedFrontMilitia.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UnitedFrontMilitiaAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UnitedFrontMilitiaList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UnitedFrontMilitiaList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserInformation.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserInformation.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserInformationAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserInformationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserInformationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserMenu.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserMenu.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserMenuAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserMenuList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserMenuList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserRoles.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserRoles.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserRolesAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserRolesList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserRolesList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\VideoPointInformation.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\VideoPointInformation.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\VideoPointInformationAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\VideoPointInformationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\VideoPointInformationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\VillageHistory.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\VillageHistory.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\VillageHistoryAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\VillageHistoryList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\VillageHistoryList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\WelfarePayment.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\WelfarePayment.js">
+      <DependentUpon>PageOneJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\WelfarePaymentAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\WelfarePaymentList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\WelfarePaymentList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\XiangXiDocument.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>XiangXiDocument.txt</LastGenOutput>
+    </Content>
+    <Content Include="gen\PageListJS.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PageListJS.html</LastGenOutput>
+    </Content>
+    <Content Include="gen\PageListHTML.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PageListHTML.html</LastGenOutput>
+    </Content>
+    <Content Include="assets\js\0-common\app-compiled.js.map" />
+    <Content Include="assets\js\0-common\cmodules-compiled.js.map" />
+    <Content Include="assets\js\0-common\full_map-compiled-compiled.js.map" />
+    <Content Include="assets\js\0-common\full_map-compiled.js.map" />
+    <Content Include="assets\js\0-common\inner_map-compiled.js.map" />
+    <Content Include="assets\js\0-common\leaflet-compiled.js.map" />
+    <Content Include="assets\js\0-common\menurole-compiled.js.map" />
+    <Content Include="assets\js\0-common\package-lock.json" />
+    <Content Include="assets\js\0-common\require-compiled.js.map" />
+    <Content Include="assets\js\0-common\userrole-compiled.js.map" />
+    <Content Include="app\app-release.apk" />
+    <Content Include="app\web.config" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Config\connectionStrings.local.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <Content Include="gen\XiangXiDocument.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XiangXiDocument.tt</DependentUpon>
+    </Content>
+    <Content Include="menu\jquery.min.js" />
+    <Content Include="menu\menu.html" />
+    <Content Include="menu\menuJson.js" />
+    <Content Include="menu\菜单.png" />
+    <Content Include="src\index.js" />
+    <Content Include="Upload\file\20180625\6366553763248339812137927.jpg" />
+    <Content Include="Upload\Image\00b340a8-fd9f-4dd3-9266-100ed2bb579c.png" />
+    <Content Include="Upload\Image\00f6f1f6-05cb-4597-9696-9eb5ff97c1f2.png" />
+    <Content Include="Upload\Image\090cd919-4c96-4073-83dd-e1d44ad63128.png" />
+    <Content Include="Upload\Image\0cdb6ae5-071e-4bef-889e-17198df9f4e5.png" />
+    <Content Include="Upload\Image\0dae73aa-de1f-440a-ada2-fe934d047325.png" />
+    <Content Include="Upload\Image\0e0a3c2e-2531-41e2-9136-a28261b2198e.png" />
+    <Content Include="Upload\Image\0ef95565-988c-4ea9-8df2-33dffda9c92b.png" />
+    <Content Include="Upload\Image\0f2a45cd-edc8-49eb-b921-6f76acb43d20.png" />
+    <Content Include="Upload\Image\0fa3f888-0e04-4308-8366-73df15d0a706.png" />
+    <Content Include="Upload\Image\10258fb3-1b55-4c0b-a9b7-0496e161fb4a.png" />
+    <Content Include="Upload\Image\11b185e2-f875-4c8e-bf24-de658469a56c.png" />
+    <Content Include="Upload\Image\12229649-ff06-49b1-8876-208cdea48694.png" />
+    <Content Include="Upload\Image\131ae536-08a5-4f90-81f9-f8ac4f1e50f6.png" />
+    <Content Include="Upload\Image\136861b9-c929-46c2-9570-d6866fac6f16.png" />
+    <Content Include="Upload\Image\1405f75a-716d-4542-ab31-b245b07b3977,1405f75a-716d-4542-ab31-b245b07b3977,\2018M5d17\8c41fe22-6559-4f74-80ad-0b66160a30b3.png" />
+    <Content Include="Upload\Image\1405f75a-716d-4542-ab31-b245b07b3977\2018M5d17\96144a2a-d640-4326-a656-dbf90d78cb7c.png" />
+    <Content Include="Upload\Image\1405f75a-716d-4542-ab31-b245b07b3977\2018_5_17\9ef38911-10a8-4add-b16a-291a2c96695c.png" />
+    <Content Include="Upload\Image\1405f75a-716d-4542-ab31-b245b07b3977\2018_5_17\f7c1c849-7dd7-4f7c-a661-11d9149597ea.png" />
+    <Content Include="Upload\Image\151b331e-4362-4c0b-9da9-06614b82961a.png" />
+    <Content Include="Upload\Image\1532afd5-3761-431d-83db-17f7b9d0b3a7.png" />
+    <Content Include="Upload\Image\17f597c9-7617-4ac6-a453-1b21d28d601e.png" />
+    <Content Include="Upload\Image\18819cfa-37b7-4ba2-8d91-408548beff74.png" />
+    <Content Include="Upload\Image\1d5792b4-3c46-491e-b84e-61b02f266300.png" />
+    <Content Include="Upload\Image\1f259b25-281b-4c80-8fee-0161f30098a6.png" />
+    <Content Include="Upload\Image\240fa04f-9f62-4782-9dd0-9de734281a62.png" />
+    <Content Include="Upload\Image\24c24e6a-343b-42c2-a695-661be1de53c5.png" />
+    <Content Include="Upload\Image\277ff32d-bb4d-46f9-aed9-95852be5786a.png" />
+    <Content Include="Upload\Image\2858f3a2-aec1-4a6d-9cc0-817a010eb324.png" />
+    <Content Include="Upload\Image\2b9b3688-02ea-4943-8373-1846b488131d.png" />
+    <Content Include="Upload\Image\2c49cb7c-146c-4a6e-9953-10e9512ee67c.png" />
+    <Content Include="Upload\Image\2dbd505b-9d5b-4276-bf4f-c2461ea10283.png" />
+    <Content Include="Upload\Image\2e9efac9-7704-4d87-9f2f-3a444ba0ae21.png" />
+    <Content Include="Upload\Image\2eacf550-250a-4aad-8e88-5a713b847994.png" />
+    <Content Include="Upload\Image\321e96d4-2a6c-4822-a685-60de9cef3eed.png" />
+    <Content Include="Upload\Image\37077658-2e9e-4194-baee-8041132a325e.png" />
+    <Content Include="Upload\Image\38d0f3aa-da48-467d-a891-db6a713ad0d1.png" />
+    <Content Include="Upload\Image\3917a771-6a69-48dd-90ec-a2e3027d28f4.png" />
+    <Content Include="Upload\Image\3b0a56b0-4803-4f5b-8423-88c3b40aff56.png" />
+    <Content Include="Upload\Image\3b6e8672-398c-4a78-a2e5-15223716f7a3.png" />
+    <Content Include="Upload\Image\3c81aad4-3d12-4d4e-8aed-c0157390ead6.png" />
+    <Content Include="Upload\Image\3de41a72-7779-4652-a337-ddeb336b8c85.png" />
+    <Content Include="Upload\Image\3f5a6353-98a0-46a7-bfc0-ab34d1b12345.png" />
+    <Content Include="Upload\Image\4703bb43-0db7-421b-ad44-e2f1c6e3c7c6.png" />
+    <Content Include="Upload\Image\49488080-9515-4820-b794-f7f28f9eb16d.png" />
+    <Content Include="Upload\Image\4afb224a-51eb-4316-b110-43ad9a39cfe7.png" />
+    <Content Include="Upload\Image\4b693092-6905-4124-9e2b-407e3fdf3031.png" />
+    <Content Include="Upload\Image\4c8b7ffe-95e4-4305-93c6-8307486551bb.png" />
+    <Content Include="Upload\Image\4eeb31e5-e0b6-427a-84ad-b7286c9926a4.png" />
+    <Content Include="Upload\Image\4f92d7e5-583d-422e-b158-3fb675c24bd2.png" />
+    <Content Include="Upload\Image\5350c031-c334-45c2-8535-c9e5cc516b5c.png" />
+    <Content Include="Upload\Image\54d88773-d90d-4240-a73b-0727021b2f2f.png" />
+    <Content Include="Upload\Image\57d9aa2b-feac-4412-a07f-273c6b2f1f5c.png" />
+    <Content Include="Upload\Image\5f99eb65-9921-45fb-84f4-35e94be051bc.png" />
+    <Content Include="Upload\Image\6031d4c2-44f7-4047-a02e-366a5821c892.png" />
+    <Content Include="Upload\Image\60627114-1463-438d-b128-9419f07eae0a.png" />
+    <Content Include="Upload\Image\610387e6-1e98-4422-bc84-18513b8e9988.png" />
+    <Content Include="Upload\Image\6326f7dc-8146-4bc1-bb34-51d374647467.png" />
+    <Content Include="Upload\Image\63821dd6-c0b8-4929-928c-1b2b29715ee7.png" />
+    <Content Include="Upload\Image\686c7788-c5d2-4561-a880-09772a8259b7.png" />
+    <Content Include="Upload\Image\6c07b3ff-a052-4940-86b4-b1c2cdb30ddd.png" />
+    <Content Include="Upload\Image\6d1a921d-8b64-40e0-8aa5-5c47103546b1.png" />
+    <Content Include="Upload\Image\6d78e5e9-de96-4016-92ae-6f02403e14a2.png" />
+    <Content Include="Upload\Image\70387409-66be-4856-b864-b64120ae0f47.png" />
+    <Content Include="Upload\Image\766f2bc6-71e7-417a-ae25-c3d3b8ee4c4c.png" />
+    <Content Include="Upload\Image\78b2c159-41e1-4340-81b6-1d88417426eb\2018_5_26\eb65c445-d451-4f1f-8710-fdeb517792a5.png" />
+    <Content Include="Upload\Image\798ef198-f0ff-4530-818c-43f793828c66.png" />
+    <Content Include="Upload\Image\7b8668f1-f9ff-454a-9e86-23e9b11979c3.png" />
+    <Content Include="Upload\Image\80baa536-c79e-4c15-a597-a7dff8895e3e.png" />
+    <Content Include="Upload\Image\820b903a-bf82-4681-a05a-097bafec9b0d.png" />
+    <Content Include="Upload\Image\82307523-85fc-41d1-9a8d-be308a09b165.png" />
+    <Content Include="Upload\Image\826a5f27-561e-4367-910b-9c60ff76c59d.png" />
+    <Content Include="Upload\Image\82e02d66-d468-4cbf-8f89-7f7bf39303e4.png" />
+    <Content Include="Upload\Image\833ba836-0509-480a-b97b-e23f0b6529c4.png" />
+    <Content Include="Upload\Image\843e28f9-899c-4b82-afed-5e619d922c9f.png" />
+    <Content Include="Upload\Image\858d5c31-c735-4fba-ba18-8f8c6b9becee.png" />
+    <Content Include="Upload\Image\894e5276-e196-472b-b8b6-66cb83aa899b.png" />
+    <Content Include="Upload\Image\9080a327-87e3-46a7-94db-731e78ad0229.png" />
+    <Content Include="Upload\Image\927de0cf-2480-4b02-940b-a5d49e2340d6.png" />
+    <Content Include="Upload\Image\94cc97e4-bcdb-485b-8b5f-fb5cb94edeab.png" />
+    <Content Include="Upload\Image\966385cf-13d8-4381-8d08-cd74daa5cea5.png" />
+    <Content Include="Upload\Image\96b589bd-dc1b-44ea-b042-5fbb718601b2\2018_5_27\545eb3ed-32ab-4db8-ba18-62de720dbb7f.png" />
+    <Content Include="Upload\Image\96b589bd-dc1b-44ea-b042-5fbb718601b2\2018_5_27\a46db1f0-2ab4-4503-b9eb-064a74f0c610.png" />
+    <Content Include="Upload\Image\97d4022a-27b1-4f70-9152-31703422eaea.png" />
+    <Content Include="Upload\Image\9c1bd30f-f1d2-4d1b-ba68-269e12d0bb8c.png" />
+    <Content Include="Upload\Image\9cd5724f-7934-4462-b9c0-cbdc38e218d2.png" />
+    <Content Include="Upload\Image\9deca839-c29d-41d4-bebc-6c53ca2b51f3.png" />
+    <Content Include="Upload\Image\9f17d786-349d-4141-be90-6252772bd53e.png" />
+    <Content Include="Upload\Image\9f21f408-65b4-42d2-b733-b478c848a4a5.png" />
+    <Content Include="Upload\Image\a0325f76-19bc-4afd-8f91-25bd36232ccf.png" />
+    <Content Include="Upload\Image\a2f1191b-29ed-4c0a-ba5c-8b23c2bf3883.png" />
+    <Content Include="Upload\Image\a46f52ec-03df-48f7-ade6-424783ddaba6.png" />
+    <Content Include="Upload\Image\a4bc1e44-0964-4172-b9c6-2764c561c5f4.png" />
+    <Content Include="Upload\Image\a60b4618-20f2-4c11-b0a8-6622dae152e6.png" />
+    <Content Include="Upload\Image\a80853ce-0cb1-4a06-846f-9abad4b93e42.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\0940766e-a838-4d76-b8dc-feb820bacfd2.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\15767520-aaa6-4e2a-ad6a-f285856951bd.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\1b07a8a9-889b-48ad-9d0c-36c9f8b1b625.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\1c19dbe0-c709-4c2e-acd7-8d07a0163c63.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\1cf01be6-e0c9-4f13-8dec-7d462005fb05.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\2ca4eadc-3e71-4849-9f01-79de5c84c463.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\35985e13-169f-4fa7-ad4c-de28eb0db7d4.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\36ca3f01-0e2b-4e75-98d2-de260f0d082f.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\4dddffe0-657d-46aa-8f4c-5a727b616bfa.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\5cab7a31-5c5a-4e78-a44a-359bec19d24b.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\5ddcb1e2-ef5a-4e22-942a-f08ed4d79566.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\6f9030e8-a417-45ed-92a2-1a411b539f0e.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\6fba2e40-e514-4946-bfe5-200f9d0009dd.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\74ee36d4-86e4-40b2-ad7e-93dc2d5b8fbb.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\75a68aa7-778b-4fb5-8073-e7740ceddd83.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\81d44535-7d79-481f-9379-9f4a78417b8b.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\81de9077-2eba-4cb6-942e-5cd423f90b11.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\83edc2e9-0cec-4d0f-a507-51afd6b1aaf1.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\8490e1bb-17a6-4125-b216-1e895d40062c.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\89c9712b-0144-4260-ad79-82d80c2ca2b8.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\925bb488-9722-44b1-a8a5-7d5fe338997f.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\9459eb86-04e9-4b83-9325-7d47c5e63655.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\980f3732-4d0f-4e10-8c11-98bccd9c0730.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\9c1c4d87-eaba-4cba-922e-63535236e805.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\a3fd43e7-fb36-41d7-a45e-6ab506c8874f.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\a834f510-744a-487e-bf1e-3ce8c373b8ac.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\a9fffac2-6d46-4e2c-8866-1ec4dec297d7.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\adbe2174-88f8-42d9-96cf-318e0a16bbb2.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\b5bd3e33-ab40-40d6-b624-211ffebbdc9f.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\b83f45bb-adbc-4d45-b49a-63c4a306d5f4.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\bba58556-e72c-4866-81a2-5b56751570d4.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\cbca8c05-72e8-46ac-9628-4a80e97600a5.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\d1cf2ceb-54c8-4601-abd7-119cb6af6565.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\d52dacc4-1ceb-4749-a627-2ba144b31c37.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\d62c5f5c-c621-4ad3-a2e4-036dcfb308a2.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\d6bf52eb-9b29-4909-93a6-d76df9445d14.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\d7e8f3f8-9b11-4f5a-9fa8-7020fa253e2e.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\d91eac23-6e61-4eed-b6ae-fb821a83ea44.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\d9a3f765-b80f-4223-8425-c732aecb0203.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\ddbca622-abe7-47bd-9759-d4b17f06d54b.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\e672cf36-8b9a-4040-a5ef-5af87cb37c8c.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\e6b27d1b-1140-415f-8916-dcf9bdaa1b02.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\e72dd45f-9d09-4c8c-967a-031e82a9410f.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\e8c1f071-dcbd-40f4-8cc1-4802d4168188.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\e96e68bd-16c1-4cce-955b-2c8f88927f43.png" />
+    <Content Include="Upload\Image\admin_76d8e758-e5f8-40b1-8a05-94971b58b62f\180816\ec98def2-6789-46d4-8bc2-a274ddeefaf3.png" />
+    <Content Include="Upload\Image\admin_95ec0179-8c79-4dce-8d49-071c09cc6a0a\180829\08284e9d-3dbc-4f02-9af3-2d068c4af364.png" />
+    <Content Include="Upload\Image\admin_95ec0179-8c79-4dce-8d49-071c09cc6a0a\180829\289c5503-6f5a-45ae-b2e0-9527ae9b8639.png" />
+    <Content Include="Upload\Image\admin_95ec0179-8c79-4dce-8d49-071c09cc6a0a\180829\47fcfaab-6939-4b91-b1a0-1427223bcfd0.png" />
+    <Content Include="Upload\Image\admin_95ec0179-8c79-4dce-8d49-071c09cc6a0a\180829\77e73524-6550-4c52-b86f-0e8396bb3992.png" />
+    <Content Include="Upload\Image\admin_95ec0179-8c79-4dce-8d49-071c09cc6a0a\180829\85132a15-2be6-49c0-88f6-8090d3fe841a.png" />
+    <Content Include="Upload\Image\admin_95ec0179-8c79-4dce-8d49-071c09cc6a0a\180829\ad09475f-0e61-41e0-9634-5924af61817b.png" />
+    <Content Include="Upload\Image\admin_95ec0179-8c79-4dce-8d49-071c09cc6a0a\180829\f6da4d51-6ece-40a2-9c75-c49c94a7832f.png" />
+    <Content Include="Upload\Image\admin_d42a6337-c22e-4f64-bfac-ebd469e3413d\180816\2154a874-585c-4c8d-9630-049dcca42bf2.png" />
+    <Content Include="Upload\Image\admin_d42a6337-c22e-4f64-bfac-ebd469e3413d\180816\c6ff1f18-cd9d-4136-b619-aea5c410b609.png" />
+    <Content Include="Upload\Image\admin_d42a6337-c22e-4f64-bfac-ebd469e3413d\180816\e7ecd2fa-c42a-402c-852b-e24b3c32b2f6.png" />
+    <Content Include="Upload\Image\admin_d42a6337-c22e-4f64-bfac-ebd469e3413d\180816\fafda7c2-c62b-4153-b687-a318497b40a0.png" />
+    <Content Include="Upload\Image\ae54eb32-483d-4103-adcd-770698eda4d4.png" />
+    <Content Include="Upload\Image\ae65e420-4854-4e11-85ce-292815f97814.png" />
+    <Content Include="Upload\Image\b01f2a7e-190c-4cf8-b589-bee03743540b.png" />
+    <Content Include="Upload\Image\b039ae05-820a-423a-871c-60e4a290d400.png" />
+    <Content Include="Upload\Image\b12655a2-b082-4da1-81b8-b25c61b775b0.png" />
+    <Content Include="Upload\Image\b1bf6263-34ba-48b2-9d20-0f9a2bf46c42.png" />
+    <Content Include="Upload\Image\b26217b5-93d1-461d-9f50-c6c4cc179fa8.png" />
+    <Content Include="Upload\Image\b8fa7952-6215-4cd6-b4ef-433946143ba3.png" />
+    <Content Include="Upload\Image\bcd0cecc-08bf-47c2-a0ba-4ef38fdabdf9.png" />
+    <Content Include="Upload\Image\c238408d-b8bc-4fa4-b70c-340eeaa34020.png" />
+    <Content Include="Upload\Image\c2ec0c9c-5d7b-439a-b265-db93556ab012.png" />
+    <Content Include="Upload\Image\c501980b-8670-4a83-88da-6291c759c931.png" />
+    <Content Include="Upload\Image\c535c5ae-8de8-4021-a383-2c97d30bc9db.png" />
+    <Content Include="Upload\Image\c57fc9c0-d966-4e80-a105-1f58ac0750d5.png" />
+    <Content Include="Upload\Image\c5ea8236-af41-4b2c-83eb-01f128081850.png" />
+    <Content Include="Upload\Image\c618dcfe-ea61-4c68-bb86-7fc2e4fba040.png" />
+    <Content Include="Upload\Image\c61c7e68-2d53-467f-b96a-2f4055ffaba4.png" />
+    <Content Include="Upload\Image\c6485f0b-3e58-49be-9c1e-9aacd1dd48f1\2018_5_27\6546d258-337e-4b28-b968-1ec017bbad27.png" />
+    <Content Include="Upload\Image\cd7a90ca-8697-497a-b0b0-5e5435cf77c1.png" />
+    <Content Include="Upload\Image\d2155d7c-422f-4f48-8890-9809f00b57b1.png" />
+    <Content Include="Upload\Image\d234ac4e-3b48-46d4-b4ed-4dcdbe585d9b.png" />
+    <Content Include="Upload\Image\db6ad4ed-83d5-4194-92d2-56d6d2f62a49.png" />
+    <Content Include="Upload\Image\dc37f7d2-2133-4488-a3e8-92e3cebae271.png" />
+    <Content Include="Upload\Image\de6f4597-4213-4b8a-871d-8d63240ece32.png" />
+    <Content Include="Upload\Image\df3d9f0e-8a8c-43ed-83a2-2a77a27c9716.png" />
+    <Content Include="Upload\Image\e2580e64-0f9d-45bd-9adc-da14a19cc3a3.png" />
+    <Content Include="Upload\Image\e3c0fd0c-800d-4155-93fd-82df0f61cac5.png" />
+    <Content Include="Upload\Image\e55d6768-35eb-433a-a727-22b2ba008fc6.png" />
+    <Content Include="Upload\Image\e66a64ee-891b-40c9-8d64-a72ae71d754b.png" />
+    <Content Include="Upload\Image\eaf0381a-719c-4e50-b205-96df4016ba0e.png" />
+    <Content Include="Upload\Image\ec38cb63-c0d3-4cac-b7da-f069641b9ae2.png" />
+    <Content Include="Upload\Image\ee1c134b-6e86-4030-9abf-dc8238881a49.png" />
+    <Content Include="Upload\Image\ef8ee956-3353-4df3-8320-73f02f832d93.png" />
+    <Content Include="Upload\Image\f1d9ae95-fe44-4e65-b9b9-190004b51520.png" />
+    <Content Include="Upload\Image\f22f146d-0205-4e28-9012-e00e268d289b.png" />
+    <Content Include="Upload\Image\f3303c67-dbcd-429a-ad84-c4805d085d7b.png" />
+    <Content Include="Upload\Image\f846e167-6136-466f-be07-68d2c2352995.png" />
+    <Content Include="Upload\Image\f968e994-42c6-4857-86d3-3e9c149a6d74.png" />
+    <Content Include="Upload\Image\fad68f60-bce2-4519-bf26-bf45afbaa424.png" />
+    <Content Include="Upload\Image\fb1a1e49-5a1c-432e-a9ca-c2fa93dfcc85.png" />
+    <Content Include="Upload\Image\fc57b7fa-d8e5-47f0-8164-778455bf4cbd.png" />
+    <Content Include="Upload\Image\fced7f74-5a23-43a4-943b-d5bb78601c37.png" />
+    <Content Include="Upload\Image\fd02a0dd-f4e1-4914-9624-45ac6e379652.png" />
+    <Content Include="Upload\Image\_\180531\5d201aa4-1bfc-4233-80f4-9557dabc4cd8.png" />
+    <Content Include="Upload\Image\_\180531\7e1cd741-a66a-4a74-844c-816e532d8db4.png" />
+    <Content Include="Upload\Image\_\180601\33182a15-ee26-47ff-82c8-eefd44440e49.png" />
+    <Content Include="Upload\Image\_\180601\3de0bf77-9468-4075-b5f4-550b9e1580f5.png" />
+    <Content Include="Upload\Image\_\180601\69115ebd-34a8-4fa9-95b8-f8a41dc2714c.png" />
+    <Content Include="Upload\Image\_\180604\02f53763-a980-4212-9728-5189464b5f51.png" />
+    <Content Include="Upload\Image\_\180604\2bf7b315-77ce-464d-88bf-07ef6d34b41e.png" />
+    <Content Include="Upload\Image\_\180604\4735a555-6111-4b3d-b6d9-db7b7d6fd31a.png" />
+    <Content Include="Upload\Image\_\180604\4a2fc659-48a3-4907-8ff2-e7d355f16ebb.png" />
+    <Content Include="Upload\Image\_\180604\7c7a0f68-9b12-472f-a59e-e1ff201785a2.png" />
+    <Content Include="Upload\Image\_\180604\8af11aa4-605c-4734-93e9-a62a840fdfcb.png" />
+    <Content Include="Upload\Image\_\180604\9cb1e306-3248-4ab0-88fe-cc1a6a5903a9.png" />
+    <Content Include="Upload\Image\_\180606\9d4aa052-8ad7-437d-890e-afd9f1344542.png" />
+    <Content Include="Upload\Image\_\180606\ba17a10b-a9fa-45b4-b80a-8e72b06d9aab.png" />
+    <Content Include="Upload\Image\_\180606\c243d4ed-c16c-4e11-9cff-b286b5c9fb77.png" />
+    <Content Include="Upload\Image\_\180611\ee7350e9-d9b6-4b2a-a172-2050beca6c24.png" />
+    <Content Include="Upload\Image\_\180612\be88c7a0-ab15-4731-9291-b5a3e024aa87.png" />
+    <Content Include="Upload\Image\_\180613\109521fd-64f2-4a8a-b546-621a9fd27748.png" />
+    <Content Include="Upload\Image\_\180613\3f91cf6c-3662-4f8a-a60f-ebadb020a7f2.png" />
+    <Content Include="Upload\Image\_\180613\6dfec81c-bf43-41e2-b236-17aa36ddbfaa.png" />
+    <Content Include="Upload\Image\_\180615\bbed3fa0-4729-4c76-a5f8-5881e0042108.png" />
+    <Content Include="Upload\Image\_\180704\22e6b0aa-28d8-419c-8dec-8b65815067cd.png" />
+    <Content Include="Upload\Image\_\180704\fbeb475c-cfaa-45fe-b3c4-4bef083729be.png" />
+    <Content Include="Upload\Image\_\180816\dbded84a-9cc4-4ccd-b6dd-8784068e8ed4.png" />
+    <Content Include="Upload\Image\_\180816\fc9ff752-7c7f-4e20-9ac0-8a6d5a85eecf.png" />
+    <Content Include="Upload\update.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Evaluators\EvaluatorGen.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\GetMapCategoryEvaluator.cs" />
+    <Compile Include="2_map\RTSP.aspx.cs">
+      <DependentUpon>RTSP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="2_map\RTSP.aspx.designer.cs">
+      <DependentUpon>RTSP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="assets\js\0-common\net\App_Code\Config.cs" />
+    <Compile Include="assets\js\0-common\net\App_Code\ConfigHandler.cs" />
+    <Compile Include="assets\js\0-common\net\App_Code\CrawlerHandler.cs" />
+    <Compile Include="assets\js\0-common\net\App_Code\Handler.cs" />
+    <Compile Include="assets\js\0-common\net\App_Code\ListFileHandler.cs" />
+    <Compile Include="assets\js\0-common\net\App_Code\NotSupportedHandler.cs" />
+    <Compile Include="assets\js\0-common\net\App_Code\PathFormater.cs" />
+    <Compile Include="assets\js\0-common\net\App_Code\UploadHandler.cs" />
+    <Compile Include="Controllers\VideoPointBitInformationsController.cs" />
+    <Compile Include="Evaluators\CacheOptionsAttribute.cs" />
+    <Compile Include="Evaluators\ChairPersonCount2Evaluator.cs" />
+    <Compile Include="Evaluators\CommonOutputList.cs" />
+    <Compile Include="Evaluators\MapQueryMilitiaEvaluator.cs" />
+    <Compile Include="Evaluators\MapQueryCadreEvaluator.cs" />
+    <Compile Include="Evaluators\PopulationAgeCountEvaluator.cs" />
+    <Compile Include="Evaluators\PopulationCount2Evaluator.cs" />
+    <Compile Include="Evaluators\PopulationFormCountEvaluator.cs" />
+    <Compile Include="Evaluators\PopulationGenderCountEvaluator.cs" />
+    <Compile Include="Evaluators\WorkshopParkCount.cs" />
+    <Compile Include="Controllers\CommonOutputT.cs" />
+    <Compile Include="gen\ImportProc.svc.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ImportProc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\SearchFormModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Startup1.cs" />
+    <Compile Include="Version.ashx.cs">
+      <DependentUpon>Version.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\CameraListEvaluator.cs" />
+    <Compile Include="Evaluators\GetMenuConfigurationTreeByAuthEvaluator.cs" />
+    <Compile Include="Evaluators\MapQueryBuildingEvaluator.cs" />
+    <Compile Include="Evaluators\MapQueryBuildingParkListEvaluator.cs" />
+    <Compile Include="Evaluators\MapQueryCameraEvaluator.cs" />
+    <Compile Include="Evaluators\MapQueryDisabledManEvaluator.cs" />
+    <Compile Include="Evaluators\MapQueryOldMannEvaluator.cs" />
+    <Compile Include="Evaluators\MapQueryParam.cs" />
+    <Compile Include="Evaluators\MapQueryPartyMemberEvaluator.cs" />
+    <Compile Include="Evaluators\MapQueryPopulationEvaluator.cs" />
+    <Compile Include="Evaluators\SavePoiListEvaluator.cs" />
+    <Compile Include="Evaluators\TreeNode.cs" />
+    <Compile Include="ImageUpload.ashx.cs" />
+    <Compile Include="DefaultHandler.ashx.cs">
+      <DependentUpon>DefaultHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\AppIndexEvaluator.cs" />
+    <Compile Include="Evaluators\AppLoginEvaluator.cs" />
+    <Compile Include="Evaluators\ExcelHelper.cs" />
+    <Compile Include="Evaluators\ExitEvaluator.cs" />
+    <Compile Include="Evaluators\GetMenuConfigurationByAuthEvaluator.cs" />
+    <Compile Include="Evaluators\GetScheduleWorkListByUserEvaluator.cs" />
+    <Compile Include="Evaluators\FileListEvaluator.cs" />
+    <Compile Include="Evaluators\GetThirdMenuEvaluator.cs" />
+    <Compile Include="Evaluators\GetUserRoleListByAuthEvaluator.cs" />
+    <Compile Include="Evaluators\HelloEvaluator.cs" />
+    <Compile Include="Evaluators\LoginEvaluator.cs" />
+    <Compile Include="Evaluators\RemoteEvaluator.cs" />
+    <Compile Include="Evaluators\SaveMenuRoleDicEvaluator.cs" />
+    <Compile Include="Evaluators\SaveSYS_CodeEvaluator.cs" />
+    <Compile Include="Evaluators\SaveUserRoleDicEvaluator.cs" />
+    <Compile Include="Evaluators\ShowEvaluator.cs" />
+    <Compile Include="Evaluators\UserInfoEvaluator.cs" />
+    <Compile Include="ExcelImport.ashx.cs">
+      <DependentUpon>ExcelImport.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ExportData.ashx.cs">
+      <DependentUpon>ExportData.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ExportSchema.ashx.cs">
+      <DependentUpon>ExportSchema.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler1.ashx.cs">
+      <DependentUpon>Handler1.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PieSeriesEntity.cs" />
+    <Compile Include="Evaluators\Evaluator.cs" />
+    <Compile Include="Interfaces\IEvaluator.cs" />
+    <Compile Include="Models\AppIndex.cs" />
+    <Compile Include="Models\AppIndexConfig.cs" />
+    <Compile Include="Models\CommonRequest.cs" />
+    <Compile Include="Models\MenuItem.cs" />
+    <Compile Include="Models\PageRows.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="DefaultHandler.ashx" />
+    <Content Include="ExportSchema.ashx" />
+    <Content Include="ExcelImport.ashx" />
+    <Content Include="ImageUpload.ashx" />
+    <Content Include="ExportData.ashx" />
+    <Content Include="ImageHandler.ashx" />
+    <Content Include="Handler1.ashx" />
+    <Content Include="Version.ashx" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\VideoPointBitInformations\Create.cshtml" />
+    <Content Include="Views\VideoPointBitInformations\Delete.cshtml" />
+    <Content Include="Views\VideoPointBitInformations\Details.cshtml" />
+    <Content Include="Views\VideoPointBitInformations\Edit.cshtml" />
+    <Content Include="Views\VideoPointBitInformations\Index.cshtml" />
+    <Content Include="ViewPage1.cshtml" />
+    <Content Include="Upload\file\20180625\6366553897478038251525568.bak" />
+    <Content Include="Upload\file\20180625\6366553965695821209818447.bak" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="assets\js\1-login\0-common\net\App_Code\" />
+    <Folder Include="assets\js\10-travel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XiangXiENtities\XiangXiENtities.csproj">
+      <Project>{4CA863B2-6982-4DC5-A725-E2F72AEBB134}</Project>
+      <Name>XiangXiENtities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>8091</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:58091/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

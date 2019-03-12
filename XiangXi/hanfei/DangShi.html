@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap 实例</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        body {
+            position: relative;
+        }
+
+        ul.nav-pills {
+            top: 20px;
+            position: fixed;
+        }
+
+        div.col-sm-9 div {
+            font-size: 28px;
+        }
+
+        .hanfei1 {
+            width: 750px;
+            height: 316px;
+        }
+
+        .hanfei2 {
+            width: 351px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="20">
+
+    <div id="container">
+        <div class="row">
+            <nav class="col-sm-3" id="myScrollspy">
+                <div class="container-fluid">
+                    <div class="container-fluid">
+                        <ul class="nav nav-pills nav-stacked" id="menu">
+                            <li class="active" v-for="item in arr" style="margin-left: 100px;">
+                                <a v-bind:href="'#'+item.VHMenuItem">{{item.VHMenuItem}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="col-sm-9">
+
+                <div v-for="(row,i) in rows" v-bind:id="row.VHMenuItem" style="width:1150px; margin-top:0px; padding:0px 66px; padding-bottom:150px; text-align:center; margin-bottom:20px;">
+
+                    <h3 class="title" style="width: 1000px;line-height: 40px; font-family:KaiTi; font-weight:bolder;">{{row.VHMainTitle}}</h3>
+                    <div class="">
+                        <div class="">
+                            <img width="700" height="400" v-bind:src="row.VHPicture" style="margin-left:-30px;" />
+                            <h5 style="width:1000px; line-height: 40px; font-family:SimHei;">{{row.VHSubtitle}}</h5>
+
+                            <h4 style="width:1000px;line-height: 30px; text-align:left; font-family:STSong; text-indent:2em;">{{row.VHAbridge}}</h4>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    // var localhost=http://192.168.31.46;
+    Vue.filter('json', function (value) {
+        return JSON.stringify(value)
+    })
+    $.ajax({
+        url: "/XiangXi/DefaultHandler.ashx?method=getVillageHistorylist&auth_user=c88ef63d-16c4-464e-8aac-bc4e5123c4cc",
+        success: function (data) {
+            var obj = {}
+            data.arr = []
+            $.each(data.rows, function () {
+                if (!obj[this.VHMenuItem]) {
+                    obj[this.VHMenuItem] = 1;
+                    data.arr.push(this)
+                }
+            })
+            new Vue({ data: data }).$mount("#container");
+        }
+    })
+</script>
+</html>

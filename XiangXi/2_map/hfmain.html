@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <script src="../assets/js/jquery.min.js"></script>
+</head>
+<style>
+    #menu{
+        width:10%;
+        height: 720px;
+        float:left;
+
+    }
+
+    #right{
+        width: 90%;
+        height: 720px;
+        float:right;
+
+    }
+
+    #user{
+        width: 100px;
+        height:100px;
+        background-image: url("../2_map/头像.jpg");
+        background-size: 100px 100px;
+        border-radius: 50%;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        position: relative;
+        left:30px;
+        top:20px;
+    }
+
+    #t1{
+        width: 168px;
+        height:168px;
+        background-image: url("../2_map/写字楼 (1).png");
+        background-size: 168px 168px;
+        position: relative;
+        top:60px;
+    }
+
+    #t2{
+        width: 168px;
+        height:168px;
+        background-image: url("../2_map/人 (1).png");
+        background-size: 168px 168px;
+        position: relative;
+        top:100px;
+    }
+
+    #t3{
+        width: 168px;
+        height:168px;
+        background-image: url("../2_map/水分 (1).png");
+        background-size: 168px 168px;
+        position: relative;
+        top:140px;
+    }
+</style>
+
+<div style="width:100%;height: 120px;background-color: #00b7ee">
+    <p style="font-size: 50px;color: white;margin-left: 220px;line-height: 120px;">海门智慧综合管理平台</p>
+    <input type="text" class="form-control" placeholder="搜索....." style="width:200px;float:right;margin-top: -80px">
+</div>
+<div id="menu">
+    <div id="user"></div>
+    <div id="t1" onclick="change()"></div>
+    <div id="t2" onclick="change1()"></div>
+    <div id="t3" onclick="change2()"></div>
+</div>
+<div id="right">
+    <ol class="breadcrumb" style="height:60px;font-size: 25px">
+        <li><a href="#">上报异常</a></li>
+    <!--<li><a href="#">异常上报</a></li>-->
+        <li class="active">异常上报</li>
+    </ol>
+</div>
+</body>
+<script>
+    function change() {
+
+        $("#t1").css('background-image', "url(写字楼.png)");
+
+    }
+    function change1() {
+
+        $("#t2").css('background-image', "url(人.png)");
+
+    }
+    function change2() {
+
+        $("#t3").css('background-image', "url(水分.png)");
+
+    }
+</script>
+</html>

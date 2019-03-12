@@ -1,0 +1,2262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CB81E6D4-2B90-433F-9EFF-584F5A3F271F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XiangXi</RootNamespace>
+    <AssemblyName>XiangXi</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <ApplicationInsightsResourceId />
+    <Use64BitIISExpress />
+    <TargetFrameworkProfile />
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <TypeScriptTarget>ES2015</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptModuleKind>None</TypeScriptModuleKind>
+    <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>False</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Caching, Version=5.0.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Caching.5.0.505.0\lib\NET35\Microsoft.Practices.EnterpriseLibrary.Caching.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Validation, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Validation.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Validation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OOXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.6\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.6\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="0_common\bigone.html" />
+    <Content Include="0_common\calendar.html" />
+    <Content Include="0_common\imageeditor.html" />
+    <Content Include="0_common\inner_map.html" />
+    <Content Include="0_common\map_editor.html" />
+    <Content Include="0_common\map_editor_tool.html" />
+    <Content Include="0_common\menurole.html" />
+    <Content Include="0_common\playground.html" />
+    <Content Include="0_common\playground_backup.html" />
+    <Content Include="0_common\submenulist.html" />
+    <Content Include="0_common\uploadedimage.html" />
+    <Content Include="0_common\userrole.html" />
+    <Content Include="1_index\baohua_index.html" />
+    <Content Include="1_index\C-business.html" />
+    <Content Include="1_index\business.html" />
+    <Content Include="1_index\business_backup.html" />
+    <Content Include="1_index\business_modules.html" />
+    <Content Include="1_index\index.html" />
+    <Content Include="1_index\main.html" />
+    <Content Include="1_index\router.html" />
+    <Content Include="2_map\1.html" />
+    <Content Include="2_map\11.html" />
+    <Content Include="2_map\3.html" />
+    <Content Include="2_map\big_map.html" />
+    <Content Include="2_map\hanfei.html" />
+    <Content Include="2_map\hflogin.html" />
+    <Content Include="2_map\hfmain.html" />
+    <Content Include="2_map\inner_building.html" />
+    <Content Include="2_map\inner_camera.html" />
+    <Content Include="2_map\inner_population.html" />
+    <Content Include="2_map\map.html" />
+    <Content Include="2_map\full_map.html" />
+    <Content Include="2_map\map_backup.html" />
+    <Content Include="2_map\map_Z.html" />
+    <Content Include="2_map\menuJson.js" />
+    <Content Include="2_map\RTSP.aspx" />
+    <Content Include="2_map\rtsp.html" />
+    <Content Include="2_map\watchjiankong.html" />
+    <Content Include="2_map\zhuanxiang.html" />
+    <Content Include="2_map\人 %281%29.png" />
+    <Content Include="2_map\人.png" />
+    <Content Include="2_map\写字楼 %281%29.png" />
+    <Content Include="2_map\写字楼.png" />
+    <Content Include="2_map\头像.jpg" />
+    <Content Include="2_map\水分 %281%29.png" />
+    <Content Include="2_map\水分.png" />
+    <Content Include="3_maintain\change_password.html" />
+    <Content Include="4_login\C-login.html" />
+    <Content Include="4_login\login.html" />
+    <Content Include="5_specialwork\SpecialWork.html" />
+    <Content Include="assets\css\0-common\baguetteBox.css" />
+    <Content Include="assets\css\0-common\bootstrap-datetimepicker.min.css" />
+    <Content Include="assets\css\0-common\bootstrap-select.min.css" />
+    <Content Include="assets\css\0-common\bootstrap-table.css" />
+    <Content Include="assets\css\0-common\bootstrap-theme.css" />
+    <Content Include="assets\css\0-common\bootstrap-theme.css.map" />
+    <Content Include="assets\css\0-common\bootstrap-theme.min.css" />
+    <Content Include="assets\css\0-common\bootstrap.css" />
+    <Content Include="assets\css\0-common\bootstrap.css.map" />
+    <Content Include="assets\css\0-common\bootstrap.min.css" />
+    <Content Include="assets\css\0-common\common.css" />
+    <Content Include="assets\css\0-common\fileinput.min.css" />
+    <Content Include="assets\css\0-common\fullcalendar.min.css" />
+    <Content Include="assets\css\0-common\images\layers-2x.png" />
+    <Content Include="assets\css\0-common\images\layers.png" />
+    <Content Include="assets\css\0-common\images\marker-icon-2x.png" />
+    <Content Include="assets\css\0-common\images\marker-icon.png" />
+    <Content Include="assets\css\0-common\images\marker-shadow.png" />
+    <Content Include="assets\css\0-common\img\diy\1_close.png" />
+    <Content Include="assets\css\0-common\img\diy\1_open.png" />
+    <Content Include="assets\css\0-common\img\diy\2.png" />
+    <Content Include="assets\css\0-common\img\diy\3.png" />
+    <Content Include="assets\css\0-common\img\diy\4.png" />
+    <Content Include="assets\css\0-common\img\diy\5.png" />
+    <Content Include="assets\css\0-common\img\diy\6.png" />
+    <Content Include="assets\css\0-common\img\diy\7.png" />
+    <Content Include="assets\css\0-common\img\diy\8.png" />
+    <Content Include="assets\css\0-common\img\diy\9.png" />
+    <Content Include="assets\css\0-common\img\line_conn.gif" />
+    <Content Include="assets\css\0-common\img\line_conn.png" />
+    <Content Include="assets\css\0-common\img\loading.gif" />
+    <Content Include="assets\css\0-common\img\metro.gif" />
+    <Content Include="assets\css\0-common\img\metro.png" />
+    <Content Include="assets\css\0-common\img\zTreeStandard.gif" />
+    <Content Include="assets\css\0-common\img\zTreeStandard.png" />
+    <Content Include="assets\css\0-common\leaflet.css" />
+    <Content Include="assets\css\0-common\metroStyle.css" />
+    <Content Include="assets\css\0-common\zTreeStyle.css" />
+    <Content Include="assets\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="assets\css\bootstrap-select.min.css" />
+    <Content Include="assets\css\bootstrap-table.css" />
+    <Content Include="assets\css\bootstrap.css" />
+    <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\i\baoxian.png" />
+    <Content Include="assets\i\Clean_Circle.png" />
+    <Content Include="assets\i\client.png" />
+    <Content Include="assets\i\cmfl.png" />
+    <Content Include="assets\i\cunz.png" />
+    <Content Include="assets\i\delete.png" />
+    <Content Include="assets\i\District_Circle.png" />
+    <Content Include="assets\i\dongshanlogo.png" />
+    <Content Include="assets\i\emptyimage\1.png" />
+    <Content Include="assets\i\emptyimage\11.png" />
+    <Content Include="assets\i\emptyimage\111.png" />
+    <Content Include="assets\i\emptyimage\123.png" />
+    <Content Include="assets\i\emptyimage\12312315.png" />
+    <Content Include="assets\i\emptyimage\2.png" />
+    <Content Include="assets\i\emptyimage\22 %282%29.png" />
+    <Content Include="assets\i\emptyimage\22.png" />
+    <Content Include="assets\i\emptyimage\222 %282%29.png" />
+    <Content Include="assets\i\emptyimage\222.png" />
+    <Content Include="assets\i\emptyimage\2231.png" />
+    <Content Include="assets\i\emptyimage\256.png" />
+    <Content Include="assets\i\emptyimage\3.png" />
+    <Content Include="assets\i\emptyimage\33 %282%29.png" />
+    <Content Include="assets\i\emptyimage\33.png" />
+    <Content Include="assets\i\emptyimage\44.png" />
+    <Content Include="assets\i\emptyimage\45463.png" />
+    <Content Include="assets\i\emptyimage\45465.png" />
+    <Content Include="assets\i\emptyimage\5456.png" />
+    <Content Include="assets\i\emptyimage\55.png" />
+    <Content Include="assets\i\emptyimage\78.png" />
+    <Content Include="assets\i\emptyimage\78423.png" />
+    <Content Include="assets\i\emptyimage\888.png" />
+    <Content Include="assets\i\emptyimage\895.png" />
+    <Content Include="assets\i\emptyimage\denglurizhi.png" />
+    <Content Include="assets\i\emptyimage\list.txt" />
+    <Content Include="assets\i\emptyimage\tu %282%29.png" />
+    <Content Include="assets\i\emptyimage\tu.png" />
+    <Content Include="assets\i\emptyimage\tutututu.png" />
+    <Content Include="assets\i\emptyimage\tututuu.png" />
+    <Content Include="assets\i\emptyimage\组1拷贝19.png" />
+    <Content Include="assets\i\Farmer_Circle.png" />
+    <Content Include="assets\i\fz.png" />
+    <Content Include="assets\i\icon\APP\党员.png" />
+    <Content Include="assets\i\icon\APP\党课记录.png" />
+    <Content Include="assets\i\icon\APP\分红记录.png" />
+    <Content Include="assets\i\icon\APP\厂房.png" />
+    <Content Include="assets\i\icon\APP\基础人口.png" />
+    <Content Include="assets\i\icon\APP\安全巡查记录.png" />
+    <Content Include="assets\i\icon\APP\家庭.png" />
+    <Content Include="assets\i\icon\APP\工作日志.png" />
+    <Content Include="assets\i\icon\APP\干部.png" />
+    <Content Include="assets\i\icon\APP\慰问记录.png" />
+    <Content Include="assets\i\icon\APP\收租记录.png" />
+    <Content Include="assets\i\icon\APP\文档管理.png" />
+    <Content Include="assets\i\icon\APP\新生儿.png" />
+    <Content Include="assets\i\icon\APP\民兵.png" />
+    <Content Include="assets\i\icon\APP\用户信息.png" />
+    <Content Include="assets\i\icon\APP\用户菜单.png" />
+    <Content Include="assets\i\icon\APP\电费缴纳记录.png" />
+    <Content Include="assets\i\icon\APP\登录记录.png" />
+    <Content Include="assets\i\icon\APP\组织架构.png" />
+    <Content Include="assets\i\icon\APP\股民.png" />
+    <Content Include="assets\i\icon\APP\菜单配置.png" />
+    <Content Include="assets\i\icon\APP\访问记录.png" />
+    <Content Include="assets\i\icon\APP\通知.png" />
+    <Content Include="assets\i\icon\APP\通知阅读记录.png" />
+    <Content Include="assets\i\icon\icon\APP\党员.png" />
+    <Content Include="assets\i\icon\icon\APP\党课记录.png" />
+    <Content Include="assets\i\icon\icon\APP\分红记录.png" />
+    <Content Include="assets\i\icon\icon\APP\厂房.png" />
+    <Content Include="assets\i\icon\icon\APP\基础人口.png" />
+    <Content Include="assets\i\icon\icon\APP\安全巡查记录.png" />
+    <Content Include="assets\i\icon\icon\APP\家庭.png" />
+    <Content Include="assets\i\icon\icon\APP\工作日志.png" />
+    <Content Include="assets\i\icon\icon\APP\干部.png" />
+    <Content Include="assets\i\icon\icon\APP\慰问记录.png" />
+    <Content Include="assets\i\icon\icon\APP\收租记录.png" />
+    <Content Include="assets\i\icon\icon\APP\文档管理.png" />
+    <Content Include="assets\i\icon\icon\APP\新生儿.png" />
+    <Content Include="assets\i\icon\icon\APP\民兵.png" />
+    <Content Include="assets\i\icon\icon\APP\用户信息.png" />
+    <Content Include="assets\i\icon\icon\APP\用户菜单.png" />
+    <Content Include="assets\i\icon\icon\APP\电费缴纳记录.png" />
+    <Content Include="assets\i\icon\icon\APP\登录记录.png" />
+    <Content Include="assets\i\icon\icon\APP\组织架构.png" />
+    <Content Include="assets\i\icon\icon\APP\股民.png" />
+    <Content Include="assets\i\icon\icon\APP\菜单配置.png" />
+    <Content Include="assets\i\icon\icon\APP\访问记录.png" />
+    <Content Include="assets\i\icon\icon\APP\通知.png" />
+    <Content Include="assets\i\icon\icon\APP\通知阅读记录.png" />
+    <Content Include="assets\i\icon\icon\后台\党员.png" />
+    <Content Include="assets\i\icon\icon\后台\党课记录.png" />
+    <Content Include="assets\i\icon\icon\后台\分红记录.png" />
+    <Content Include="assets\i\icon\icon\后台\厂房.png" />
+    <Content Include="assets\i\icon\icon\后台\基础人口.png" />
+    <Content Include="assets\i\icon\icon\后台\安全巡查记录.png" />
+    <Content Include="assets\i\icon\icon\后台\家庭.png" />
+    <Content Include="assets\i\icon\icon\后台\工作日志.png" />
+    <Content Include="assets\i\icon\icon\后台\干部.png" />
+    <Content Include="assets\i\icon\icon\后台\慰问记录.png" />
+    <Content Include="assets\i\icon\icon\后台\收租记录.png" />
+    <Content Include="assets\i\icon\icon\后台\文档管理.png" />
+    <Content Include="assets\i\icon\icon\后台\新生儿.png" />
+    <Content Include="assets\i\icon\icon\后台\民兵.png" />
+    <Content Include="assets\i\icon\icon\后台\用户信息.png" />
+    <Content Include="assets\i\icon\icon\后台\用户菜单.png" />
+    <Content Include="assets\i\icon\icon\后台\电费缴纳记录.png" />
+    <Content Include="assets\i\icon\icon\后台\登录记录.png" />
+    <Content Include="assets\i\icon\icon\后台\组织架构.png" />
+    <Content Include="assets\i\icon\icon\后台\股民.png" />
+    <Content Include="assets\i\icon\icon\后台\菜单配置.png" />
+    <Content Include="assets\i\icon\icon\后台\访问记录.png" />
+    <Content Include="assets\i\icon\icon\后台\通知.png" />
+    <Content Include="assets\i\icon\icon\后台\通知阅读记录.png" />
+    <Content Include="assets\i\icon\后台\党员.png" />
+    <Content Include="assets\i\icon\后台\党课记录.png" />
+    <Content Include="assets\i\icon\后台\分红记录.png" />
+    <Content Include="assets\i\icon\后台\厂房.png" />
+    <Content Include="assets\i\icon\后台\基础人口.png" />
+    <Content Include="assets\i\icon\后台\安全巡查记录.png" />
+    <Content Include="assets\i\icon\后台\家庭.png" />
+    <Content Include="assets\i\icon\后台\工作日志.png" />
+    <Content Include="assets\i\icon\后台\干部.png" />
+    <Content Include="assets\i\icon\后台\慰问记录.png" />
+    <Content Include="assets\i\icon\后台\收租记录.png" />
+    <Content Include="assets\i\icon\后台\文档管理.png" />
+    <Content Include="assets\i\icon\后台\新生儿.png" />
+    <Content Include="assets\i\icon\后台\民兵.png" />
+    <Content Include="assets\i\icon\后台\用户信息.png" />
+    <Content Include="assets\i\icon\后台\用户菜单.png" />
+    <Content Include="assets\i\icon\后台\电费缴纳记录.png" />
+    <Content Include="assets\i\icon\后台\登录记录.png" />
+    <Content Include="assets\i\icon\后台\组织架构.png" />
+    <Content Include="assets\i\icon\后台\股民.png" />
+    <Content Include="assets\i\icon\后台\菜单配置.png" />
+    <Content Include="assets\i\icon\后台\访问记录.png" />
+    <Content Include="assets\i\icon\后台\通知.png" />
+    <Content Include="assets\i\icon\后台\通知阅读记录.png" />
+    <Content Include="assets\i\images\dairy.png" />
+    <Content Include="assets\i\images\erwm.png" />
+    <Content Include="assets\i\images\gra.png" />
+    <Content Include="assets\i\images\green.png" />
+    <Content Include="assets\i\images\head1.jpg" />
+    <Content Include="assets\i\images\house.png" />
+    <Content Include="assets\i\images\jk.png" />
+    <Content Include="assets\i\images\left.png" />
+    <Content Include="assets\i\images\logo.png" />
+    <Content Include="assets\i\images\map.png" />
+    <Content Include="assets\i\images\people.png" />
+    <Content Include="assets\i\images\qiye.png" />
+    <Content Include="assets\i\images\right.png" />
+    <Content Include="assets\i\images\shequjianjie.png" />
+    <Content Include="assets\i\images\tongji.png" />
+    <Content Include="assets\i\images\wei.png" />
+    <Content Include="assets\i\images\zhuxiao.png" />
+    <Content Include="assets\i\images\zhuyaogongneng.png" />
+    <Content Include="assets\i\images\zongzhi.png" />
+    <Content Include="assets\i\images\社区介绍.png" />
+    <Content Include="assets\i\indexnew\jianyichuli.png" />
+    <Content Include="assets\i\indexnew\sheqingminyi.png" />
+    <Content Include="assets\i\indexnew\shequguabnlitongji.png" />
+    <Content Include="assets\i\indexnew\zhengwuchaxun.png" />
+    <Content Include="assets\i\indexnew\zhengwutongji.png" />
+    <Content Include="assets\i\indexnew\zhudongxunjian.png" />
+    <Content Include="assets\i\index\nav.png" />
+    <Content Include="assets\i\index\neibugonggao.png" />
+    <Content Include="assets\i\index\neibugonggao_hover.png" />
+    <Content Include="assets\i\index\news.png" />
+    <Content Include="assets\i\index\news2.jpg" />
+    <Content Include="assets\i\index\nongcunyiliao.png" />
+    <Content Include="assets\i\index\renkouditu-_hover.png" />
+    <Content Include="assets\i\index\renkouditu.png" />
+    <Content Include="assets\i\index\renkoutongji.png" />
+    <Content Include="assets\i\index\renkoutongji_hover.png" />
+    <Content Include="assets\i\index\shehuiguanli-_hoover.png" />
+    <Content Include="assets\i\index\shehuiguanli.png" />
+    <Content Include="assets\i\index\wenlvxinxi-_hover.png" />
+    <Content Include="assets\i\index\wenlvxinxi.png" />
+    <Content Include="assets\i\index\white.png" />
+    <Content Include="assets\i\index\xukuang_news.png" />
+    <Content Include="assets\i\index\zhengwuchaxun.png" />
+    <Content Include="assets\i\index\zhengwuchaxun_hover.png" />
+    <Content Include="assets\i\index\zhengwutongji.png" />
+    <Content Include="assets\i\jiahao.png" />
+    <Content Include="assets\i\knhga.png" />
+    <Content Include="assets\i\list.txt" />
+    <Content Include="assets\i\loading.gif" />
+    <Content Include="assets\i\lock.png" />
+    <Content Include="assets\i\login.png" />
+    <Content Include="assets\i\logo-sm.png" />
+    <Content Include="assets\i\logo.png" />
+    <Content Include="assets\i\logo1.png" />
+    <Content Include="assets\i\logo_.png" />
+    <Content Include="assets\i\lrga.png" />
+    <Content Include="assets\i\main\dairy.png" />
+    <Content Include="assets\i\main\erwm.png" />
+    <Content Include="assets\i\main\head1.jpg" />
+    <Content Include="assets\i\main\house.png" />
+    <Content Include="assets\i\main\jk.png" />
+    <Content Include="assets\i\main\left.png" />
+    <Content Include="assets\i\main\logo.png" />
+    <Content Include="assets\i\main\map.png" />
+    <Content Include="assets\i\main\people.png" />
+    <Content Include="assets\i\main\qiye.png" />
+    <Content Include="assets\i\main\right.png" />
+    <Content Include="assets\i\main\shequjianjie.png" />
+    <Content Include="assets\i\main\tongji.png" />
+    <Content Include="assets\i\main\wei.png" />
+    <Content Include="assets\i\main\zhuxiao.png" />
+    <Content Include="assets\i\main\zhuyaogongneng.png" />
+    <Content Include="assets\i\main\zongzhi.png" />
+    <Content Include="assets\i\mapicon\cangf.png" />
+    <Content Include="assets\i\mapicon\canji.png" />
+    <Content Include="assets\i\mapicon\dangyuan.png" />
+    <Content Include="assets\i\mapicon\ganbu.png" />
+    <Content Include="assets\i\mapicon\jiank.png" />
+    <Content Include="assets\i\mapicon\laonian.png" />
+    <Content Include="assets\i\mapicon\minbing.png" />
+    <Content Include="assets\i\mapicon\renkou.png" />
+    <Content Include="assets\i\marker\chaye.png" />
+    <Content Include="assets\i\marker\Crab_Circle.png" />
+    <Content Include="assets\i\marker\Loquat_Circle.png" />
+    <Content Include="assets\i\marker\Marker_Disabled.png" />
+    <Content Include="assets\i\marker\Marker_Elderly.png" />
+    <Content Include="assets\i\marker\Marker_GoodFamily.png" />
+    <Content Include="assets\i\marker\Marker_Leader.png" />
+    <Content Include="assets\i\marker\Marker_PartyMember.png" />
+    <Content Include="assets\i\marker\pangxie.png" />
+    <Content Include="assets\i\marker\pipa.png" />
+    <Content Include="assets\i\marker\plane.png" />
+    <Content Include="assets\i\marker\Tea_Circle.png" />
+    <Content Include="assets\i\marker\Waxberry_Circle.png" />
+    <Content Include="assets\i\marker\yangmei.png" />
+    <Content Include="assets\i\metaicon\e.jpg" />
+    <Content Include="assets\i\metaicon\Marker_PartyMember.png" />
+    <Content Include="assets\i\metaicon\POI.png" />
+    <Content Include="assets\i\metaicon\qq_03.png" />
+    <Content Include="assets\i\metaicon\QQ图片20180605101023--.png" />
+    <Content Include="assets\i\metaicon\QQ图片20180605101023.png" />
+    <Content Include="assets\i\metaicon\三会一课.png" />
+    <Content Include="assets\i\metaicon\专家管理.png" />
+    <Content Include="assets\i\metaicon\专项工作.png" />
+    <Content Include="assets\i\metaicon\业务登记统计.png" />
+    <Content Include="assets\i\metaicon\业务管理.png" />
+    <Content Include="assets\i\metaicon\业务管理统计.png" />
+    <Content Include="assets\i\metaicon\业务统计.png" />
+    <Content Include="assets\i\metaicon\业务跟踪统计.png" />
+    <Content Include="assets\i\metaicon\业务预约.png" />
+    <Content Include="assets\i\metaicon\主动巡检.png" />
+    <Content Include="assets\i\metaicon\举办党课 %281%29.png" />
+    <Content Include="assets\i\metaicon\举办党课.png" />
+    <Content Include="assets\i\metaicon\乡村.png" />
+    <Content Include="assets\i\metaicon\人口信息.png" />
+    <Content Include="assets\i\metaicon\人口档案.png" />
+    <Content Include="assets\i\metaicon\人口概况.png" />
+    <Content Include="assets\i\metaicon\人口管理.png" />
+    <Content Include="assets\i\metaicon\人口统计.png" />
+    <Content Include="assets\i\metaicon\人员.png" />
+    <Content Include="assets\i\metaicon\优秀党员.png" />
+    <Content Include="assets\i\metaicon\优秀党员1.png" />
+    <Content Include="assets\i\metaicon\便民指南.png" />
+    <Content Include="assets\i\metaicon\党务党史.png" />
+    <Content Include="assets\i\metaicon\党务指南.png" />
+    <Content Include="assets\i\metaicon\党务指南1.png" />
+    <Content Include="assets\i\metaicon\党务管理.png" />
+    <Content Include="assets\i\metaicon\党员.png" />
+    <Content Include="assets\i\metaicon\党员管理.png" />
+    <Content Include="assets\i\metaicon\党建专题.png" />
+    <Content Include="assets\i\metaicon\党建活动管理.png" />
+    <Content Include="assets\i\metaicon\党建要闻管理.png" />
+    <Content Include="assets\i\metaicon\党支部.png" />
+    <Content Include="assets\i\metaicon\党费缴纳管理.png" />
+    <Content Include="assets\i\metaicon\关爱.png" />
+    <Content Include="assets\i\metaicon\农业企业管理.png" />
+    <Content Include="assets\i\metaicon\农技人员管理.png" />
+    <Content Include="assets\i\metaicon\农村医疗.png" />
+    <Content Include="assets\i\metaicon\办事指南.png" />
+    <Content Include="assets\i\metaicon\医保统计.png" />
+    <Content Include="assets\i\metaicon\厂房.png" />
+    <Content Include="assets\i\metaicon\厂房楼栋.png" />
+    <Content Include="assets\i\metaicon\厂房统计.png" />
+    <Content Include="assets\i\metaicon\合同.png" />
+    <Content Include="assets\i\metaicon\合同信息管理.png" />
+    <Content Include="assets\i\metaicon\合同管理.png" />
+    <Content Include="assets\i\metaicon\地图.png" />
+    <Content Include="assets\i\metaicon\城管违法查询.png" />
+    <Content Include="assets\i\metaicon\基层党建.png" />
+    <Content Include="assets\i\metaicon\宝华首页_03.png" />
+    <Content Include="assets\i\metaicon\家庭 %281%29.png" />
+    <Content Include="assets\i\metaicon\家庭农场管理.png" />
+    <Content Include="assets\i\metaicon\家庭档案.png" />
+    <Content Include="assets\i\metaicon\家庭管理.png" />
+    <Content Include="assets\i\metaicon\少儿医保.png" />
+    <Content Include="assets\i\metaicon\少儿医保统计.png" />
+    <Content Include="assets\i\metaicon\工业园楼栋.png" />
+    <Content Include="assets\i\metaicon\工作人员.png" />
+    <Content Include="assets\i\metaicon\工作人员信息.png" />
+    <Content Include="assets\i\metaicon\工作日志.png" />
+    <Content Include="assets\i\metaicon\干部.png" />
+    <Content Include="assets\i\metaicon\建党要闻管理.png" />
+    <Content Include="assets\i\metaicon\建议处理.png" />
+    <Content Include="assets\i\metaicon\待办业务统计.png" />
+    <Content Include="assets\i\metaicon\收租.png" />
+    <Content Include="assets\i\metaicon\收租管理.png" />
+    <Content Include="assets\i\metaicon\政策文件.png" />
+    <Content Include="assets\i\metaicon\文档管理 %281%29.png" />
+    <Content Include="assets\i\metaicon\文档管理.png" />
+    <Content Include="assets\i\metaicon\普通农户管理.png" />
+    <Content Include="assets\i\metaicon\智慧园区.png" />
+    <Content Include="assets\i\metaicon\服务预约.png" />
+    <Content Include="assets\i\metaicon\村党史.png" />
+    <Content Include="assets\i\metaicon\村史.png" />
+    <Content Include="assets\i\metaicon\村委.png" />
+    <Content Include="assets\i\metaicon\民兵.png" />
+    <Content Include="assets\i\metaicon\民兵管理.png" />
+    <Content Include="assets\i\metaicon\活动管理.png" />
+    <Content Include="assets\i\metaicon\游客.png" />
+    <Content Include="assets\i\metaicon\环卫.png" />
+    <Content Include="assets\i\metaicon\用户信息.png" />
+    <Content Include="assets\i\metaicon\用户管理.png" />
+    <Content Include="assets\i\metaicon\用户访问记录.png" />
+    <Content Include="assets\i\metaicon\电费缴纳记录.png" />
+    <Content Include="assets\i\metaicon\登录记录.png" />
+    <Content Include="assets\i\metaicon\监控.png" />
+    <Content Include="assets\i\metaicon\监控中心.png" />
+    <Content Include="assets\i\metaicon\社区动态.png" />
+    <Content Include="assets\i\metaicon\社情民意.png" />
+    <Content Include="assets\i\metaicon\种植大户管理.png" />
+    <Content Include="assets\i\metaicon\租房.png" />
+    <Content Include="assets\i\metaicon\红色党建.png" />
+    <Content Include="assets\i\metaicon\综治维稳.png" />
+    <Content Include="assets\i\metaicon\老人.png" />
+    <Content Include="assets\i\metaicon\股民.png" />
+    <Content Include="assets\i\metaicon\股票.png" />
+    <Content Include="assets\i\metaicon\菜单配置.png" />
+    <Content Include="assets\i\metaicon\视频监控基本信息.png" />
+    <Content Include="assets\i\metaicon\访问记录.png" />
+    <Content Include="assets\i\metaicon\财务.png" />
+    <Content Include="assets\i\metaicon\财务管理.png" />
+    <Content Include="assets\i\metaicon\退出 %281%29.png" />
+    <Content Include="assets\i\metaicon\退出 %282%29.png" />
+    <Content Include="assets\i\metaicon\退出%281%29.png" />
+    <Content Include="assets\i\metaicon\退出%282%29.png" />
+    <Content Include="assets\i\metaicon\退出.png" />
+    <Content Include="assets\i\metaicon\通知 %281%29.png" />
+    <Content Include="assets\i\metaicon\通知.png" />
+    <Content Include="assets\i\metaicon\通知、会议管理.png" />
+    <Content Include="assets\i\metaicon\通讯录管理.png" />
+    <Content Include="assets\i\metaicon\重点工程.png" />
+    <Content Include="assets\i\metaicon\随手拍.png" />
+    <Content Include="assets\i\metaicon\香溪电子地图（首页）1-2.jpg" />
+    <Content Include="assets\i\mobile_link.jpg" />
+    <Content Include="assets\i\ncyl.png" />
+    <Content Include="assets\i\newmain\举办党课.png" />
+    <Content Include="assets\i\newmain\人员.png" />
+    <Content Include="assets\i\newmain\党支部.png" />
+    <Content Include="assets\i\newmain\合同.png" />
+    <Content Include="assets\i\newmain\家庭.png" />
+    <Content Include="assets\i\newmain\监控.png" />
+    <Content Include="assets\i\newmain\租房.png" />
+    <Content Include="assets\i\newmain\财务.png" />
+    <Content Include="assets\i\nybt.png" />
+    <Content Include="assets\i\People_Circle.png" />
+    <Content Include="assets\i\Plane_Circle.png" />
+    <Content Include="assets\i\poi_type_icons.png" />
+    <Content Include="assets\i\population\cjr.png" />
+    <Content Include="assets\i\population\cjr_hover.png" />
+    <Content Include="assets\i\population\dangyuan-guanli.png" />
+    <Content Include="assets\i\population\dangyuanguanli_hover-.png" />
+    <Content Include="assets\i\population\gongzuorenyuan.png" />
+    <Content Include="assets\i\population\gongzuorenyuan_hover.png" />
+    <Content Include="assets\i\population\gsgl.png" />
+    <Content Include="assets\i\population\gsgl_click.png" />
+    <Content Include="assets\i\population\jiating-dangan_hover.png" />
+    <Content Include="assets\i\population\jiatingdangan.png" />
+    <Content Include="assets\i\population\jichurenkou_normal.png" />
+    <Content Include="assets\i\population\jichurukou_hover-.png" />
+    <Content Include="assets\i\population\minbinguanli.png" />
+    <Content Include="assets\i\population\mingbingguanli_hover.png" />
+    <Content Include="assets\i\population\renkoutongji.png" />
+    <Content Include="assets\i\population\renkoutongji_hover.png" />
+    <Content Include="assets\i\pop\canjiren.png" />
+    <Content Include="assets\i\pop\dangyuanguanli.png" />
+    <Content Include="assets\i\pop\jiatingguanli_icon.png" />
+    <Content Include="assets\i\pop\jichurukou.png" />
+    <Content Include="assets\i\pop\renkouguanli_icon_gongjufuwu.png" />
+    <Content Include="assets\i\pop\renkouguanli_icon_zhanshi.png" />
+    <Content Include="assets\i\pop\renkoutongji.png" />
+    <Content Include="assets\i\quick\Quick_Map.png" />
+    <Content Include="assets\i\safe_Shield.png" />
+    <Content Include="assets\i\search-icon.png" />
+    <Content Include="assets\i\search_menu_icon.png" />
+    <Content Include="assets\i\seyb.png" />
+    <Content Include="assets\i\share\btn_A.png" />
+    <Content Include="assets\i\share\btn_ip.png" />
+    <Content Include="assets\i\shiwugl.png" />
+    <Content Include="assets\i\sngl.png" />
+    <Content Include="assets\i\social\chuli.png" />
+    <Content Include="assets\i\social\chuli_hover.png" />
+    <Content Include="assets\i\social\dongtaitongji.png" />
+    <Content Include="assets\i\social\huodongguanli.png" />
+    <Content Include="assets\i\social\huodongguanli_hovber.png" />
+    <Content Include="assets\i\social\jianyichuli.png" />
+    <Content Include="assets\i\social\jianyichuli_hover.png" />
+    <Content Include="assets\i\social\ruanjianfankui.png" />
+    <Content Include="assets\i\social\shehuiguanli1.png" />
+    <Content Include="assets\i\social\suishoupaigenzong_hover.png" />
+    <Content Include="assets\i\social\suizhoupaigenzong.png" />
+    <Content Include="assets\i\social\tijianyizhuangtai.png" />
+    <Content Include="assets\i\social\tijianyizhuangtai_hover.png" />
+    <Content Include="assets\i\social\tongtaitongji_hover.png" />
+    <Content Include="assets\i\social\xinxifbu.png" />
+    <Content Include="assets\i\social\xinxifbu_hover.png" />
+    <Content Include="assets\i\social\yewuyuyue.png" />
+    <Content Include="assets\i\social\yewuyuyue_hover.png" />
+    <Content Include="assets\i\social\yewuzhuangtai_hover.png" />
+    <Content Include="assets\i\social\zdxj.png" />
+    <Content Include="assets\i\social\zdxj_hover.png" />
+    <Content Include="assets\i\social_Z\dongtaishequyewutongji.png" />
+    <Content Include="assets\i\social_Z\huodongguanli.png" />
+    <Content Include="assets\i\social_Z\jianyichuli.png" />
+    <Content Include="assets\i\social_Z\ruanjianfankui.png" />
+    <Content Include="assets\i\social_Z\suishoupaichuli.png" />
+    <Content Include="assets\i\social_Z\suoshoupaiyunxingzhuangtaigenzong.png" />
+    <Content Include="assets\i\social_Z\tijianyiyunxingzhuangtai.png" />
+    <Content Include="assets\i\social_Z\xinxifabu.png" />
+    <Content Include="assets\i\social_Z\yewuyuyvegzhuangtaigenzong.png" />
+    <Content Include="assets\i\social_Z\zhudongxunjian.png" />
+    <Content Include="assets\i\sqmy.png" />
+    <Content Include="assets\i\stars.png" />
+    <Content Include="assets\i\suo.png" />
+    <Content Include="assets\i\system\denglurizhi.png" />
+    <Content Include="assets\i\system\denglurizhi_hover.png" />
+    <Content Include="assets\i\system\jueseguanli.png" />
+    <Content Include="assets\i\system\jueseguanli_hover.png" />
+    <Content Include="assets\i\system\nav_blue.png" />
+    <Content Include="assets\i\system\neibugonggao.png" />
+    <Content Include="assets\i\system\neibugonggao_hover.png" />
+    <Content Include="assets\i\system\white.png" />
+    <Content Include="assets\i\system\xitongguanli1.png" />
+    <Content Include="assets\i\system\xitongguanli_bg.jpg" />
+    <Content Include="assets\i\system\yonghuguanli.png" />
+    <Content Include="assets\i\system\yonghuguanli_hover.png" />
+    <Content Include="assets\i\system\yunweiguanl1i.png" />
+    <Content Include="assets\i\system\yunweiguanli2.png" />
+    <Content Include="assets\i\system\yunweiguanli3.png" />
+    <Content Include="assets\i\system\zhencun_xitongguanli_bg.jpg" />
+    <Content Include="assets\i\tdbg.png" />
+    <Content Include="assets\i\view\biluo\俞坞_sm.jpg" />
+    <Content Include="assets\i\view\biluo\全景图_sm.jpg" />
+    <Content Include="assets\i\view\biluo\千年古寺紫金庵_sm.jpg" />
+    <Content Include="assets\i\view\biluo\古村秋色_sm.jpg" />
+    <Content Include="assets\i\view\biluo\村民生活1_sm.jpg" />
+    <Content Include="assets\i\view\biluo\村民生活2_sm.jpg" />
+    <Content Include="assets\i\view\biluo\炒茶大赛_sm.jpg" />
+    <Content Include="assets\i\view\biluo\碧螺广场_sm.jpg" />
+    <Content Include="assets\i\view\biluo\碧螺春茶原产地--东山镇碧螺村_sm.jpg" />
+    <Content Include="assets\i\view\biluo\碧螺风景区_sm.jpg" />
+    <Content Include="assets\i\view\biluo\西坞俯览图_sm.jpg" />
+    <Content Include="assets\i\view\biluo\西街风情_sm.jpg" />
+    <Content Include="assets\i\view\biluo\银杏林_sm.jpg" />
+    <Content Include="assets\i\view\dongshan\1.jpg" />
+    <Content Include="assets\i\view\dongshan\10.jpg" />
+    <Content Include="assets\i\view\dongshan\11.jpg" />
+    <Content Include="assets\i\view\dongshan\12.jpg" />
+    <Content Include="assets\i\view\dongshan\2.jpg" />
+    <Content Include="assets\i\view\dongshan\3.jpg" />
+    <Content Include="assets\i\view\dongshan\4.jpg" />
+    <Content Include="assets\i\view\dongshan\5.jpg" />
+    <Content Include="assets\i\view\dongshan\6.jpg" />
+    <Content Include="assets\i\view\dongshan\7.jpg" />
+    <Content Include="assets\i\view\dongshan\8.jpg" />
+    <Content Include="assets\i\view\dongshan\9.jpg" />
+    <Content Include="assets\i\view\dongshan\东山1.jpg" />
+    <Content Include="assets\i\view\dongshan\东山10.jpg" />
+    <Content Include="assets\i\view\dongshan\东山11.jpg" />
+    <Content Include="assets\i\view\dongshan\东山12.jpg" />
+    <Content Include="assets\i\view\dongshan\东山13.jpg" />
+    <Content Include="assets\i\view\dongshan\东山2.jpg" />
+    <Content Include="assets\i\view\dongshan\东山4.jpg" />
+    <Content Include="assets\i\view\dongting\世纪广场_sm.jpg" />
+    <Content Include="assets\i\view\dongting\东山商城_sm.jpg" />
+    <Content Include="assets\i\view\dongting\东街_sm.jpg" />
+    <Content Include="assets\i\view\dongting\农贸市场_sm.jpg" />
+    <Content Include="assets\i\view\dongting\将军街_sm.jpg" />
+    <Content Include="assets\i\view\dongting\居民娱乐活动_sm.jpg" />
+    <Content Include="assets\i\view\dongting\文体设施_sm.jpg" />
+    <Content Include="assets\i\view\dongting\洞庭饭店_sm.jpg" />
+    <Content Include="assets\i\view\dongting\老年门球场_sm.jpg" />
+    <Content Include="assets\i\view\dongting\西街_sm.jpg" />
+    <Content Include="assets\i\view\dongting\镇区建筑_sm.jpg" />
+    <Content Include="assets\i\view\dukou\东山蔬菜园_sm.jpg" />
+    <Content Include="assets\i\view\dukou\村庄全貌_sm.jpg" />
+    <Content Include="assets\i\view\dukou\村道路_sm.jpg" />
+    <Content Include="assets\i\view\dukou\清洁的河道_sm.jpg" />
+    <Content Include="assets\i\view\dukou\渡口书场_sm.jpg" />
+    <Content Include="assets\i\view\dukou\现代农业设施_sm.jpg" />
+    <Content Include="assets\i\view\dukou\社区服务中心_sm.jpg" />
+    <Content Include="assets\i\view\dukou\美丽村庄_sm.jpg" />
+    <Content Include="assets\i\view\dukou\群众娱乐_sm.jpg" />
+    <Content Include="assets\i\view\dukou\蔬菜合作社_sm.jpg" />
+    <Content Include="assets\i\view\dukou\蔬菜园俯瞰图_sm.jpg" />
+    <Content Include="assets\i\view\dukou\集体厂房_sm.jpg" />
+    <Content Include="assets\i\view\duqiao\具区风月桥_sm.jpg" />
+    <Content Include="assets\i\view\duqiao\山水度假村1-鲍建国_sm.jpg" />
+    <Content Include="assets\i\view\duqiao\渡桥书场_sm.jpg" />
+    <Content Include="assets\i\view\duqiao\渡桥村新建婆罗桥_sm.jpg" />
+    <Content Include="assets\i\view\duqiao\湖羊基地1_sm.jpg" />
+    <Content Include="assets\i\view\duqiao\湖羊基地2_sm.jpg" />
+    <Content Include="assets\i\view\duqiao\湖羊基地举办未成年人活动_sm.jpg" />
+    <Content Include="assets\i\view\duqiao\白切羊肉_sm.jpg" />
+    <Content Include="assets\i\view\duqiao\羊家乐_sm.jpg" />
+    <Content Include="assets\i\view\duqiao\老年人日间照料中心_sm.jpg" />
+    <Content Include="assets\i\view\liaoli\养殖区_sm.jpg" />
+    <Content Include="assets\i\view\liaoli\前门头小区_sm.jpg" />
+    <Content Include="assets\i\view\liaoli\安置小区_sm.jpg" />
+    <Content Include="assets\i\view\liaoli\新农村_sm.jpg" />
+    <Content Include="assets\i\view\liaoli\村民参与荷花节_sm.jpg" />
+    <Content Include="assets\i\view\liaoli\水乡秋意_sm.jpg" />
+    <Content Include="assets\i\view\liaoli\渔民出湖_sm.jpg" />
+    <Content Include="assets\i\view\liaoli\潦里新社区服务中心_sm.jpg" />
+    <Content Include="assets\i\view\liaoli\螃蟹网箱_sm.jpg" />
+    <Content Include="assets\i\view\liaoli\高田路_sm.jpg" />
+    <Content Include="assets\i\view\luxiang\中国历史文化名村--陆巷_sm.jpg" />
+    <Content Include="assets\i\view\luxiang\全景_sm.jpg" />
+    <Content Include="assets\i\view\luxiang\古村停车场_sm.jpg" />
+    <Content Include="assets\i\view\luxiang\古村南入口_sm.jpg" />
+    <Content Include="assets\i\view\luxiang\安置小区_sm.jpg" />
+    <Content Include="assets\i\view\luxiang\村民采杨梅_sm.jpg" />
+    <Content Include="assets\i\view\luxiang\村民闲聊_sm.jpg" />
+    <Content Include="assets\i\view\luxiang\桔子红了_sm.jpg" />
+    <Content Include="assets\i\view\luxiang\民俗活动--猛将会_sm.jpg" />
+    <Content Include="assets\i\view\luxiang\民间糕点热卖_sm.jpg" />
+    <Content Include="assets\i\view\luxiang\炒茶_sm.jpg" />
+    <Content Include="assets\i\view\luxiang\生活_sm.jpg" />
+    <Content Include="assets\i\view\luxiang\陆巷7-老墙_sm.jpg" />
+    <Content Include="assets\i\view\luxiang\陆巷古村雪景_sm.jpg" />
+    <Content Include="assets\i\view\moli\丰圻夜幕_sm.jpg" />
+    <Content Include="assets\i\view\moli\余山原始生态岛_sm.jpg" />
+    <Content Include="assets\i\view\moli\全景图_sm.jpg" />
+    <Content Include="assets\i\view\moli\农民人家_sm.jpg" />
+    <Content Include="assets\i\view\moli\启园_sm.jpg" />
+    <Content Include="assets\i\view\moli\村委会_sm.jpg" />
+    <Content Include="assets\i\view\moli\村民健身_sm.jpg" />
+    <Content Include="assets\i\view\moli\村民生活_sm.jpg" />
+    <Content Include="assets\i\view\moli\森林公园_sm.jpg" />
+    <Content Include="assets\i\view\moli\沂水人家_sm.jpg" />
+    <Content Include="assets\i\view\moli\环岛公路2_sm.jpg" />
+    <Content Include="assets\i\view\moli\环岛公路_sm.jpg" />
+    <Content Include="assets\i\view\moli\翁巷~松风馆_sm.jpg" />
+    <Content Include="assets\i\view\moli\翁巷古村风貌_sm.jpg" />
+    <Content Include="assets\i\view\moli\老人集体晒太阳.jpg" />
+    <Content Include="assets\i\view\moli\老人集体晒太阳_sm.jpg" />
+    <Content Include="assets\i\view\moli\银杏树街_sm.jpg" />
+    <Content Include="assets\i\view\moli\雨花胜境1_sm.jpg" />
+    <Content Include="assets\i\view\sanshan\三山全貌_sm.jpg" />
+    <Content Include="assets\i\view\sanshan\三山古村落1_sm.jpg" />
+    <Content Include="assets\i\view\sanshan\三山古村落_sm.jpg" />
+    <Content Include="assets\i\view\sanshan\三山民居_sm.jpg" />
+    <Content Include="assets\i\view\sanshan\假日_sm.jpg" />
+    <Content Include="assets\i\view\sanshan\大年初五迎财神_sm.jpg" />
+    <Content Include="assets\i\view\sanshan\小姑村_sm.jpg" />
+    <Content Include="assets\i\view\sanshan\快乐假期_sm.jpg" />
+    <Content Include="assets\i\view\sanshan\村民生活1_sm.jpg" />
+    <Content Include="assets\i\view\sanshan\村民生活2_sm.jpg" />
+    <Content Include="assets\i\view\sanshan\桃映三山_sm.jpg" />
+    <Content Include="assets\i\view\sanshan\民居1_sm.jpg" />
+    <Content Include="assets\i\view\sanshan\民居_sm.jpg" />
+    <Content Include="assets\i\view\sanshan\水上活动基地_sm.jpg" />
+    <Content Include="assets\i\view\sanshan\湿地公园_sm.jpg" />
+    <Content Include="assets\i\view\shuangwan\双湾村鱼塘1_sm.jpg" />
+    <Content Include="assets\i\view\shuangwan\双湾村鱼塘_sm.jpg" />
+    <Content Include="assets\i\view\shuangwan\归航_sm.jpg" />
+    <Content Include="assets\i\view\shuangwan\新农村建设.jpg" />
+    <Content Include="assets\i\view\shuangwan\新农村建设_sm.jpg" />
+    <Content Include="assets\i\view\shuangwan\枇杷基地_sm.jpg" />
+    <Content Include="assets\i\view\shuangwan\荷花节_sm.jpg" />
+    <Content Include="assets\i\view\shuangwan\莼菜塘_sm.jpg" />
+    <Content Include="assets\i\view\shuangwan\藏船坞_sm.jpg" />
+    <Content Include="assets\i\view\shuangwan\路边的枇杷摊后面是整片的枇杷林_sm.jpg" />
+    <Content Include="assets\i\view\shuangwan\金选枇杷_sm.jpg" />
+    <Content Include="assets\i\view\shuangwan\鱼塘春色_sm.jpg" />
+    <Content Include="assets\i\view\shuangwan\鱼塘航拍_sm.jpg" />
+    <Content Include="assets\i\view\shuangwan\龙头山葑山寺_sm.jpg" />
+    <Content Include="assets\i\view\taihu\出闸口_sm.jpg" />
+    <Content Include="assets\i\view\taihu\太湖捕捞_sm.jpg" />
+    <Content Include="assets\i\view\taihu\太湖捕鱼_sm.jpg" />
+    <Content Include="assets\i\view\taihu\太湖网围_sm.jpg" />
+    <Content Include="assets\i\view\taihu\太湖蟹王蟹后_sm.jpg" />
+    <Content Include="assets\i\view\taihu\太湖闸口_sm.jpg" />
+    <Content Include="assets\i\view\taihu\归_sm.jpg" />
+    <Content Include="assets\i\view\taihu\渔村之晨_sm.jpg" />
+    <Content Include="assets\i\view\taihu\渔民作业_sm.jpg" />
+    <Content Include="assets\i\view\taihu\销售大闸蟹_sm.jpg" />
+    <Content Include="assets\i\view\wuxiang\东山镇工业科技园.jpg" />
+    <Content Include="assets\i\view\wuxiang\东山镇工业科技园_sm.jpg" />
+    <Content Include="assets\i\view\wuxiang\农贸市场_sm.jpg" />
+    <Content Include="assets\i\view\wuxiang\吴巷黄昏_sm.jpg" />
+    <Content Include="assets\i\view\wuxiang\射鹤小区.jpg" />
+    <Content Include="assets\i\view\wuxiang\射鹤小区_sm.jpg" />
+    <Content Include="assets\i\view\wuxiang\射鹤山生态园.jpg" />
+    <Content Include="assets\i\view\wuxiang\射鹤山生态园_sm.jpg" />
+    <Content Include="assets\i\view\wuxiang\文体设施.jpg" />
+    <Content Include="assets\i\view\wuxiang\文体设施_sm.jpg" />
+    <Content Include="assets\i\view\wuxiang\村委会_sm.jpg" />
+    <Content Include="assets\i\view\wuxiang\湖羊基地_sm.jpg" />
+    <Content Include="assets\i\view\wuxiang\静_sm.jpg" />
+    <Content Include="assets\i\view\xinliao\农校苗圃培训基地_sm.jpg" />
+    <Content Include="assets\i\view\xinliao\文艺活动_sm.jpg" />
+    <Content Include="assets\i\view\xinliao\新卫生服务站_sm.jpg" />
+    <Content Include="assets\i\view\xinliao\新潦便民服务中心_sm.jpg" />
+    <Content Include="assets\i\view\xinliao\新潦新农村_sm.jpg" />
+    <Content Include="assets\i\view\xinliao\新潦村养殖区域._sm.jpg" />
+    <Content Include="assets\i\view\xinliao\新潦村防汛段_sm.jpg" />
+    <Content Include="assets\i\view\xinliao\新潦桥边_sm.jpg" />
+    <Content Include="assets\i\view\xinliao\民俗活动_sm.jpg" />
+    <Content Include="assets\i\view\xinliao\社区服务中心_sm.jpg" />
+    <Content Include="assets\i\view\xinliao\荷花节_sm.jpg" />
+    <Content Include="assets\i\view\xinliao\蟹塘归_sm.jpg" />
+    <Content Include="assets\i\view\xinliao\蟹市场_sm.jpg" />
+    <Content Include="assets\i\view\yangwan\丰收的喜悦_sm.jpg" />
+    <Content Include="assets\i\view\yangwan\农贸市场_sm.jpg" />
+    <Content Include="assets\i\view\yangwan\古宅春色_sm.jpg" />
+    <Content Include="assets\i\view\yangwan\古建筑_sm.jpg" />
+    <Content Include="assets\i\view\yangwan\古村落_sm.jpg" />
+    <Content Include="assets\i\view\yangwan\哇，大青蛙_sm.jpg" />
+    <Content Include="assets\i\view\yangwan\学习新技能_sm.jpg" />
+    <Content Include="assets\i\view\yangwan\最美村小_sm.jpg" />
+    <Content Include="assets\i\view\yangwan\村内小公园自娱自乐_sm.jpg" />
+    <Content Include="assets\i\view\yangwan\村容村貌_sm.jpg" />
+    <Content Include="assets\i\view\yangwan\村民乐居_sm.jpg" />
+    <Content Include="assets\i\view\yangwan\杨梅采摘_sm.jpg" />
+    <Content Include="assets\i\view\yangwan\杨陆古道_sm.jpg" />
+    <Content Include="assets\i\view\yangwan\美丽村庄_sm.jpg" />
+    <Content Include="assets\i\view\yangwan\花海同乐_sm.jpg" />
+    <Content Include="assets\i\view\yangwan\西巷栖居_sm.jpg" />
+    <Content Include="assets\i\view\yangwan\评弹听听_sm.jpg" />
+    <Content Include="assets\i\view\yangwan\骑车一族_sm.jpg" />
+    <Content Include="assets\i\wjda.png" />
+    <Content Include="assets\i\yangwan\gongzhonghaogongneng.png" />
+    <Content Include="assets\i\yangwan\meiliyangwan.png" />
+    <Content Include="assets\i\yangwan\sucaiguanli.png" />
+    <Content Include="assets\i\yangwan\wanzhuanyangwan.png" />
+    <Content Include="assets\i\yangwan\yangwanfuwu.png" />
+    <Content Include="assets\i\yangwan\yonghuguanli.png" />
+    <Content Include="assets\i\yewuguanl.png" />
+    <Content Include="assets\i\yhm.png" />
+    <Content Include="assets\i\ywtj.png" />
+    <Content Include="assets\i\zhengwu\hygg.png" />
+    <Content Include="assets\i\zhengwu\hygg_hover.png" />
+    <Content Include="assets\i\zhengwu\nongcunyiliao.png" />
+    <Content Include="assets\i\zhengwu\nongcunyiliao_hover.png" />
+    <Content Include="assets\i\zhengwu\richengguanli.png" />
+    <Content Include="assets\i\zhengwu\richengguanli_hover.png" />
+    <Content Include="assets\i\zhengwu\shaoeryibao.png" />
+    <Content Include="assets\i\zhengwu\shaoeryibao_hover.png" />
+    <Content Include="assets\i\zhengwu\tongzhhi_hover.png" />
+    <Content Include="assets\i\zhengwu\tongzhi.png" />
+    <Content Include="assets\i\zhengwu\zhengwuchaxun.png" />
+    <Content Include="assets\i\zhengwu\zhengwuchaxun_hover.png" />
+    <Content Include="assets\i\zhengwu\zhengwushenpi.png" />
+    <Content Include="assets\i\zhengwu\zhengwushenpi_hover.png" />
+    <Content Include="assets\i\zhengwu\zwtj.png" />
+    <Content Include="assets\i\zhengwu\zwtj_hover.png" />
+    <Content Include="assets\i\zhengwu_Z\fuwu.png" />
+    <Content Include="assets\i\zhengwu_Z\huiyigonggao.png" />
+    <Content Include="assets\i\zhengwu_Z\nongcunyiliao.png" />
+    <Content Include="assets\i\zhengwu_Z\richengguanli.png" />
+    <Content Include="assets\i\zhengwu_Z\shaoeryibao.png" />
+    <Content Include="assets\i\zhengwu_Z\zhengwuchaxun.png" />
+    <Content Include="assets\i\zhengwu_Z\zhengwutongji.png" />
+    <Content Include="assets\i\zhengwu_Z\zhengwutongzhi.png" />
+    <Content Include="assets\i\zhengwu_Z\zhen_zhenwuguanli_bg.jpg" />
+    <Content Include="assets\i\关心人.png" />
+    <Content Include="assets\i\工作人员.png" />
+    <Content Include="assets\i\民兵.png" />
+    <Content Include="assets\i\监控.png" />
+    <Content Include="assets\i\老人.png" />
+    <Content Include="assets\js\0-common\bootstrap-datetimepicker.min.js" />
+    <Content Include="assets\js\0-common\bootstrap-datetimepicker.zh-CN.js" />
+    <Content Include="assets\js\0-common\bootstrap-editable.js" />
+    <Content Include="assets\js\0-common\bootstrap-select.min.js" />
+    <Content Include="assets\js\0-common\bootstrap-table-editable.js" />
+    <Content Include="assets\js\0-common\bootstrap-table-export.js" />
+    <Content Include="assets\js\0-common\bootstrap-table-zh-CN.js" />
+    <Content Include="assets\js\0-common\bootstrap-table-zh-CN.min.js" />
+    <Content Include="assets\js\0-common\bootstrap-table.js" />
+    <Content Include="assets\js\0-common\bootstrap.js" />
+    <Content Include="assets\js\0-common\bootstrap.min.js" />
+    <Content Include="assets\js\0-common\cmodules-compiled.js" />
+    <Content Include="assets\js\0-common\cmodules.js" />
+    <Content Include="assets\js\0-common\fileinput.min.js" />
+    <Content Include="assets\js\0-common\fileinput_locale_zh.js" />
+    <Content Include="assets\js\1-login\login-compiled.js" />
+    <Content Include="assets\js\1-login\login.js" />
+    <Content Include="assets\js\2-index\baohua_index.js" />
+    <Content Include="assets\js\2-index\business-compiled.js" />
+    <Content Include="assets\js\2-index\index.js" />
+    <Content Include="assets\js\2-index\index_Z.js" />
+    <Content Include="assets\js\2-index\main.js" />
+    <Content Include="assets\js\2-index\router.js" />
+    <Content Include="assets\js\3-map\inner_building-compiled.js" />
+    <Content Include="assets\js\3-map\inner_building.js" />
+    <Content Include="assets\js\3-map\inner_camera-compiled.js" />
+    <Content Include="assets\js\3-map\inner_camera.js" />
+    <Content Include="assets\js\3-map\inner_population-compiled.js" />
+    <Content Include="assets\js\3-map\inner_population.js" />
+    <Content Include="assets\js\3-map\map.js" />
+    <Content Include="assets\js\3-map\map_Z-compiled.js" />
+    <Content Include="assets\js\3-map\map_Z.js" />
+    <Content Include="assets\js\3-map\playground-compiled.js" />
+    <Content Include="assets\js\3-map\playground.js" />
+    <Content Include="assets\js\3-map\test.js" />
+    <Content Include="assets\js\bootstrap-datetimepicker.fr.js" />
+    <Content Include="assets\js\bootstrap-datetimepicker.js" />
+    <Content Include="assets\js\bootstrap-datetimepicker.min.css" />
+    <Content Include="assets\js\bootstrap-select.min.js" />
+    <Content Include="assets\js\bootstrap-table.js" />
+    <Content Include="assets\js\bootstrap.js" />
+    <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\common\bootstrap\3.3.5\css\bootstrap.min.css" />
+    <Content Include="assets\js\common\bootstrap\3.3.5\js\bootstrap.min.js" />
+    <Content Include="assets\js\common\bootstrap\bootstrap-treeview.js" />
+    <Content Include="assets\js\common\html5shiv.js" />
+    <Content Include="assets\js\common\jquery.barrager.min.js" />
+    <Content Include="assets\js\common\jquery\jquery.form-2.82.js" />
+    <Content Include="assets\js\common\jquery\jquery1.8.3.min.js" />
+    <Content Include="assets\js\common\layer\extend\layer.ext.js" />
+    <Content Include="assets\js\common\layer\layer.js" />
+    <Content Include="assets\js\common\layer\skin\default\icon-ext.png" />
+    <Content Include="assets\js\common\layer\skin\default\icon.png" />
+    <Content Include="assets\js\common\layer\skin\default\loading-0.gif" />
+    <Content Include="assets\js\common\layer\skin\default\loading-1.gif" />
+    <Content Include="assets\js\common\layer\skin\default\loading-2.gif" />
+    <Content Include="assets\js\common\layer\skin\layer.css" />
+    <Content Include="assets\js\common\layer\skin\layer.ext.css" />
+    <Content Include="assets\js\common\supersized-init.js" />
+    <Content Include="assets\js\common\supersized.3.2.7.min.js" />
+    <Content Include="assets\js\fileinput_locale_zh.js" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Evaluators\EvaluatorGen.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Content>
+    <Content Include="Evaluators\EvaluatorGen.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EvaluatorGen.txt</LastGenOutput>
+    </Content>
+    <Content Include="gen\Access.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\AccessList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\AccessList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ActiveInspection.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ActiveInspectionList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ActiveInspectionList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Advise.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\AdviseList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\AdviseList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\aGuideToTheConvenienceOfPeople.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\aGuideToTheConvenienceOfPeopleList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\aGuideToTheConvenienceOfPeopleList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BonusRecord.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BonusRecordList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BonusRecordList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Building.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BuildingList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BuildingList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessManagement.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessManagementList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessManagementList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessReservation.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessReservationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\BusinessReservationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Cadre.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CadreList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CadreList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ChildrensMedicalInsuranceRegistration.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ChildrensMedicalInsuranceRegistrationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ChildrensMedicalInsuranceRegistrationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ContractManagement.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ContractManagementList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ContractManagementList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CriticalHousingCrisis.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CriticalHousingCrisisList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\CriticalHousingCrisisList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DemandCollection.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DemandCollectionList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DemandCollectionList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DocumentManagement.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DocumentManagementList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\DocumentManagementList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\EmploymentAssistance.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\EmploymentAssistanceList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\EmploymentAssistanceList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ExpertManagement.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ExpertManagementList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ExpertManagementList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Family.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FamilyList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FamilyList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FeaturesOfXiangxi.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FeaturesOfXiangxiList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\FeaturesOfXiangxiList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\GuideToAffairs.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\GuideToAffairsList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\GuideToAffairsList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\GuideToPartyAffairs.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\GuideToPartyAffairsList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\GuideToPartyAffairsList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\HouseProperty.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\HousePropertyList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\HousePropertyList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ImportProc.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ImportProc.svc.cs</LastGenOutput>
+    </Content>
+    <Content Include="gen\IndustrialParkHousingReceipts.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\IndustrialParkHousingReceiptsList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\IndustrialParkHousingReceiptsList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\InformationManagementOfPartyMembers.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\InformationManagementOfPartyMembersList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\InformationManagementOfPartyMembersList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Investors.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\InvestorsList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\InvestorsList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\LogonRecord.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\LogonRecordList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\LogonRecordList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MailList.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MailListList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MailListList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MembershipDuesPaymentManagement.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MembershipDuesPaymentManagementList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MembershipDuesPaymentManagementList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MenuConfiguration.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MenuConfigurationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MenuConfigurationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Militia.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MilitiaList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\MilitiaList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PageListHTML.html">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PageListJS.html">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PageOneHTML.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Content>
+    <Content Include="gen\PageOneHTML.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PageOneHTML.html</LastGenOutput>
+    </Content>
+    <Content Include="gen\PartyBuilding.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyBuildingList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyBuildingList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyBuildingProject.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyBuildingProjectList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyBuildingProjectList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyNewsManagement.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyNewsManagementList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PartyNewsManagementList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Pat.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PatList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PatList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PersonalInformation.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PersonalInformationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PersonalInformationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\POI.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\POIList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\POIList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PolicyDocument.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PolicyDocumentList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PolicyDocumentList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\Population.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PopulationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\PopulationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RecommendedTreatment.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RecommendedTreatmentList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RecommendedTreatmentList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RecordingLectures.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RecordingLecturesList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RecordingLecturesList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RecordOfElectricityPayment.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RecordOfElectricityPaymentList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RecordOfElectricityPaymentList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ReimbursementList.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ReimbursementListList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ReimbursementListList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RentRecord.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RentRecordList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RentRecordList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RoleConfiguration.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RoleConfigurationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RoleConfigurationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RoleMenu.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RoleMenuList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RoleMenuList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RuralMedicalTreatment.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RuralMedicalTreatmentList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\RuralMedicalTreatmentList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ScheduleManagement.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ScheduleManagementList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ScheduleManagementList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ScheduleWork.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ScheduleWorkList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ScheduleWorkList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SearchFormModel.html">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Content>
+    <Content Include="gen\SearchFormModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SearchFormModel.html</LastGenOutput>
+    </Content>
+    <Content Include="gen\Service.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ServiceList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ServiceList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ServiceReservation.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ServiceReservationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ServiceReservationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SocialConditionsAndPublicOpinions.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SocialConditionsAndPublicOpinionsList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SocialConditionsAndPublicOpinionsList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SpecialWork.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SpecialWorkList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SpecialWorkList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SuggestionRecord.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SuggestionRecordList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SuggestionRecordList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SystemConfiguration.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SystemConfigurationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\SystemConfigurationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\TheObjectOfCare.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\TheObjectOfCareList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\TheObjectOfCareList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\TheStudyOfPartyStyleAndCleanGovernment.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\TheStudyOfPartyStyleAndCleanGovernmentList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\TheStudyOfPartyStyleAndCleanGovernmentList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ThreeProductionBuilding.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ThreeProductionBuildingList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\ThreeProductionBuildingList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserInformation.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserInformationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserInformationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserMenu.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserMenuList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserMenuList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserRole.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserRoleList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserRoleList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\VideoPointBitInformation.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\VideoPointBitInformationList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\VideoPointBitInformationList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\VillageHistory.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\VillageHistoryList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\VillageHistoryList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\WelfareGrant.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\WelfareGrantList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\WelfareGrantList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\WorkLog.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\WorkLogList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\WorkLogList.js">
+      <DependentUpon>PageListJS.tt</DependentUpon>
+    </Content>
+    <Content Include="scripts\ai.0.22.9-build00167.js" />
+    <Content Include="scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="scripts\bootstrap.bundle.js" />
+    <Content Include="scripts\bootstrap.bundle.min.js" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\bootstrap.min.js.map" />
+    <Content Include="scripts\bootstrap.js.map" />
+    <Content Include="scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="scripts\esm\popper-utils.js" />
+    <Content Include="scripts\esm\popper-utils.min.js" />
+    <Content Include="scripts\esm\popper.js" />
+    <Content Include="scripts\esm\popper.min.js" />
+    <Content Include="scripts\esm\popper.min.js.map" />
+    <Content Include="scripts\esm\popper.js.map" />
+    <Content Include="scripts\esm\popper-utils.min.js.map" />
+    <Content Include="scripts\esm\popper-utils.js.map" />
+    <Content Include="assets\css\bootstrap.css.map" />
+    <Content Include="assets\js\common\bootstrap\3.3.5\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\js\common\bootstrap\3.3.5\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="assets\js\common\bootstrap\3.3.5\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="assets\i\index\Thumbs.db" />
+    <Content Include="assets\i\population\Thumbs.db" />
+    <Content Include="assets\i\social\Thumbs.db" />
+    <Content Include="assets\i\system\Thumbs.db" />
+    <Content Include="assets\i\yangwan\Thumbs.db" />
+    <Content Include="assets\i\zhengwu\Thumbs.db" />
+    <Content Include="assets\js\0-common\app-compiled.js.map" />
+    <Content Include="assets\js\1-login\login-compiled.js.map" />
+    <Content Include="assets\js\2-index\business-compiled.js.map" />
+    <Content Include="assets\js\3-map\inner_building-compiled.js.map" />
+    <Content Include="assets\js\3-map\inner_camera-compiled.js.map" />
+    <Content Include="assets\js\3-map\inner_population-compiled.js.map" />
+    <Content Include="assets\js\3-map\map_Z-compiled.js.map" />
+    <Content Include="assets\js\3-map\playground-compiled.js.map" />
+    <Content Include="gen\PageListJS.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PageListJS.html</LastGenOutput>
+    </Content>
+    <Content Include="gen\PageListHTML.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PageListHTML.html</LastGenOutput>
+    </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="scripts\jquery-3.3.1.js" />
+    <Content Include="scripts\jquery-3.3.1.min.js" />
+    <Content Include="scripts\jquery-3.3.1.slim.js" />
+    <Content Include="scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="scripts\jquery.validate-vsdoc.js" />
+    <Content Include="scripts\jquery.validate.js" />
+    <Content Include="scripts\jquery.validate.min.js" />
+    <Content Include="scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="scripts\modernizr-2.8.3.js" />
+    <Content Include="scripts\popper-utils.js" />
+    <Content Include="scripts\popper-utils.min.js" />
+    <Content Include="scripts\popper.js" />
+    <Content Include="scripts\popper.min.js" />
+    <Content Include="scripts\umd\popper-utils.js" />
+    <Content Include="scripts\umd\popper-utils.min.js" />
+    <Content Include="scripts\umd\popper.js" />
+    <Content Include="scripts\umd\popper.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="2_map\RTSP.aspx.cs">
+      <DependentUpon>RTSP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="2_map\RTSP.aspx.designer.cs">
+      <DependentUpon>RTSP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="assets\js\0-common\net\App_Code\Config.cs" />
+    <Compile Include="assets\js\0-common\net\App_Code\ConfigHandler.cs" />
+    <Compile Include="assets\js\0-common\net\App_Code\CrawlerHandler.cs" />
+    <Compile Include="assets\js\0-common\net\App_Code\Handler.cs" />
+    <Compile Include="assets\js\0-common\net\App_Code\ListFileHandler.cs" />
+    <Compile Include="assets\js\0-common\net\App_Code\NotSupportedHandler.cs" />
+    <Compile Include="assets\js\0-common\net\App_Code\PathFormater.cs" />
+    <Compile Include="assets\js\0-common\net\App_Code\UploadHandler.cs" />
+    <Compile Include="Controllers\VideoPointBitInformationsController.cs" />
+<<<<<<< HEAD
+    <Compile Include="Evaluators\AccessEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\ActiveInspectionEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\AdviseEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\aGuideToTheConvenienceOfPeopleEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\BonusRecordEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\BuildingEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\BusinessManagementEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\BusinessReservationEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\CacheOptionsAttribute.cs" />
+    <Compile Include="Evaluators\CadreEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+=======
+    <Compile Include="Evaluators\CacheOptionsAttribute.cs" />
+>>>>>>> 修改路径
+    <Compile Include="Evaluators\ChairPersonCount2Evaluator.cs" />
+    <Compile Include="Evaluators\CommonOutputList.cs" />
+<<<<<<< HEAD
+    <Compile Include="Evaluators\ContractManagementEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\CriticalHousingCrisisEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\DemandCollectionEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\DocumentManagementEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\EmploymentAssistanceEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\ExpertManagementEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\FamilyEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\FeaturesOfXiangxiEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\GetMapCategoryEvaluator.cs" />
+    <Compile Include="Evaluators\GuideToAffairsEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\GuideToPartyAffairsEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\HousePropertyEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\IndustrialParkHousingReceiptsEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\InformationManagementOfPartyMembersEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\InvestorsEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\LogonRecordEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\MailListEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\MapQueryMilitiaEvaluator.cs" />
+    <Compile Include="Evaluators\MapQueryCadreEvaluator.cs" />
+    <Compile Include="Evaluators\MembershipDuesPaymentManagementEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\MenuConfigurationEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\MilitiaEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\PartyBuildingEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\PartyBuildingProjectEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\PartyNewsManagementEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\PatEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\PersonalInformationEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\POIEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\PolicyDocumentEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+=======
+    <Compile Include="Evaluators\GetMapCategoryEvaluator.cs" />
+    <Compile Include="Evaluators\MapQueryMilitiaEvaluator.cs" />
+    <Compile Include="Evaluators\MapQueryCadreEvaluator.cs" />
+>>>>>>> 修改路径
+    <Compile Include="Evaluators\PopulationAgeCountEvaluator.cs" />
+    <Compile Include="Evaluators\PopulationCount2Evaluator.cs" />
+    <Compile Include="Evaluators\PopulationFormCountEvaluator.cs" />
+    <Compile Include="Evaluators\PopulationGenderCountEvaluator.cs" />
+<<<<<<< HEAD
+    <Compile Include="Evaluators\RecommendedTreatmentEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\RecordingLecturesEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\RecordOfElectricityPaymentEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\ReimbursementListEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\RentRecordEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\RoleConfigurationEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\RoleMenuEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\RuralMedicalTreatmentEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\ScheduleManagementEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\ScheduleWorkEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\SearchEntity.cs" />
+    <Compile Include="Evaluators\ServiceEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\ServiceReservationEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\SocialConditionsAndPublicOpinionsEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\SpecialWorkEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\SuggestionRecordEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\SystemConfigurationEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\TheObjectOfCareEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\TheStudyOfPartyStyleAndCleanGovernmentEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\ThreeProductionBuildingEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\UserInformationEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\UserMenuEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\UserRoleEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\VideoPointBitInformationEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\VillageHistoryEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\WelfareGrantEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\WorkLogEvaluator.cs">
+      <DependentUpon>EvaluatorGen.tt</DependentUpon>
+    </Compile>
+=======
+    <Compile Include="Evaluators\SearchEntity.cs" />
+>>>>>>> 修改路径
+    <Compile Include="Evaluators\WorkshopParkCount.cs" />
+    <Compile Include="gen\AccessSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\ActiveInspectionSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\AdviseSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\aGuideToTheConvenienceOfPeopleSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\BonusRecordSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\BuildingSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\BusinessManagementSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\BusinessReservationSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\CadreSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\ChildrensMedicalInsuranceRegistrationSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\CommonOutputT.cs" />
+    <Compile Include="gen\ContractManagementSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\CriticalHousingCrisisSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\DemandCollectionSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\DocumentManagementSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\EmploymentAssistanceSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\ExpertManagementSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\FamilySearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\FeaturesOfXiangxiSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\GuideToAffairsSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\GuideToPartyAffairsSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\HousePropertySearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\ImportProc.svc.cs">
+      <DependentUpon>ImportProc.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="gen\IndustrialParkHousingReceiptsSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\InformationManagementOfPartyMembersSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\InvestorsSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\LogonRecordSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\MailListSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\MembershipDuesPaymentManagementSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\MenuConfigurationSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\MilitiaSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\PartyBuildingProjectSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\PartyBuildingSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\PartyNewsManagementSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\PatSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\PersonalInformationSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\POISearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\PolicyDocumentSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\PopulationSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\RecommendedTreatmentSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\RecordingLecturesSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\RecordOfElectricityPaymentSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\ReimbursementListSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\RentRecordSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\RoleConfigurationSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\RoleMenuSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\RuralMedicalTreatmentSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\ScheduleManagementSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\ScheduleWorkSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\ServiceReservationSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\ServiceSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\SocialConditionsAndPublicOpinionsSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\SpecialWorkSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\SuggestionRecordSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\SystemConfigurationSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\TheObjectOfCareSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\TheStudyOfPartyStyleAndCleanGovernmentSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\ThreeProductionBuildingSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\UserInformationSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\UserMenuSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\UserRoleSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\VideoPointBitInformationSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\VillageHistorySearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\WelfareGrantSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gen\WorkLogSearchModel.cs">
+      <DependentUpon>SearchFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Startup1.cs" />
+    <Compile Include="Version.ashx.cs">
+      <DependentUpon>Version.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\CameraListEvaluator.cs" />
+    <Compile Include="Evaluators\GetMenuConfigurationTreeByAuthEvaluator.cs" />
+    <Compile Include="Evaluators\MapQueryBuildingEvaluator.cs" />
+    <Compile Include="Evaluators\MapQueryBuildingParkListEvaluator.cs" />
+    <Compile Include="Evaluators\MapQueryCameraEvaluator.cs" />
+    <Compile Include="Evaluators\MapQueryDisabledManEvaluator.cs" />
+    <Compile Include="Evaluators\MapQueryOldMannEvaluator.cs" />
+    <Compile Include="Evaluators\MapQueryParam.cs" />
+    <Compile Include="Evaluators\MapQueryPartyMemberEvaluator.cs" />
+    <Compile Include="Evaluators\MapQueryPopulationEvaluator.cs" />
+    <Compile Include="Evaluators\SavePoiListEvaluator.cs" />
+    <Compile Include="Evaluators\TreeNode.cs" />
+    <Compile Include="ImageUpload.ashx.cs" />
+    <Compile Include="DefaultHandler.ashx.cs">
+      <DependentUpon>DefaultHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluators\AppIndexEvaluator.cs" />
+    <Compile Include="Evaluators\AppLoginEvaluator.cs" />
+    <Compile Include="Evaluators\ExcelHelper.cs" />
+    <Compile Include="Evaluators\ExitEvaluator.cs" />
+    <Compile Include="Evaluators\GetMenuConfigurationByAuthEvaluator.cs" />
+    <Compile Include="Evaluators\GetScheduleWorkListByUserEvaluator.cs" />
+    <Compile Include="Evaluators\FileListEvaluator.cs" />
+    <Compile Include="Evaluators\GetThirdMenuEvaluator.cs" />
+    <Compile Include="Evaluators\GetUserRoleListByAuthEvaluator.cs" />
+    <Compile Include="Evaluators\HelloEvaluator.cs" />
+    <Compile Include="Evaluators\LoginEvaluator.cs" />
+    <Compile Include="Evaluators\RemoteEvaluator.cs" />
+    <Compile Include="Evaluators\SaveMenuRoleDicEvaluator.cs" />
+    <Compile Include="Evaluators\SaveSYS_CodeEvaluator.cs" />
+    <Compile Include="Evaluators\SaveUserRoleDicEvaluator.cs" />
+    <Compile Include="Evaluators\ShowEvaluator.cs" />
+    <Compile Include="Evaluators\UserInfoEvaluator.cs" />
+    <Compile Include="ExcelImport.ashx.cs">
+      <DependentUpon>ExcelImport.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ExportData.ashx.cs">
+      <DependentUpon>ExportData.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ExportSchema.ashx.cs">
+      <DependentUpon>ExportSchema.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler1.ashx.cs">
+      <DependentUpon>Handler1.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PieSeriesEntity.cs" />
+    <Compile Include="Evaluators\Evaluator.cs" />
+    <Compile Include="Interfaces\IEvaluator.cs" />
+    <Compile Include="Models\AppIndex.cs" />
+    <Compile Include="Models\AppIndexConfig.cs" />
+    <Compile Include="Models\CommonRequest.cs" />
+    <Compile Include="Models\MenuItem.cs" />
+    <Compile Include="Models\PageRows.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="DefaultHandler.ashx" />
+    <Content Include="ExportSchema.ashx" />
+    <Content Include="ExcelImport.ashx" />
+    <Content Include="ImageUpload.ashx" />
+    <Content Include="ExportData.ashx" />
+    <Content Include="ImageHandler.ashx" />
+    <Content Include="Handler1.ashx" />
+    <Content Include="2_map\debug.log" />
+    <Content Include="Version.ashx" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\VideoPointBitInformations\Create.cshtml" />
+    <Content Include="Views\VideoPointBitInformations\Delete.cshtml" />
+    <Content Include="Views\VideoPointBitInformations\Details.cshtml" />
+    <Content Include="Views\VideoPointBitInformations\Edit.cshtml" />
+    <Content Include="Views\VideoPointBitInformations\Index.cshtml" />
+    <Content Include="ViewPage1.cshtml" />
+    <Content Include="scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="scripts\jquery-3.3.1.min.map" />
+    <Content Include="scripts\umd\popper.min.js.map" />
+    <Content Include="scripts\umd\popper.js.map" />
+    <Content Include="scripts\umd\popper-utils.min.js.map" />
+    <Content Include="scripts\umd\popper-utils.js.map" />
+    <Content Include="scripts\README.md" />
+    <Content Include="scripts\popper.min.js.map" />
+    <Content Include="scripts\popper.js.map" />
+    <Content Include="scripts\popper-utils.min.js.map" />
+    <Content Include="scripts\popper-utils.js.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="assets\js\1-login\0-common\net\App_Code\" />
+    <Folder Include="assets\js\10-travel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XiangXiENtities\XiangXiENtities.csproj">
+      <Project>{4CA863B2-6982-4DC5-A725-E2F72AEBB134}</Project>
+      <Name>XiangXiENtities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="scripts\index.d.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>8091</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:8091/XiangXi</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

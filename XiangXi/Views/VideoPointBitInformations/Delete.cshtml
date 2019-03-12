@@ -1,0 +1,184 @@
+﻿@model XiangXiENtities.EF.VideoPointInformation
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>VideoPointInformation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VPBISerialNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VPBISerialNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VPISerialNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VPISerialNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VPBIMonitoringPointNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VPBIMonitoringPointNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VPBIAffiliatedOrganization)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VPBIAffiliatedOrganization)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VPBIBelongToTheRegion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VPBIBelongToTheRegion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VPBIPlatform)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VPBIPlatform)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VPBILongitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VPBILongitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VPBILatitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VPBILatitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VersionNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VersionNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TransactionID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TransactionID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataLevel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Latitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Longitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Polyline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Polyline)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Polygon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Polygon)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

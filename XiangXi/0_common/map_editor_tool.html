@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Playground</title>
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/bootstrap-table.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main1119.css"/>
+    <script src="https://cache.amap.com/lbs/static/es5.min.js"></script>
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+</head>
+<body>
+<div class="container" style="margin:10px 0px;">
+    <div class="row">
+        <div class="col-xs-2">地址</div>
+        <div class="col-xs-4"><input type="text" id="addr" class="form-control"/></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2">当前位置</div>
+        <div class="col-xs-4"><input type="text" id="lnglat" class="form-control"/></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2">累计位置</div>
+        <div class="col-xs-4"><input type="text" id="lnglat_list" class="form-control"/></div>
+        <button class="btn btn-success">画点</button>
+        <button class="btn btn-primary">画多边形</button>
+        <button class="btn btn-danger">定位到</button>
+        <button class="btn btn-warning">保存区块</button>
+        <button class="btn btn-info">保存点标记</button>
+        <button class="btn btn-clear">清除</button>
+    </div>
+</div>
+<div id="container" style="width: 100%; height: 100%;top:15%;">
+
+</div>
+<script>
+    require(['amap', 'jquery','cmodules'], function () {
+        location.href.split('?')[1].split('&').map(function (t) {
+            return t.split('=');
+        }).map(function (t) {
+            return $('#'+t[0]).val(decodeURIComponent(t[1]))
+        })
+        $(".btn-warning").click(function () {
+            "保存区块";
+            var addr = $("#addr").val();
+            if (!addr && !addr.length) {
+                return;
+            }
+            var points = $("#lnglat_list").val();
+            var pois = [];
+            if (!points && !points.length) {
+                return;
+            }
+            points = JSON.parse(points);
+            if (!points && !points.length) {
+                return;
+            }
+            var i = 0;
+            for (var p in points) {
+                var point = points[p];
+                if (!point) continue;
+                pois.push({
+                    "PAddress": addr,
+                    "DataLevel": "01",
+                    "Longitude": point[0],
+                    "Latitude": point[1],
+                    "ord":++i
+                })
+            }
+            $.call("SavePoiList", pois, function (resp) {
+                if (typeof(resp) === 'string') {
+                    alert(resp);
+                    return;
+                }
+                if (!resp.success) {
+                    alert(resp.message);
+                    return;
+                }
+                alert(JSON.stringify(resp));
+            });
+        });
+        $(".btn-info").click(function () {
+            "保存点标记";
+            var addr = $("#addr").val();
+            if (!addr && !addr.length) {
+                return;
+            }
+            var lnglat_text = $("#lnglat").val();
+            if (!lnglat_text && !lnglat_text.length) {
+                return;
+            }
+            var point = lnglat_text.split(",");
+            var pois = [];
+            pois.push({
+                "PAddress": addr,
+                "DataLevel": "01",
+                "Longitude": point[0],
+                "Latitude": point[1],
+                "ord":0
+            });
+            $.call("SavePoiList", pois, function (resp) {
+                if (typeof(resp) === 'string') {
+                    alert(resp);
+                    return;
+                }
+                if (!resp.success) {
+                    alert(resp.message);
+                    return;
+                }
+            });
+        })
+
+        var map = new AMap.Map('container', {
+            resizeEnable: true,
+            zoom: 16,
+            center: [120.511929, 31.252366],
+        });
+        map.add(new AMap.TileLayer.Satellite());
+        var arr = [];
+        var type = "point"; // or polygon
+        $(".btn-success").click(function () {
+            type = "point"
+            draw_point();
+        });
+        $(".btn-clear").click(function(){
+            arr = [];
+            map.clearMap();
+        });
+
+        $(".btn-danger").click(function () {
+            var lnglat = $("#lnglat").val();
+            if (!lnglat || !lnglat) return;
+            var position = lnglat.split(",")
+            var marker = new AMap.Marker({
+                icon: "../assets/i/mapicon/renkou.png",
+                position: position
+            });
+            marker.setMap(map);
+            map.panTo(new AMap.LngLat(position[0], position[1]));
+        })
+        function draw_point() {
+            map.clearMap();
+            for (var i in arr) {
+                var marker = new AMap.Marker({
+//                    icon: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+                    icon: "../assets/i/mapicon/renkou.png",
+                    position: arr[i]
+                });
+                marker.setMap(map);
+            }
+        }
+
+        function draw_polygon() {
+            map.clearMap();
+            var polygon = new AMap.Polygon({
+                path: JSON.parse(JSON.stringify(arr)),//设置多边形边界路径
+                strokeColor: "#FF33FF", //线颜色
+                strokeOpacity: 0.2, //线透明度
+                strokeWeight: 3,    //线宽
+                fillColor: "#1791fc", //填充色
+                fillOpacity: 0.35//填充透明度
+            });
+            polygon.setMap(map);
+        }
+
+        $(".btn-primary").click(function () {
+            type = "polygon";
+            draw_polygon();
+        });
+        //为地图注册click事件获取鼠标点击出的经纬度坐标
+        var clickEventListener = map.on('click', function (e) {
+            var lng = e.lnglat.getLng();
+            var lat = e.lnglat.getLat();
+            document.getElementById("lnglat").value = lng + ',' + lat
+            arr.push([lng, lat]);
+            document.getElementById("lnglat_list").value = JSON.stringify(arr);
+
+            if (type === "polygon") {
+                draw_polygon();
+            } else if (type === "point") {
+                draw_point();
+            }
+        });
+    })
+
+</script>
+</body>
+</html>

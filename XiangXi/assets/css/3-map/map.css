@@ -1,0 +1,20 @@
+﻿
+#bar {
+    position: absolute;
+    top: 100px;
+    right: 10px;
+    padding: 16px;
+    background: red;
+    opacity: .8;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 10px;
+}
+
+    #bar div {
+        width: 96px;
+        height: 2px;
+        margin-bottom: 8px;
+        background: #444;
+        color: #444;
+    }

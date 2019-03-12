@@ -1,0 +1,1515 @@
+  
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <title>视频监控基本信息</title>
+    <meta charset="utf-8"/>
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap-table.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/fileinput.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/common.css" rel="stylesheet"/>
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+    <script src="BasicInformationOfVideoSurveillance-compiled.js"></script>
+</head>
+<body>
+
+<div class="container">
+	<h3>视频监控基本信息</h3>
+		<form role="form" class="col-xs-11 form-horizontal">
+
+<div class=""  id="BasicInformationOfVideoSurveillance" style="margin-top:5px;">
+	<div class="container" style="margin-bottom: 20px;">
+			<a href="javascript:history.go(-1)" id="table-back" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>返回</a>
+			<button type="button" class="btn btn-info excel-import-button-BasicInformationOfVideoSurveillance"><i class="glyphicon glyphicon-cloud-upload"></i>Excel导入</button>
+			<a href="/XiangXi/ExportSchema.ashx?title=BasicInformationOfVideoSurveillance" class="btn btn-primary">Excel模板</a>
+			<button type="button" id="submit" @click="save" class="btn  btn-info"><i class="glyphicon glyphicon-circle-arrow-up"></i>提交</button>
+	</div>
+
+    <div class="modal fade table_excel_modal-BasicInformationOfVideoSurveillance">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Excel导入</h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <!--<button type="button" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i>确定</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+				<div v-if="table">
+					<div class="row" ><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDeviceName">
+									设备名称
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDeviceName" 
+											v-model="BIOVSDeviceName" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSIP协议">
+									IP地址
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSIP协议" 
+											v-model="BIOVSIP协议" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSPort">
+									端口
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSPort" 
+											v-model="BIOVSPort" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSGetuserrolelist">
+									用户名
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSGetuserrolelist" 
+											v-model="BIOVSGetuserrolelist" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSCode">
+									密码
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSCode" 
+											v-model="BIOVSCode" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSWhetherThePasswordIsCipherOrNot">
+									密码是否密文
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSWhetherThePasswordIsCipherOrNot" 
+											v-model="BIOVSWhetherThePasswordIsCipherOrNot" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSAffiliatedArea">
+									所属地区
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSAffiliatedArea" 
+											v-model="BIOVSAffiliatedArea" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSPersonalNumber">
+									编号
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSPersonalNumber" 
+											v-model="BIOVSPersonalNumber" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSEquipmentType">
+									设备类型
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSEquipmentType" 
+											v-model="BIOVSEquipmentType" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSRegistrationType">
+									注册类型
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSRegistrationType" 
+											v-model="BIOVSRegistrationType" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSSerialNumber">
+									序列号
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSSerialNumber" 
+											v-model="BIOVSSerialNumber" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVS">
+									vag名称
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVS" 
+											v-model="BIOVS" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDomain">
+									所属网域
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDomain" 
+											v-model="BIOVSDomain" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSAlarmInput">
+									报警输入
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSAlarmInput" 
+											v-model="BIOVSAlarmInput" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSAlarmOutput">
+									报警输出
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSAlarmOutput" 
+											v-model="BIOVSAlarmOutput" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSIntercomChannel">
+									对讲通道
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSIntercomChannel" 
+											v-model="BIOVSIntercomChannel" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSAnalogChannelNumber">
+									模拟通道数
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSAnalogChannelNumber" 
+											v-model="BIOVSAnalogChannelNumber" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSNumberChannel">
+									数字通道数
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSNumberChannel" 
+											v-model="BIOVSNumberChannel" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSFirstRoad1">
+									第1路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSFirstRoad1" 
+											v-model="BIOVSFirstRoad1" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSSecondRoad2">
+									第2路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSSecondRoad2" 
+											v-model="BIOVSSecondRoad2" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSThirdRoad3">
+									第3路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSThirdRoad3" 
+											v-model="BIOVSThirdRoad3" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSFourthRoad4">
+									第4路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSFourthRoad4" 
+											v-model="BIOVSFourthRoad4" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSFifthRoad5">
+									第5路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSFifthRoad5" 
+											v-model="BIOVSFifthRoad5" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSSixthRoad6">
+									第6路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSSixthRoad6" 
+											v-model="BIOVSSixthRoad6" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSSeventhRoad7">
+									第7路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSSeventhRoad7" 
+											v-model="BIOVSSeventhRoad7" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSEighthRoad8">
+									第8路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSEighthRoad8" 
+											v-model="BIOVSEighthRoad8" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSNinthRoad9">
+									第9路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSNinthRoad9" 
+											v-model="BIOVSNinthRoad9" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSTenthRoad10">
+									第10路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSTenthRoad10" 
+											v-model="BIOVSTenthRoad10" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSEleventhRoad11">
+									第11路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSEleventhRoad11" 
+											v-model="BIOVSEleventhRoad11" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSTwelfthRoad12">
+									第12路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSTwelfthRoad12" 
+											v-model="BIOVSTwelfthRoad12" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSThirteenthRoad13">
+									第13路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSThirteenthRoad13" 
+											v-model="BIOVSThirteenthRoad13" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSFourteenthRoad14">
+									第14路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSFourteenthRoad14" 
+											v-model="BIOVSFourteenthRoad14" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSFifteenthRoad15">
+									第15路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSFifteenthRoad15" 
+											v-model="BIOVSFifteenthRoad15" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSSixteenthRoad16">
+									第16路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSSixteenthRoad16" 
+											v-model="BIOVSSixteenthRoad16" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSSeventeenthRoad17">
+									第17路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSSeventeenthRoad17" 
+											v-model="BIOVSSeventeenthRoad17" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSEighteenthRoad18">
+									第18路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSEighteenthRoad18" 
+											v-model="BIOVSEighteenthRoad18" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSNineteenthRoad19">
+									第19路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSNineteenthRoad19" 
+											v-model="BIOVSNineteenthRoad19" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSTwentiethRoad20">
+									第20路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSTwentiethRoad20" 
+											v-model="BIOVSTwentiethRoad20" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSTwentyFirstRoad21">
+									第21路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSTwentyFirstRoad21" 
+											v-model="BIOVSTwentyFirstRoad21" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSTwentySecondRoad22">
+									第22路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSTwentySecondRoad22" 
+											v-model="BIOVSTwentySecondRoad22" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSTwentyThirdRoad23">
+									第23路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSTwentyThirdRoad23" 
+											v-model="BIOVSTwentyThirdRoad23" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSTwentyFourthRoad24">
+									第24路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSTwentyFourthRoad24" 
+											v-model="BIOVSTwentyFourthRoad24" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSTwentyFifthRoad25">
+									第25路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSTwentyFifthRoad25" 
+											v-model="BIOVSTwentyFifthRoad25" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSTwentySixthRoad26">
+									第26路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSTwentySixthRoad26" 
+											v-model="BIOVSTwentySixthRoad26" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSTwentySeventhRoad27">
+									第27路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSTwentySeventhRoad27" 
+											v-model="BIOVSTwentySeventhRoad27" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSTwentyEighthRoad28">
+									第28路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSTwentyEighthRoad28" 
+											v-model="BIOVSTwentyEighthRoad28" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSTwentyNinthRoad29">
+									第29路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSTwentyNinthRoad29" 
+											v-model="BIOVSTwentyNinthRoad29" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSThirtiethRoad30">
+									第30路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSThirtiethRoad30" 
+											v-model="BIOVSThirtiethRoad30" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSThirtyFirstRoad31">
+									第31路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSThirtyFirstRoad31" 
+											v-model="BIOVSThirtyFirstRoad31" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSThirtySecondRoad32">
+									第32路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSThirtySecondRoad32" 
+											v-model="BIOVSThirtySecondRoad32" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalFirst1">
+									数字第1路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalFirst1" 
+											v-model="BIOVSDigitalFirst1" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalSecond2">
+									数字第2路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalSecond2" 
+											v-model="BIOVSDigitalSecond2" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalThird3">
+									数字第3路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalThird3" 
+											v-model="BIOVSDigitalThird3" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalFourth4">
+									数字第4路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalFourth4" 
+											v-model="BIOVSDigitalFourth4" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalFifth5">
+									数字第5路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalFifth5" 
+											v-model="BIOVSDigitalFifth5" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalSixth6">
+									数字第6路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalSixth6" 
+											v-model="BIOVSDigitalSixth6" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalSeventh7">
+									数字第7路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalSeventh7" 
+											v-model="BIOVSDigitalSeventh7" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalEighth8">
+									数字第8路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalEighth8" 
+											v-model="BIOVSDigitalEighth8" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalNinth9">
+									数字第9路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalNinth9" 
+											v-model="BIOVSDigitalNinth9" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalTenth10">
+									数字第10路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalTenth10" 
+											v-model="BIOVSDigitalTenth10" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalEleventh11">
+									数字第11路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalEleventh11" 
+											v-model="BIOVSDigitalEleventh11" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalTwelfth12">
+									数字第12路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalTwelfth12" 
+											v-model="BIOVSDigitalTwelfth12" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalThirteenth13">
+									数字第13路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalThirteenth13" 
+											v-model="BIOVSDigitalThirteenth13" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalFourteenth14">
+									数字第14路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalFourteenth14" 
+											v-model="BIOVSDigitalFourteenth14" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalFifteenth15">
+									数字第15路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalFifteenth15" 
+											v-model="BIOVSDigitalFifteenth15" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalSixteenth16">
+									数字第16路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalSixteenth16" 
+											v-model="BIOVSDigitalSixteenth16" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalSeventeenth17">
+									数字第17路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalSeventeenth17" 
+											v-model="BIOVSDigitalSeventeenth17" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalEighteenth18">
+									数字第18路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalEighteenth18" 
+											v-model="BIOVSDigitalEighteenth18" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalNineteenth19">
+									数字第19路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalNineteenth19" 
+											v-model="BIOVSDigitalNineteenth19" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalTwentieth20">
+									数字第20路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalTwentieth20" 
+											v-model="BIOVSDigitalTwentieth20" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalTwentyFirst21">
+									数字第21路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalTwentyFirst21" 
+											v-model="BIOVSDigitalTwentyFirst21" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalTwentySecond22">
+									数字第22路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalTwentySecond22" 
+											v-model="BIOVSDigitalTwentySecond22" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalTwentyThird23">
+									数字第23路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalTwentyThird23" 
+											v-model="BIOVSDigitalTwentyThird23" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalTwentyFourth24">
+									数字第24路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalTwentyFourth24" 
+											v-model="BIOVSDigitalTwentyFourth24" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalTwentyFifth25">
+									数字第25路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalTwentyFifth25" 
+											v-model="BIOVSDigitalTwentyFifth25" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalTwentySixth26">
+									数字第26路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalTwentySixth26" 
+											v-model="BIOVSDigitalTwentySixth26" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalTwentySeventh27">
+									数字第27路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalTwentySeventh27" 
+											v-model="BIOVSDigitalTwentySeventh27" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalTwentyEighth28">
+									数字第28路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalTwentyEighth28" 
+											v-model="BIOVSDigitalTwentyEighth28" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalTwentyNinth29">
+									数字第29路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalTwentyNinth29" 
+											v-model="BIOVSDigitalTwentyNinth29" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalThirtieth30">
+									数字第30路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalThirtieth30" 
+											v-model="BIOVSDigitalThirtieth30" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalThirtyFirst31">
+									数字第31路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalThirtyFirst31" 
+											v-model="BIOVSDigitalThirtyFirst31" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSDigitalThirtySecond32">
+									数字第32路
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSDigitalThirtySecond32" 
+											v-model="BIOVSDigitalThirtySecond32" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div><div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="BIOVSAddress">
+									地址
+								</label>
+                                <div class="col-sm-8">
+									
+									
+						
+						<input 
+											class="form-control" 
+											type="text" 
+											id="BIOVSAddress" 
+											v-model="BIOVSAddress" 
+											placeholder="">
+                                </div>
+                            </div>
+                        </div></div>
+					</div>
+					</div>
+					</form>
+            </div>
+<div class="modal fade" id="account-info-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">当前用户</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-5">
+                    </div>
+                    <div class="col-md-7">
+                        <ul class="list-group">
+                            <li class="list-group-item"><span class="list-group-item-title">姓名：</span>超级管理员</li>
+                            <li class="list-group-item"><span class="list-group-item-title">职位：</span>超级管理员</li>
+                            <li class="list-group-item"><span class="list-group-item-title">街道：</span>东山镇</li>
+                            <li class="list-group-item"><span class="list-group-item-title">社区：</span>潦里村</li>
+                            <li class="list-group-item"><span class="list-group-item-title">最后登录时间：</span>2016年6月23日20:38:36</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="logout()" class="btn btn-primary" style="float: left">注销</button>
+                <a class="btn btn-default">修改个人信息>></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="common-alert">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

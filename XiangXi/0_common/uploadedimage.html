@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Playground</title>
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/bootstrap-table.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/bootstrap-select.min.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/fileinput.min.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/common.css" rel="stylesheet"/>
+
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+    <script src="http://api.tianditu.com/api?v=4.0" type="text/javascript"></script>
+</head>
+<body>
+<div id="app" style="margin-top: 10px; margin-left: 10px;">
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <div class="row">
+                <div class="col-xs-12">
+                    <c-fileinput v-model="rows[0]"></c-fileinput>
+                    <!--<input id="cover" class="input-file form-control portrait" type="file">-->
+                </div>
+            </div>
+            <div class="row" style="margin-top:10px;">
+                <div class="col-xs-2" v-for="row in rows">
+                    <a v-bind:href="row">
+                        <img alt="" v-bind:src="row" width="150" />
+                        <h4>{{row|strlimit}}</h4>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    require(['vue', 'jquery', 'cmodules'], function (Vue, $) {
+        Vue.filter('strlimit', function (value) {
+            return strlimit(value, 18);
+        })
+        Vue.filter('slice', function (value) {
+            return value.slice(1, 5);
+        })
+        $.call('UploadedImageEvaluator', {}, function (data) {
+            if (!data)return;
+            new Vue({
+                data: {
+                    rows: data
+                },
+                mounted: function () {
+
+                }
+            }).$mount('#app')
+
+
+        })
+    })
+</script>
+</body>
+</html>

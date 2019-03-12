@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../assets/css/0-common/fullcalendar.min.css"/>
+    <link rel="stylesheet" href="../assets/css/0-common/bootstrap.min.css">
+    <link href="../assets/css/2-index/main.css" rel="stylesheet"/>
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+    <script src="../assets/js/2-index/main.js"></script>
+    <title>香溪首页</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div style="width:600px; margin:100px auto;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <img id="headPic" src="../images/head1.jpg" height="42"/>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span>用户真实姓名：XXX</span><br/>
+                <span>最后登陆时间：2018.5.7 16:14:00</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" class="btn btn-primary">
+                    修改密码
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<div id="container"
+     style="position:absolute;margin: 0 auto; background: url('../images/img/bg.png') no-repeat;  height: 1080px;width:1980px ">
+    <div id="header" style="height:149px;">
+        <div id="logo" style="margin-left:70px;">
+            <img src="../images/img/组1.png"/>
+
+            <div style="display:inline-block; vertical-align:middle; margin-left:1180px; margin-top:-90px;">
+                <div style="width:400px;height:60px;float:left;margin-left:-1150px;margin-top:120px;font-family:楷体"><h1>
+                    <b>香溪信息工作平台</b></h1></div>
+                <div id="user" style="display:inline-block; vertical-align:middle; text-align:center; width:60px;">
+                    <img id="headPic" src="../images/img/guanliyuan.png" data-toggle="modal" data-target="#myModal"
+                         style="margin-top:155px;width:229px;height:50px;margin-left:-90px"/><br/>
+                </div>
+                <a href="../4_login/login.html" style="margin-top:50px;margin-right:60px;width:30px;float:right">
+                    <img src="../images/img/tuichudenglu.png"
+                         style="vertical-align:middle;margin-top:110px;margin-left:160px;width:165px;height:45px"/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="left" style="float:left; width:1160px; margin-top:25px;">
+        <img src="../images/img/gongneng.png" style="margin-left:27px;margin-top:0px;width:122px;height:498px;float:left;"/>
+        <div id="part1" style="float:left;width:1011px;margin-top:50px;">
+            <ul>
+                <li v-for="row in rows" style="width:104px; margin-left:60px;">
+                    <a v-bind:href="row.MCLink">
+                        <img v-bind:src="row.MCPicture" width="70" style="margin-top:10px;width:100%;"/>
+                        <h3 style="width:100%;text-align:center">{{row.MCTitle}}</h3>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="part2" style="margin-left:0px;float:left; line-height:250%;margin-top:10px;">
+            <div title="标题一" id="content"
+                 style="width:544px;height:370px; float:left; padding-top:20px; vertical-align:central;margin-left:10px;background-image: url('../images/img/huiyi.png');">
+                <div title="标题二" id="1"
+                     style="width:420px; font-size:12px; float:left; margin-top:5px; margin-left:80px; overflow:hidden">
+                    <h3>
+                        <img src="../images/img/xuanzhong.png"/>
+                        街的一头枕着幽奇古朴的山壑（灵岩山）
+                    </h3>
+                </div>
+                <div title="标题二" id="1"
+                     style="width:420px; font-size:12px; float:left; margin-top:5px; margin-left:80px; overflow:hidden">
+                    <h3>
+                        <img src="../images/img/xuanzhong.png"/>
+                        木渎古镇风貌依旧，街道沿河并行、小桥流水、绿荫绵延、深宅大院、街巷幽深、古迹处处。
+                    </h3>
+                </div>
+                <div title="标题二" id="1"
+                     style="width:420px; font-size:12px; float:left; margin-top:5px; margin-left:80px; overflow:hidden">
+                    <h3>
+                        <img src="../images/img/xuanzhong.png"/>
+                        与原先的古镇相比，现在的古镇更干净些，管理更规范些。
+                    </h3>
+                </div>
+            </div>
+            <div id="pic"
+                 style="float: left; margin-left: 15px; margin-top: 20px;   width: 584px; height: 370px; overflow:hidden;">
+                <div id="calendar" style="width:100%; height:95%;overflow: hidden; background:white; border-radius: 2%"></div>
+                <!--日历卡:<br />
+                <input type="date" />-->
+                <!--<img style="width:545px;height:342px;margin-left:35px;" src="../images/img/图层179.png" />-->
+            </div>
+        </div>
+    </div>
+    <div id="right"
+         style="float: right; width: 724px;height:911px; background-image: url('../images/img/jieshao.png');margin-right:90px;margin-top:25px">
+        <div id="intro"
+             style="text-align:center; vertical-align:central; width:720px; margin:15px 10px; padding:20px 2px;">
+            <img src="../images/shequjianjie.png"/>
+
+            <h3 style="color:rgba(255, 255, 255, 0.8); font-family:14px;">社区介绍</h3>
+            <img src="../images/img/n_s12174875435912249104.png"
+                 style="width:640px;height:360px;margin-left:-10px"/><br/>
+            <!--<span style="font-size:13px; text-align:left;">婺源，因其春天黄灿灿的油菜花，万亩梯田花海而闻名</span>-->
+            <p style="font-size:22px;text-align:left;padding:30px">
+
+                木渎古镇风貌依旧，街道沿河并行、小桥流水、绿荫绵延、深宅大院、街巷幽深、古迹处处。街的一头枕着幽奇古朴的山壑（灵岩山），另一头连着繁华热闹的商业区。与原先的古镇相比，现在的古镇更干净些，管理更规范些。
+
+                木渎的名称来源于吴王夫差为宠爱西施，在灵岩山上为之兴建馆娃宫，集中大批能工巧匠在此劳作，并需要大批材料，“三年聚材，五年乃成”，从浙江等地征集的木材源源而至，“积木塞渎”，时常堵塞山塘河道，于是山塘河一带被称为“木渎”。
+
+                香溪岸ART+，是古镇街区生活与现代生活艺术的结合。</p>
+        </div>
+    </div>
+</div>
+<script>
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ include file="..\CodeTemplates\Manager.ttinclude"#>  
+<#@ assembly name="$(SolutionDir)\Generator\bin\Debug\Generator.dll"#>
+<#@ import namespace="XiangXiENtities.CodeTemplates" #>
+
+<#@ output extension=".cs" #>
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.Migrations;
+
+namespace XiangXiENtities.EF
+{
+    public class DefaultContext : DbContext
+    {
+	
+#if DEBUG
+        public DefaultContext():base("LocalDefaultContext")
+        {
+            
+        }
+#elif RELEASE
+        
+#endif
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<DefaultContext, Configuration>());
+        }
+        static DefaultContext()
+        {
+            using (var ctx = new DefaultContext())
+            {
+                ctx.BuildMenu();
+            }
+        }
+
+		public void BuildMenu()
+		{
+            var TransactionID = Guid.NewGuid().ToString();
+            var CreateBy = "Initialization Job";
+            var UIPassword = "123";
+            if(!UserInformation.Any(t => t.UILoginName == "public"))UserInformation.Add(new XiangXiENtities.EF.NewEntities.UserInformation { CreateBy = CreateBy, TransactionID = TransactionID, IsDeleted = 0, id = Guid.NewGuid().ToString(), UILoginName = "public", UISubordinateDepartments = "公众", UIPassword = UIPassword, DataLevel = "019999" });
+
+			<#
+foreach(var ent in table_schema2.Values){ 
+var table_name = ent.table_name;
+var table = ent;
+#>
+
+			if (!MenuConfiguration.Any(t => t.MCTitle == "<#=table.table_name_ch#>"))
+			{
+				MenuConfiguration.Add(new XiangXiENtities.EF.NewEntities.MenuConfiguration
+				{
+					id = Guid.NewGuid().ToString(),
+					MCTitle = "<#=table.table_name_ch#>",
+					MCLink = "/XiangXi/gen/<#=table_name#>List.html",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+                    CreateOn = DateTime.Now,
+                    UpdateOn = DateTime.Now,
+                    UpdateBy = CreateBy
+				});
+				MenuConfiguration.Add(new XiangXiENtities.EF.NewEntities.MenuConfiguration
+				{
+					id = Guid.NewGuid().ToString(),
+					MCTitle = "<#=table.table_name_ch#>统计",
+					MCLink = "/XiangXi/gen/<#=table_name#>Analysis.html",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+                    CreateOn = DateTime.Now,
+                    UpdateOn = DateTime.Now,
+                    UpdateBy = CreateBy
+				});
+			}
+			var <#=table.table_name_en.ToLower()#> = MenuConfiguration.FirstOrDefault(t => t.MCTitle == "<#=table.table_name_ch#>");
+			if(<#=table.table_name_en.ToLower()#>!=null)
+			{
+				<#=table.table_name_en.ToLower()#>.MCLink = "/XiangXi/gen/<#=table_name#>List.html";
+				MenuConfiguration.AddOrUpdate(<#=table.table_name_en.ToLower()#>);
+			}
+<#}
+#>
+            
+
+		    SaveChanges();
+		}
+<#
+foreach(var ent in table_schema2.Values){ 
+var table_name = ent.table_name;
+var table = ent;
+#>
+
+        /// <summary>
+        ///  <#=table.table_name_ch#> 
+        /// </summary>
+        public virtual DbSet<XiangXiENtities.EF.NewEntities.<#=table_name#>> <#=table_name#> { get; set; }
+<#}
+#>
+    }
+}
+namespace XiangXiENtities.EF.NewEntities
+{
+<#
+
+foreach(var ent in table_schema2.Values){ 
+var table_name = ent.table_name;
+var line = ent;
+var table = line;
+var tableName = line.table_name_ch;
+var pascalCaseTableName = line.table_name_en;
+var fields = table.Columns;
+var prefix = string.Concat(pascalCaseTableName.Where(c=>c>='A' && c<='Z'));
+#>
+	
+    /// <summary>
+    ///  <#=table.table_name_ch#> 
+    /// </summary>
+	[Table("<#=table_name#>")]
+    public class <#=table_name#> 
+    {
+			        
+        /// <summary>
+        ///  唯一编号
+        /// </summary>
+		[Key]
+        public string id { get; set; }
+        /// <summary>
+        ///  版本号
+        /// </summary>
+        public int? VersionNo { get; set; }
+        /// <summary>
+        ///  创建人
+        /// </summary>
+        public string CreateBy { get; set; }
+        /// <summary>
+        ///  创建时间
+        /// </summary>
+        public DateTime? CreateOn { get; set; }
+        /// <summary>
+        ///  更新时间
+        /// </summary>
+        public string UpdateBy { get; set; }
+        /// <summary>
+        ///  更新人
+        /// </summary>
+        public DateTime? UpdateOn { get; set; }
+        /// <summary>
+        ///  事务编号
+        /// </summary>
+        public string TransactionID { get; set; }
+        /// <summary>
+        ///  是否删除
+        /// </summary>
+        public int? IsDeleted { get; set; }
+        /// <summary>
+        ///  数据级别
+        /// </summary>
+        public string DataLevel { get; set; }
+        /// <summary>
+        ///  经度
+        /// </summary>
+        public string Longitude { get; set; }
+        /// <summary>
+        ///  纬度
+        /// </summary>
+        public string Latitude { get; set; }
+        /// <summary>
+        ///  排序
+        /// </summary>
+        public int? ord { get; set; }
+<#
+            foreach(var col in fields){#>
+			
+        /// <summary>
+        ///  <#=col.column_description#> 
+        /// </summary>
+        public <#=SqlServerDbTypeMap.MapCsharpType(col.dbtype.Split('(')[0])#> <#=col.column_name#> { get; set; }
+<#}
+			if(table.Children!=null)
+            foreach(var child in table.Children){#>
+			
+        /// <summary>
+        ///  <#=child.table_name_ch#> 
+        /// </summary>
+        // public List<<#=child.table_name_en#>> <#=child.table_name_en#> { get; set; }
+<# 
+			}
+			#>
+	}
+
+<# } #>
+}

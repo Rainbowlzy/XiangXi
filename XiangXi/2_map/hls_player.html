@@ -1,0 +1,126 @@
+<head>
+    <link href="https://vjs.zencdn.net/7.1.0/video-js.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- If you'd like to support IE8 (for Video.js versions prior to v7)
+    <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
+    -->
+</head>
+
+<body style="overflow: hidden;background:black">
+
+<script>
+
+    function getparams() {
+        var keypairs = location.href.split("?")[1].split("&");
+        var obj = {};
+        for (var k in keypairs) {
+            var kvs = keypairs[k].split('=');
+            var key = kvs[0];
+            var val = kvs[1];
+            obj[key] = val;
+            console.log(url, obj, keypairs, key, val);
+        }
+        return obj;
+    }
+
+    var url = getparams().url;
+
+
+
+</script>
+<div id="app">
+
+    <!--<p>example</p><c-video url="http://122.193.18.104:83/pag/172.28.1.2/7302/32058488001310016410/0/MAIN/TCP/live.m3u8?"></c-video>-->
+    <!--<div v-for="idx in indexCodes">
+    <p>{{idx}}</p>
+    <c-video :url="'http://122.193.18.104:83/pag/172.28.1.2/7302/'+idx+'/0/MAIN/TCP/live.m3u8?'"></c-video>
+    </div>-->
+
+</div>
+<img src="../assets/img/2_map/close.png"id="button"class="close"
+     style="float:right; cursor:pointer; z-index:2000" width="14" height="14"
+     onclick="parent.say();"/>
+<video id="my-video" class="video-js" controls preload="auto" width="510" height="430"
+       poster="MY_VIDEO_POSTER.jpg" data-setup="{}"
+       style="margin-left: 11px;"></video>
+<b>
+    <p id="dync" style="color:black;">
+
+    </p>
+</b>
+<!--<b>é™æ€åŠ è½½ application/x-mpegURL</b>
+
+<video class="video-js" controls preload="auto" width="710" height="400"
+poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
+  <source
+   src="http://122.193.18.104:83/pag/172.28.1.2/7302/32058488001310016410/0/MAIN/TCP/live.m3u8?"
+   type="application/x-mpegURL">
+  <p class="vjs-no-js">
+    To view this video please enable JavaScript, and consider upgrading to a web browser that
+    <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+  </p>
+</video>-->
+<!--
+    <b>é™æ€åŠ è½½ application/vnd.apple.mpegurl</b>
+  <video class="video-js" controls preload="auto" width="710" height="400"
+  poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
+    <source
+     src="http://122.193.18.125:8080/hls/172.29.7.250/1d9d88d3f5b4a1e623583d6f3c976ff5/phone.m3u8"
+     type="application/vnd.apple.mpegurl">
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a web browser that
+      <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    </p>
+  </video>
+-->
+
+<script src="https://vjs.zencdn.net/7.1.0/video.js"></script>
+<script>
+    Vue.component("c-video", {
+        template: '<video class="video-js" controls preload="auto" width="710" height="400" poster="MY_VIDEO_POSTER.jpg" data-setup="{}"></video>',
+        props: ['url'],
+        mounted: function () {
+            var id = '_' + parseInt(Math.random() * Math.pow(10, 5));
+            this.$el.id = id;
+            var player = videojs(id);
+            player.src({
+                src: this.url,
+                type: 'application/x-mpegURL',
+                //withCredentials: true
+            });
+            setTimeout(function () {
+                player.play();
+            }, 1000)
+            player.play();
+        }
+    })
+    //var vm = new Vue({
+    //    data: function () {
+    //        return {
+    //            indexCodes: [
+    //                '32058488001310050446',
+    //                '32058488001310013507',
+    //                '32058488001310013556',
+    //                '32058488001310013609',
+    //                '32058488001310013658',
+    //            ]
+    //        }
+    //    }
+    //}).$mount("#app")
+
+
+    document.getElementById('dync').innerHTML = url;
+    var player = videojs('my-video',{html5: {
+            hls: {
+                withCredentials: false
+            }
+        }});
+    player.src({
+        src: url,
+        type: 'application/x-mpegURL',
+        //withCredentials: true
+    });
+    player.play();
+</script>
+</body>

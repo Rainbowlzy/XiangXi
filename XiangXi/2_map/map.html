@@ -1,0 +1,579 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>香溪地图</title>
+    <meta charset="utf-8" />
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet" />-->
+    <!--<link rel="stylesheet" href="../assets/css/0-common/common.css" />-->
+    <!--<script src="http://webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>-->
+    <script src="https://cdn.bootcss.com/require.js/2.3.5/require.min.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+</head>
+<script>
+    require(['vue', 'jquery', 'cmodules', 'amap'
+        //, '../assets/js/0-common/initfakedmap'
+    ], function (Vue, $) {
+        $(function () {
+            var w = window.screen.width; var zoom = w / 1920;
+            $("#container").css({
+                "zoom": zoom,
+                "-moz-transform": "scale(" + zoom + ")",
+                "-moz-transform-origin": "top left"
+            });
+        });
+        $(function urlborder() {
+            $.call('GetMenuConfigurationByAuth', {}, function (resp) {
+                resp.colorlist = "ff6c6c,ffa54d,5c9cf4,23c9d3,f4bd52,2eb8e5,ac8cf5,55c795,ff6c6c,ffa54d,5c9cf4,23c9d3,f4bd52,2eb8e5,ac8cf5,55c795".split(',')
+                resp.svcHeader = svcHeader;
+                resp.categories = [];
+                resp.sub_categories = [];
+                var vm = new Vue({
+                    mounted: function () {
+                        $('#m6').on("click", function () {
+                            alert("该模块还在开发中！")
+                        });
+                        var request = GetRequest();
+                        if (request) {
+                            if (request.lnglat)
+                                var lnglat = JSON.parse(request.lnglat);
+                            if (request.zoom)
+                                var zoom = JSON.parse(request.zoom);
+                            if (request.markers)
+                                var markers = JSON.parse(request.markers);
+                        }
+
+                        var satellite = new AMap.TileLayer.Satellite();
+                        var roadnet = new AMap.TileLayer.RoadNet();
+                        var map = this.map = new AMap.Map('amap', {
+                            resizeEnable: true,
+                            zoom: zoom || 14,
+                            layers: [
+                                //new AMap.TileLayer.Satellite(),
+                                //                                new AMap.TileLayer.RoadNet()
+                                new AMap.TileLayer()//高德默认标准图层
+                            ],
+                            center: lnglat || [120.511929, 31.252366]
+                        });
+
+                        // 绘制香溪社区边框图开始
+                        // 据说要不到点位，所以随便画好了。
+                        var address = "香溪社区外框图";
+                        $.call("getpoilist", { search: address, limit: 4000,sort:'ord' }, function (resp) {
+                            if (!resp) return;
+                            if (!resp.rows) return;
+
+                            var border_points = resp.rows.map(function (t) {
+                                return [t.Longitude, t.Latitude].map(function (k) { return parseFloat(k) });
+                            });
+                            var polygon = new AMap.Polygon({
+                                map: map,
+                                path: border_points,
+                                fillColor: 'blue',
+                                fillOpacity: 0.3,
+                            });
+
+                            var position = $.calcCenter(border_points);
+
+                            var marker = new AMap.Marker({
+                                map: map,
+                                position: [120.511929, 31.252366],
+                                title: "香溪社区",
+                                icon: "../assets/i/mapicon/cangf.png"
+                            });
+
+                            marker.on('click',
+                                function(e) {
+                                    var summary = '<p class="MsoNormal">	<b></b></p><p class="MsoNormal" style="text-indent:24.1pt;">	<span style="font-size:18px;">2003年，金星村与镇区三个居委会合并改名为香溪社区。香溪社区位于木渎中心地段，紧靠镇郊和灵岩山风景区，社区所辖面积1.8平方公里，现有总户数2003户，户籍人口6159户，党员220人。一直以来，社区党委始终坚持以经济发展为中心，以“为民服务”为宗旨，创新发展，转型升级，加强服务，规范管理，全面提升社区的综合实力和服务水平。</span></p><p class="MsoNormal" style="text-indent:24.1pt;">	<span style="font-size:18px;">为加快社区城乡一体化建设，2001年成立江苏省首家社区资产股份合作社，十多年来，社区始终坚持科学发展观，积极探索农村股份合作改革，不断做大做强集体经济，保障村民收益。2017年，社区三个股份合作社固定资产达5亿元，集体收益3657万元，每个股民分红13400元，位居苏州前列。</span></p><p class="MsoNormal" style="text-indent:24.1pt;">	<span style="font-size:18px;">在大力发展经济的同时，社区党委坚持走群众路线，加大投入实施民生工程，真正为民办实事，做好事，受到了上级的肯定和群众的拥护。近几年来，先后获得“全国和谐示范社区、江苏省民主法治示范社区、江苏省科普示范社区，江苏省社会主义新农村建设先进村，苏州市十佳农村新型合作经济组织、苏州市绿色社区”等荣誉称号。</span></p>';
+                                    this.openWindow('<div style="width:800px;"><a href="/XiangXi/0_common/map_editor_tool.html?addr=香溪社区外框图&lnglat=' + this.getPosition() + '"><b><span style="font-size:18px;">香溪社区简介</span></b></a>' + summary + '</div>');
+                                });
+                            map.setFitView();
+
+                            var summary = '<p class="MsoNormal">	<b></b></p><p class="MsoNormal" style="text-indent:24.1pt;">	<span style="font-size:18px;">2003年，金星村与镇区三个居委会合并改名为香溪社区。香溪社区位于木渎中心地段，紧靠镇郊和灵岩山风景区，社区所辖面积1.8平方公里，现有总户数2003户，户籍人口6159户，党员220人。一直以来，社区党委始终坚持以经济发展为中心，以“为民服务”为宗旨，创新发展，转型升级，加强服务，规范管理，全面提升社区的综合实力和服务水平。</span></p><p class="MsoNormal" style="text-indent:24.1pt;">	<span style="font-size:18px;">为加快社区城乡一体化建设，2001年成立江苏省首家社区资产股份合作社，十多年来，社区始终坚持科学发展观，积极探索农村股份合作改革，不断做大做强集体经济，保障村民收益。2017年，社区三个股份合作社固定资产达5亿元，集体收益3657万元，每个股民分红13400元，位居苏州前列。</span></p><p class="MsoNormal" style="text-indent:24.1pt;">	<span style="font-size:18px;">在大力发展经济的同时，社区党委坚持走群众路线，加大投入实施民生工程，真正为民办实事，做好事，受到了上级的肯定和群众的拥护。近几年来，先后获得“全国和谐示范社区、江苏省民主法治示范社区、江苏省科普示范社区，江苏省社会主义新农村建设先进村，苏州市十佳农村新型合作经济组织、苏州市绿色社区”等荣誉称号。</span></p>';
+                            marker.openWindow('<div style="width:800px;"><a href="/XiangXi/0_common/map_editor_tool.html?addr=香溪社区外框图&lnglat=' + marker.getPosition() + '"><b><span style="font-size:18px;">香溪社区简介</span></b></a>' + summary + '</div>');
+                            map.setZoom(17);
+
+                        })
+                        // 绘制香溪社区边框图结束
+
+
+                        //                         AMapUI.loadUI(['control/BasicControl'], function(BasicControl) {
+                        //
+                        //                             var layerCtrl1 = new BasicControl.LayerSwitcher({
+                        //                                 position: 'tr'
+                        //                             });
+                        //
+                        //                             var map = new AMap.Map('amap', {
+                        //                                 resizeEnable: true,
+                        //                                 zoom: zoom || 14,
+                        //                                 layers: [
+                        //                                     //new AMap.TileLayer.Satellite(),
+                        // //                                new AMap.TileLayer.RoadNet()
+                        //                                     new AMap.TileLayer()//高德默认标准图层
+                        //                                 ],
+                        //                                 center: lnglat || [119.042806, 32.146854]
+                        //                             });
+                        //
+                        //                             map1.addControl(layerCtrl1);
+                        //
+                        //                             var layerCtrl2 = new BasicControl.LayerSwitcher({
+                        //                                 theme: 'dark',
+                        //                                 //自定义基础图层
+                        //                                 baseLayers: [{
+                        //                                     id: 'tile',
+                        //                                     name: '图层A',
+                        //                                     layer: new AMap.TileLayer()
+                        //                                 }, {
+                        //                                     enable: true,
+                        //                                     id: 'satellite',
+                        //                                     name: '图层B',
+                        //                                     layer: new AMap.TileLayer.Satellite()
+                        //                                 }],
+                        //                                 //自定义覆盖图层
+                        //                                 overlayLayers: [{
+                        //                                     enable: true,
+                        //                                     id: 'traffic',
+                        //                                     name: '图层C',
+                        //                                     layer: new AMap.TileLayer.Traffic()
+                        //                                 }, {
+                        //                                     id: 'roadNet',
+                        //                                     name: '图层D',
+                        //                                     layer: new AMap.TileLayer.RoadNet()
+                        //                                 }]
+                        //                             });
+                        //
+                        //                             var map2 = new AMap.Map('container2', {
+                        //                                 //这里将layerCtrl中启用的图层传递给map
+                        //                                 layers: layerCtrl2.getEnabledLayers()
+                        //                             });
+                        //
+                        //                             map2.addControl(layerCtrl2);
+                        //                         });
+
+                        $.call('getSpecialWorklist', { limit: 4000 }, function (data) {
+                            new Vue({
+                                data: data
+                            }).$mount('#right')
+
+                        })
+
+                        AMap.Marker.prototype.openWindow = function (content) {
+                            var map = this.getMap();
+                            var position = this.getPosition();
+                            position = [position.lng, position.lat];
+                            var lnglat = new AMap.LngLat(position[0], position[1]);;
+                            var recalc_center = lnglat.offset(0, 120);
+                            var w = new AMap.InfoWindow({
+                                //                                        content: '<iframe src="' + (link || '../2_map/CGcard.html') + '" width="400" height="250" frameborder="no" border="0"   marginheight="0" scrolling="no" allowtransparency="yes"/>'
+                                content: content || '<iframe frameborder="0" src="../2_map/inner_population.html?address=' + this.getTitle() + '" width="500" height="380"></iframe>',
+                                showShadow: true,
+                            });
+                            w.open(map, position);
+                            map.panTo(recalc_center)
+                            map.setZoom(18);
+                        };
+
+                        //产业园
+                        $("#heading1").click(function () {
+                            map.clearMap();
+                            $('.map_right_nav').collapse("hide");
+                            $.call('MapQueryBuilding', { type: '厂房' }, function (data) {
+                                if (!data || data.length === 0) {
+                                    alert('未找到数据')
+                                    return;
+                                }
+                                map.clearMap();
+                                $.each(data, function () {
+                                    let e = this;
+                                    let position = [parseFloat(e.Longitude || '0'), parseFloat(e.Latitude || '0')];
+                                    var marker = new AMap.Marker({
+                                        map: map,
+                                        position: position,
+                                        title: this.POIAddress,
+                                        icon: "../assets/i/mapicon/cangf.png"
+                                    })
+                                    marker.on('click', function (e) {
+                                        this.openWindow('<iframe frameborder="0" src="../2_map/inner_building.html?address=' + this.getTitle() + '" width="500" height="380"></iframe>');
+                                    })
+                                    map.setFitView();
+                                    map.panTo(position)
+                                })
+                            })
+                        })
+                        function area() {
+                            map.plugin(["AMap.MouseTool"], function () {
+                                var mouseTool = new AMap.MouseTool(map);
+                                //鼠标工具插件添加draw事件监听
+                                AMap.event.addListener(mouseTool, "draw", function callback(e) {
+                                    var eObject = e.obj;//obj属性就是鼠标事件完成所绘制的覆盖物对象。
+                                });
+                                mouseTool.measureArea();  //调用鼠标工具的面积量测功能
+                            });
+                        }
+                        AMap.plugin(['AMap.ToolBar', 'AMap.Scale', 'AMap.OverView'], function () {
+                            map.addControl(new AMap.ToolBar());
+                            map.addControl(new AMap.Scale());
+                            map.addControl(new AMap.OverView({ isOpen: true }));
+                        })//鹰眼
+                        map.plugin(["AMap.RangingTool"], function () {
+                            ruler1 = new AMap.RangingTool(map);
+                            AMap.event.addListener(ruler1, "end", function (e) {
+                                ruler1.turnOff();
+                            });
+                            var sMarker = {
+                                icon: new AMap.Icon({
+                                    size: new AMap.Size(19, 31),//图标大小
+                                    image: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b1.png"
+                                })
+                            };
+                            var eMarker = {
+                                icon: new AMap.Icon({
+                                    size: new AMap.Size(19, 31),//图标大小
+                                    image: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b2.png"
+                                }),
+                                offset: new AMap.Pixel(-9, -31)
+                            };
+                            var lOptions = {
+                                strokeStyle: "solid",
+                                strokeColor: "#FF33FF",
+                                strokeOpacity: 1,
+                                strokeWeight: 2
+                            };
+                            var rulerOptions = {
+                                startMarkerOptions: sMarker,
+                                endMarkerOptions: eMarker,
+                                lineOptions: lOptions
+                            };
+                            ruler2 = new AMap.RangingTool(map, rulerOptions);
+                        });
+                        //启用默认样式测距
+                        function startRuler1() {
+                            ruler2.turnOff();
+                            ruler1.turnOn();
+                        }
+                        //启用自定义样式测距
+                        function startRuler2() {
+                            ruler1.turnOff();
+                            ruler2.turnOn();
+                        }
+                        //测距
+                        var contextMenu = new AMap.ContextMenu();  //创建右键菜单
+                        //右键放大
+                        contextMenu.addItem("放大一级", function () {
+                            map.zoomIn();
+                        }, 0);
+                        //右键缩小
+                        contextMenu.addItem("缩小一级", function () {
+                            map.zoomOut();
+                        }, 1);
+                        //右键显示全国范围
+                        contextMenu.addItem("缩放至全国范围", function (e) {
+                            map.setZoomAndCenter(4, [108.946609, 34.262324]);
+                        }, 2);
+                        //右键添加Marker标记
+                        // contextMenu.addItem("添加标记", function (e) {
+                        //     var marker = new AMap.Marker({
+                        //         map: map,
+                        //         position: contextMenuPositon //基点位置
+                        //     });
+                        // }, 3);
+                        contextMenu.addItem("添加标记", function (e) {
+                            var marker = new AMap.Marker({
+                                map: map,
+                                position: contextMenuPositon //基点位置
+                            });
+                        }, 3);
+                        //地图绑定鼠标右击事件——弹出右键菜单
+                        map.on('rightclick', function (e) {
+                            contextMenu.open(map, e.lnglat);
+                            contextMenuPositon = e.lnglat;
+                        });
+                        map.plugin(["AMap.ToolBar"], function () {
+                            map.addControl(new AMap.ToolBar());
+                        });
+                        map.plugin(["AMap.Scale"], function () {
+                            map.addControl(new AMap.Scale());
+                        });
+                        map.plugin(["AMap.Geolocation"], function () {
+                            map.addControl(new AMap.Geolocation());
+                        });
+                    },
+                    data: function () {
+                        return resp;
+                    },
+                    state: {
+                        switch: false
+                    },
+                    methods: {
+                        switch_layer: function () {
+                            if (this.current_layer) {
+                                this.map.remove(this.current_layer);
+                                this.current_layer = null;
+                                $(".map_span").css({ 'color': '#000' });
+                                return;
+                            }
+                            this.current_layer = new AMap.TileLayer.Satellite();
+                            this.map.add(this.current_layer);
+                            $(".map_span").css({ 'color': '#fff' });
+                        },
+                        toggle: function (category) {
+                            if (!category.children || category.children.length <= 0) {
+                                this.toggle_sub(category);
+                                return;
+                            }
+                            this.$data.sub_categories = category.children;
+                            $('.map_right_nav').toggle('toggle');
+                        },
+                        toggle_sub: function (sub) {
+                            var label = sub.title.split(' ')[0];
+                            console.log(label)
+                            if (label === '切换地图') {
+                                this.switch_layer();
+                                return;
+                            }
+                            var options = {
+                                全部: {
+                                    method: "MapQueryPopulation", icon: "../assets/i/mapicon/renkou.png", page: "../2_map/inner_population.html"
+                                },
+                                党员: {
+                                    method: "MapQueryPartyMember", icon: "../assets/i/mapicon/dangyuan.png", page: "../2_map/inner_population.html"
+                                },
+                                老年人: {
+                                    method: "MapQueryOldMann", icon: "../assets/i/mapicon/laonian.png", page: "../2_map/inner_population.html"
+                                },
+                                残疾人: {
+                                    method: "MapQueryDisabledMan", icon: "../assets/i/mapicon/canji.png", page: "../2_map/inner_population.html"
+                                },
+                                民兵: {
+                                    method: "MapQueryMilitia", icon: "../assets/i/mapicon/minbing.png", page: "../2_map/inner_population.html"
+                                },
+                                干部: {
+                                    method: "MapQueryCadre", icon: "../assets/i/mapicon/ganbu.png", page: "../2_map/inner_population.html"
+                                },
+                                厂房: {
+                                    params: { BIndustrialParkName: label },
+                                    method: "MapQueryBuilding", icon: "../assets/i/mapicon/cangf.png", page: "../2_map/inner_building.html"
+                                },
+                                观山工业园: {
+                                    params: { BIndustrialParkName: label },
+                                    method: "MapQueryBuilding", icon: "../assets/i/mapicon/cangf.png", page: "../2_map/inner_building.html"
+                                },
+                                横泾工业园二期: {
+                                    params: { BIndustrialParkName: label },
+                                    summary:'<pre><span style="background-color:#e4e4ff;">横泾工业园二期</span></pre></pre><pre>2012年6月1日收购，占地90亩，一期建筑面积3.2万平方米，二期建筑面积2.9万平方米，总面积6.1万平方米，总投资约为1.25亿元。</pre>',
+                                    method: "MapQueryBuilding", icon: "../assets/i/mapicon/cangf.png", page: "../2_map/inner_building.html"
+                                },
+                                横泾工业园一期: {
+                                    params: { BIndustrialParkName: label },
+                                    summary:'<pre><span style="background-color:#e4e4ff;">横泾工业园一期</span></pre></pre><pre>2012年6月1日收购，占地90亩，一期建筑面积3.2万平方米，二期建筑面积2.9万平方米，总面积6.1万平方米，总投资约为1.25亿元。</pre>',
+                                    method: "MapQueryBuilding", icon: "../assets/i/mapicon/cangf.png", page: "../2_map/inner_building.html"
+                                },
+                                马舍工业园: {
+                                    params: { BIndustrialParkName: label },
+                                    method: "MapQueryBuilding", icon: "../assets/i/mapicon/cangf.png", page: "../2_map/inner_building.html"
+                                },
+                                摄像头: {
+                                    method: "MapQueryCamera", icon: "../assets/i/mapicon/jiank.png", page: "/XiangXi/2_map/RTSP.aspx"
+                                }
+                            }
+
+                            var option = options[label];
+                            if (!option) {
+                                console.error("未找到标签" + label);
+                            }
+
+                            var map = this.map;
+                            $('.map_right_nav').hide();
+                            $('.map_right_com').hide();
+                            $.call(option.method, $.extend({ limit: 4000 }, option.params), function (data) {
+                                if (!data || data.length === 0) {
+                                    alert('未找到数据')
+                                    return;
+                                }
+                                $('.map_right_nav').hide();
+                                map.clearMap();
+                                var recalc_center = null;
+                                var groups = (data.rows || data).groupby('POIAddress');
+                                function paint_ent(map,k, ent){
+                                    let points = ent.map(function (e) {
+                                        return [parseFloat(e.Longitude || '0'), parseFloat(e.Latitude || '0')]
+                                    }).filter(function (w) {
+                                        return w[0] && w[1];
+                                    });
+                                    if (!points || points.length <= 0) return;
+                                    var marker = null;
+                                    if (points.length > 1) {
+                                        let center = $.calcCenter(points);
+                                        var title = k;
+                                        new AMap.Polygon({
+                                            map: map,
+                                            path: points,
+                                            fillColor: 'blue',
+                                            fillOpacity: 0.3,
+                                        });
+                                        marker = new AMap.Marker({
+                                            map: map,
+                                            position: center,
+                                            title: title,
+                                            icon: option.icon
+                                        });
+                                        var lnglat = new AMap.LngLat(center[0], center[1]);
+                                        var recalc_center = lnglat.offset(0, -50);
+                                        if(option.summary) marker.openWindow(option.summary)
+                                    } else {
+                                        var point = points[0];
+                                        marker = new AMap.Marker({
+                                            map: map,
+                                            position: point,
+                                            title: k,
+                                            icon: option.icon
+                                        });
+                                        marker.ent = ent;
+                                        var lnglat = new AMap.LngLat(point[0], point[1]);
+                                        var recalc_center = lnglat.offset(0, -80);
+                                    }
+                                    marker.on('click', function (e) {
+                                        let markerTitle = this.getTitle();
+                                        let position = this.getPosition();
+                                        if(this.ent[0]){
+                                            var camera_link = "src=" + encodeURIComponent(this.ent[0].url);
+                                        }
+
+                                        this.openWindow('<iframe frameborder="0" src=\"' + option.page + '?src='+camera_link+'&VPBIAddress=' + markerTitle + '&address=' + markerTitle + '&position=' + position + '" width="1000" height="500"></iframe>');
+                                    });
+                                }
+                                if(groups)
+                                for(var k in groups){
+                                    paint_ent(map,k,groups[k])
+                                }
+                                // Object.values(groups).map(function(ent){
+                                //     return paint_ent(map,ent[0].POIAddress,ent);
+                                // })
+                                map.panTo(recalc_center||[120.511929,31.252366])
+                                map.setFitView()
+                            });
+                        },
+                        redirect: function (li) {
+                            var link = li.MCLink;
+                            if (link.indexOf('business.html') !== -1) parent.location.href = link;
+                            location.href = link
+                        },
+                        editorswitch: function () {
+                            this.state.switch = !this.state.switch;
+                        }
+                    }
+                }).$mount('#app')
+                $.call("GetMapCategoryEvaluator", null, function (categories) {
+                    vm.$data.categories = categories;
+                })
+
+            })
+
+        })
+    })
+
+</script>
+<style>
+
+    .map_right_com {
+        position: relative !important;
+        left: 60px !important;
+    }
+
+    .map_left_nav {
+        position: relative !important;
+        left: 900px;
+    }
+
+    table {
+        border-collapse: separate;
+        border-spacing: 20px;
+        height: 600px !important;
+    }
+
+    body {
+        background: transparent !important;
+    }
+
+    .map_top_nav {
+        position: relative;
+        top: 30px;
+        left: 80px;
+        z-index: 1002;
+    }
+
+        .map_top_nav > div {
+            float: left;
+            width: 100px;
+        }
+
+    .map_right_nav {
+        position: absolute;
+        top: 180px;
+        left: 80px;
+        z-index: 1002;
+        width: 240px;
+    }
+</style>
+<body>
+    <div id="app">
+        <div style="position:fixed;width: 25%;left:2%;height:35%;background-color:rgba(97,255,255,0.15);border-radius:10px">
+            <div v-for="(lm,i) in leftmenu" style="margin-left:10px; margin-top:25px;">
+                <a @click="redirect(lm)">
+                    <img width="20%" class="left-image"
+                         style="border-radius: 10px;float:left;margin:4% 2%;"
+                         v-bind:src="lm.MCPicture||'http://122.193.9.83:8091/XiangXi/ImageHandler.ashx?label='+lm.MCCaption+'&bgcolor1='+colorlist[i]+'&bgcolor2='+colorlist[i]+'&width=200&height=200&icon='+lm.MCCaption+'.png&shape=rectangle&fontSize=24&noshadow=noshadow'" />
+                </a>
+            </div>
+            <div style="position:fixed;width:25%;left:2%; top:36%; height:44%;background-color:rgba(97,255,255,0.15);border-radius:10px;color: white">
+                <div style="width:100%">
+                    <p style="font-size: 20px;margin: 10px 20px; ">香溪动态</p>
+                    <hr style="height:3px;border:none;border-top:3px solid #fdffff;width: 100%;margin-top:-10px;float: left" />
+                </div>
+                <br>
+                <div id="right">
+                    <ul style="font-size: 18px;line-height:35px;width: 100%" v-for="title in specialwork">
+                        <li>{{title.SWWorkTheme}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div style="position:fixed;width:70%;left:28%;height:80%;background-color:rgba(97,255,255,0.15);border-radius:10px">
+            <div id="amap" style="width:98%;height:98%;overflow: hidden; border-radius:10px;margin:10px 10px;">
+                <div style="">
+                    <div class="map_top_nav" style="font-size: 12px;" v-show="categories && categories.length>0">
+                        <div v-for="(category,i) in categories" class="">
+                            <a href="javascript:void(0)" @click="toggle(category)">
+                                <div><img :src="category.data.MCPicture" width="32"></div>
+                                <div>
+                                    <span style="color:#000" class="map_span">
+                                        {{category.title}}
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="map_right_nav" hidden="hidden" style="display:none;" v-show="sub_categories && sub_categories.length">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default" v-for="(sub,i) in sub_categories">
+                                <div class="panel-heading" role="tab" id="heading">
+                                    <h4 class="panel-title">
+                                        <a role="button"
+                                           href="javascript:void(0)"
+                                           type="population" href="#all"
+                                           @click="toggle_sub(sub)"
+                                           v-bind:class="sub.title"
+                                           aria-expanded="true">
+                                            <i class="glyphicon glyphicon-chevron-right"></i>{{sub.title}}
+                                        </a>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

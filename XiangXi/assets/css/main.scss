@@ -1,0 +1,62 @@
+$icon-actual-width: 380;
+$icon-actual-height: 380;
+$domain: "localhost";
+$left-icon-path: ('http://#{$domain}/XiangXi/ImageHandler.ashx?bgcolor2=FF6B4C&bgcolor1=FF6B4C&width=#{$icon-actual-width}&height=#{$icon-actual-height}&icon=%E7%9B%91%E6%8E%A7.png&shape=pie&fontSize=30&nolabel=nolabel&noshadow=noshadow' 'http://#{$domain}/XiangXi/ImageHandler.ashx?bgcolor2=FFBC3B&bgcolor1=FFBC3B&width=#{$icon-actual-width}&height=#{$icon-actual-height}&icon=%E4%BA%BA%E5%8F%A3%E4%BF%A1%E6%81%AF.png&shape=pie&fontSize=30&nolabel=nolabel&noshadow=noshadow' 'http://#{$domain}/XiangXi/ImageHandler.ashx?bgcolor2=7CCA37&bgcolor1=7CCA37&width=#{$icon-actual-width}&height=#{$icon-actual-height}&icon=%E5%8E%82%E6%88%BF%E6%A5%BC%E6%A0%8B.png&shape=pie&fontSize=30&nolabel=nolabel&noshadow=noshadow' 'http://#{$domain}/XiangXi/ImageHandler.ashx?bgcolor2=61ACF9&bgcolor1=61ACF9&width=#{$icon-actual-width}&height=#{$icon-actual-height}&icon=%E5%85%9A%E5%91%98.png&shape=pie&fontSize=30&nolabel=nolabel&noshadow=noshadow' 'http://#{$domain}/XiangXi/ImageHandler.ashx?bgcolor2=FF9445&bgcolor1=FF9445&width=#{$icon-actual-width}&height=#{$icon-actual-height}&icon=%E8%80%81%E4%BA%BA.png&shape=pie&fontSize=30&nolabel=nolabel&noshadow=noshadow' 'http://#{$domain}/XiangXi/ImageHandler.ashx?bgcolor2=DC6FF4&bgcolor1=DC6FF4&width=#{$icon-actual-width}&height=#{$icon-actual-height}&icon=%E5%85%B3%E7%88%B1.png&shape=pie&fontSize=30&nolabel=nolabel&noshadow=noshadow' 'http://#{$domain}/XiangXi/ImageHandler.ashx?bgcolor2=DC6FF4&bgcolor1=DC6FF4&width=#{$icon-actual-width}&height=#{$icon-actual-height}&icon=%E5%85%B3%E7%88%B1.png&shape=pie&fontSize=30&nolabel=nolabel&noshadow=noshadow' 'http://#{$domain}/XiangXi/ImageHandler.ashx?bgcolor2=DC6FF4&bgcolor1=DC6FF4&width=#{$icon-actual-width}&height=#{$icon-actual-height}&icon=%E5%85%B3%E7%88%B1.png&shape=pie&fontSize=30&nolabel=nolabel&noshadow=noshadow');
+
+.map-search-button {
+  $width: 20px;
+  $height: 20px;
+  display: block;
+  width: $width;
+  height: $height;
+  background: url(http://#{$domain}/XiangXi/assets/i/search-icon.png) no-repeat top left;
+  -webkit-background-size: $width $height !important;
+}
+
+.left-icon-label {
+  margin: 0px 6px;
+}
+
+.left-icon-button {
+  margin: 5px 0px;
+}
+
+.left-icon {
+  $icon-width: 38px;
+  $icon-height: 38px;
+  margin: 2px 0px;
+  width: $icon-width;
+  height: $icon-height;
+  -webkit-background-size: $icon-width $icon-height !important;
+  background-size: $icon-width $icon-height !important;
+}
+
+.left-icon-monitor {
+  @extend .left-icon;
+  background: url(nth($left-icon-path, 1)) no-repeat top left;
+}
+
+.left-icon-population {
+  @extend .left-icon;
+  background: url(nth($left-icon-path, 2)) no-repeat top left;
+}
+
+.left-icon-building {
+  @extend .left-icon;
+  background: url(nth($left-icon-path, 3)) no-repeat top left;
+}
+
+.left-icon-party-member {
+  @extend .left-icon;
+  background: url(nth($left-icon-path, 4)) no-repeat top left;
+}
+
+.left-icon-older-man {
+  @extend .left-icon;
+  background: url(nth($left-icon-path, 5)) no-repeat top left;
+}
+
+.left-icon-health-care {
+  @extend .left-icon;
+  background: url(nth($left-icon-path, 6)) no-repeat top left;
+}

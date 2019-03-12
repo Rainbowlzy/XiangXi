@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Playground</title>
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet"/>
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+    <script src="http://api.tianditu.com/api?v=4.0" type="text/javascript"></script>
+</head>
+<body>
+
+<div id="app" style="margin-top:10px;">
+    <div class="row">
+        <div class="col-xs-offset-2">
+            <div class="form-group">
+                <div class="col-xs-2">
+                    <button class="btn btn-danger edit">编辑</button>
+                    <button class="btn btn-primary save">保存</button>
+                </div>
+                <div class="col-xs-4">
+                    <input type="text" name="PAddress" class="form-control address" placeholder="这里填写地址信息"/>
+                </div>
+            </div>
+            <div id="mapDiv" style="position:absolute;width:800px; height:500px; top:90px;"></div>
+        </div>
+    </div>
+</div>
+<script>
+    require(['vue', 'jquery', 'cmodules'], function (Vue, $) {
+        var map = new T.Map('mapDiv');
+        (function init(){
+            $.call('getpoilist',{search:'天地图',limit:4000}, function (resp) {
+                let groups = resp.rows.groupby('PAddress',function (line) {
+                    return T.LngLat(line.Longitude, line.Latitude)
+                })
+                $.each(groups,function(){
+                    console.log(this)
+                    let polyline = new T.Polyline(this,{
+                        color:'red',
+                        weight:3,
+                        opacity:0.5,
+                        lineStyle:'solid'
+                    })
+                    map.addOverLay(polyline);
+                })
+            })
+        })()
+
+        var lnglat = new T.LngLat(116.40969, 39.89945)
+        map.centerAndZoom(lnglat, 12);
+        var pointlist = []
+        var status = 'display'//display,edit
+        map.on('click', function (e) {
+            if(status==='edit'){
+                map.clearOverLays();
+                var point = e.lnglat;
+                pointlist.push(point)
+                let polyline = new T.Polyline(pointlist,{
+                    color:'red',
+                    weight:3,
+                    opacity:0.5,
+                    lineStyle:'solid'
+                })
+                map.addOverLay(polyline);
+                console.log(pointlist,polyline)
+            }
+        })
+        $('.edit').click(function () {
+            map.clearOverLays();
+            pointlist = []
+            status = 'edit';
+        })
+        $('.save').click(function () {
+
+            let poilist = pointlist.map(function (e,i) {
+                return ({
+                    PAddress:$('.address').val(),
+                    Latitude: e.lat,
+                    Longitude: e.lng,
+                    ord:i
+                })
+            })
+            $.each(poilist, function () {
+                $.call('savepoi',this, function (resp) {
+                    if(!resp) alert('请求异常')
+                    if(!resp.success) alert(resp.message)
+                })
+            })
+        })
+
+    })
+</script>
+</body>
+</html>

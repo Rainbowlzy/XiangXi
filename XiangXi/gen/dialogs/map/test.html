@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <title>建议处理</title>
+    <meta charset="utf-8"/>
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/bootstrap-table.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/bootstrap-select.min.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/fileinput.min.css" rel="stylesheet"/>
+    <link href="../assets/css/0-common/common.css" rel="stylesheet"/>
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h1>建议处理</h1>
+
+    <div class="row">
+        <div class="row">
+            <form role="form" class="row form-horizontal">
+                <script>
+                    require([
+                        "vue",
+                        "jquery",
+                        "jquery.cookie",
+                        "bootstrap",
+                        "bootstrap-table",
+                        "bootstrap-select",
+                        "bootstrap-datetimepicker",
+                        "bootstrap-datetimepicker.zh-CN",
+                        "fileinput",
+                        "fileinput_locale_zh",
+                        "bootstrap-typeahead",
+                        "cmodules"
+                    ], function (Vue, $) {
+                        $(document).ready(function () {
+                            var request = GetRequest();
+                            if (request)
+                                for (var p in request) {
+                                    if (request[p].indexOf('%') != -1)request[p] = decodeURIComponent(request[p])
+                                }
+                            var vm = {};
+                            var created = function () {
+                                $(".form_datetime").datetimepicker({
+                                    format: "yyyy/mm/dd",
+                                    language: "zh-CN",
+                                    weekStart: 1,
+                                    minView: 2,
+                                    maxView: 4,
+                                    startView: 4,
+                                    autoclose: true
+                                })
+                                        .on('changeDate', function (ev) {
+                                            vm[$(this).attr('id')] = $(this).val();
+                                        });
+                                $(".portrait").fileinput({
+                                    language: "zh", //设置语言
+                                    uploadUrl: "../ImageUpload.ashx?", //上传的地址
+                                    allowedFileExtensions: ["jpg", "png", "gif", "JPEG"], //接收的文件后缀,
+                                    showUpload: true, //是否显示上传按钮
+                                    dropZoneEnabled: false,
+                                    showCaption: true, //是否显示标题
+                                    browseClass: "btn btn-primary", //按钮样式
+                                    previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+                                    msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！"
+                                })
+                                $(".portrait").on("fileuploaded", function (event, data, previewId, index) {
+                                    $(".imageURL").val(data.response.imageURL);
+                                    vm[$(this).attr('id')] = data.response.imageURL;
+                                });
+                                $("input[type=text]:first").focus();
+                                $('.excel-import-button-RecommendedTreatment').click(function () {
+                                    $('.table_add_modal').modal('hide');
+                                    $('.table_excel_modal-RecommendedTreatment').on('shown.bs.modal', function () {
+                                        $('.table_excel_modal-RecommendedTreatment .modal-body').html('<input class="excel_file input-file form-control" type="file">');
+                                        $(".excel_file").fileinput({
+                                            language: 'zh', //设置语言
+                                            uploadUrl: "../Data/ExcelImport.ashx?fileType=RecommendedTreatment", //上传的地址
+                                            allowedFileExtensions: ['xls'],//接收的文件后缀,
+                                            showUpload: true, //是否显示上传按钮
+                                            dropZoneEnabled: true,
+                                            showCaption: true,//是否显示标题
+                                            browseClass: "btn btn-primary", //按钮样式
+                                            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+                                            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！"
+                                        });
+                                        $(".excel_file").on("fileuploaded", function () {
+                                            window.location.href = site_gen + "RecommendedTreatmentList.html"
+                                        });
+                                    })
+
+                                    $('.table_excel_modal-RecommendedTreatment').modal('show');
+                                })
+                                $("#RecommendedTreatment").show();
+                            };
+                            var method = {
+                                log(o)
+                            {
+                                (o)
+                                return o;
+                            }
+                            ,
+
+                            save()
+                            {
+                                var datum = this.$data;
+                                datum.districtID = $.cookie("JTZH_districtID");
+                                datum.VersionNo = parseInt(datum.VersionNo)
+                                $.call("SaveRecommendedTreatment", datum, function (data) {
+                                    if (!data) return bootstrap_alert('返回数据为空')
+                                    if (!data.success) return bootstrap_alert(data.message)
+                                    window.location.href = site_gen + "RecommendedTreatmentList.html?table=RecommendedTreatment"
+                                });
+                            }
+                            ,
+
+                            back()
+                            {
+                                window.location.href = site_gen + "RecommendedTreatment.html?table=RecommendedTreatment"
+                            }
+                            ,
+
+                            changeSelect(val)
+                            {
+                                selector = 'option.' + val.target.value;
+                                var s = ''
+                                // N级联动，子集选择控件设置为空
+                                $(selector).parent().val('')
+                                // 子集中所有option单位隐藏
+                                $(selector).parent().children().hide()
+                                // 显示联动部分
+                                $(selector).show()
+                                // 刷新父控件
+                                $(selector).parent().selectpicker('refresh').selectpicker('toggle')
+                                vm[$(selector).parent().attr("id")] = val.target.value
+                            }
+                        };
+                        if (request && request.data) request = JSON.parse(decodeURIComponent(decodeURIComponent(request.data)));
+                        if (!request || request.id === undefined) {
+                            $.call("GetRecommendedTreatmentEmpty", {}, function (data) {
+                                data = data || {};
+                                data.table = 'RecommendedTreatment'
+                                vm = new Vue({
+                                    el: "#RecommendedTreatment",
+                                    data: data || {},
+                                    methods: method,
+                                    mounted: created
+                                });
+                                $(".selectpicker1").selectpicker('refresh')
+                                console.log('picker');
+                            });
+                            return;
+                        } else {
+                            request.table = 'RecommendedTreatment'
+                            vm = new Vue({
+                                el: "#RecommendedTreatment",
+                                data: request || {},
+                                methods: method,
+                                mounted: created
+                            });
+                            $(".selectpicker1").selectpicker('refresh')
+                            console.log('picker');
+                        }
+                    });
+                    })
+                    ;
+                </script>
+
+                <div class="" id="RecommendedTreatment" style="margin-top:5px;">
+                    <div class="container" style="margin-bottom: 20px;">
+                        <a href="javascript:history.go(-1)" id="table-back" class="btn btn-success"><i
+                                class="glyphicon glyphicon-menu-left"></i>返回</a>
+                        <button type="button" class="btn btn-info excel-import-button-RecommendedTreatment"><i
+                                class="glyphicon glyphicon-cloud-upload"></i>Excel导入
+                        </button>
+                        <a href="/XiangXi/ExportSchema.ashx?title=RecommendedTreatment"
+                           class="btn btn-primary">Excel模板</a>
+                        <button type="button" id="submit" @click="save" class="btn  btn-info"><i
+                                class="glyphicon glyphicon-circle-arrow-up"></i>提交
+                        </button>
+                    </div>
+
+                    <div class="modal fade table_excel_modal-RecommendedTreatment">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">Excel导入</h4>
+                                </div>
+                                <div class="modal-body"></div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <!--<button type="button" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i>确定</button>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-if="table">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="RTCaption">
+                                        标题
+                                    </label>
+
+                                    <div class="col-sm-8" id="RTCaption">
+
+                                        <input
+                                                class="form-control"
+                                                type="text"
+                                                id="RTCaption"
+                                                v-model="RTCaption"
+                                                placeholder=""></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="RTTarget">
+                                        对象
+                                    </label>
+
+                                    <div class="col-sm-8" id="RTTarget">
+
+                                        <input
+                                                class="form-control"
+                                                type="text"
+                                                id="RTTarget"
+                                                v-model="RTTarget"
+                                                placeholder=""></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="RTProcessingPerson">
+                                        处理人
+                                    </label>
+
+                                    <div class="col-sm-8" id="RTProcessingPerson">
+
+                                        <input
+                                                class="form-control"
+                                                type="text"
+                                                id="RTProcessingPerson"
+                                                v-model="RTProcessingPerson"
+                                                placeholder=""></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="RTProcessingDate">
+                                        处理日期
+                                    </label>
+
+                                    <div class="col-sm-8" id="RTProcessingDate">
+                                        <input size="16"
+                                               id="RTProcessingDate"
+                                               type="text"
+                                               v-model="RTProcessingDate"
+                                               @change="val=>RTProcessingDate=val"
+                                               class="RTProcessingDate form_datetime form-control"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="RTName">
+                                        姓名
+                                    </label>
+
+                                    <div class="col-sm-8" id="RTName">
+
+                                        <input
+                                                class="form-control"
+                                                type="text"
+                                                id="RTName"
+                                                v-model="RTName"
+                                                placeholder=""></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="RTIdNumber">
+                                        身份证
+                                    </label>
+
+                                    <div class="col-sm-8" id="RTIdNumber">
+
+                                        <input
+                                                class="form-control"
+                                                type="text"
+                                                id="RTIdNumber"
+                                                v-model="RTIdNumber"
+                                                placeholder=""></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="RTBooth">
+                                        电话
+                                    </label>
+
+                                    <div class="col-sm-8" id="RTBooth">
+
+                                        <input
+                                                class="form-control"
+                                                type="text"
+                                                id="RTBooth"
+                                                v-model="RTBooth"
+                                                placeholder=""></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="RTCreationTime">
+                                        创建时间
+                                    </label>
+
+                                    <div class="col-sm-8" id="RTCreationTime">
+                                        <input size="16"
+                                               id="RTCreationTime"
+                                               type="text"
+                                               v-model="RTCreationTime"
+                                               @change="val=>RTCreationTime=val"
+                                               class="RTCreationTime form_datetime form-control"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="RTBackwardness">
+                                        状态
+                                    </label>
+
+                                    <div class="col-sm-8" id="RTBackwardness">
+                                        <select id="RTBackwardness"
+                                                class="form-control selectpicker1"
+                                                data-live-search="true"
+                                                title="状态"
+                                                v-model="RTBackwardness"
+                                                @change="val=>{RTBackwardness=val.target.value;changeSelect(val)}">
+
+
+                                            <option value="已登记">已登记</option>
+
+                                            <option value="已处理">已处理</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <c-uedit class="form-control"
+                                             id="RTContent"
+                                             v-model="RTContent"></c-uedit>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+<div class="modal fade" id="account-info-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">当前用户</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-5">
+                    </div>
+                    <div class="col-md-7">
+                        <ul class="list-group">
+                            <li class="list-group-item"><span class="list-group-item-title">姓名：</span>超级管理员</li>
+                            <li class="list-group-item"><span class="list-group-item-title">职位：</span>超级管理员</li>
+                            <li class="list-group-item"><span class="list-group-item-title">街道：</span>东山镇</li>
+                            <li class="list-group-item"><span class="list-group-item-title">社区：</span>潦里村</li>
+                            <li class="list-group-item"><span class="list-group-item-title">最后登录时间：</span>2016年6月23日20:38:36
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="logout()" class="btn btn-primary" style="float: left">注销</button>
+                <a class="btn btn-default">修改个人信息>></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="common-alert">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

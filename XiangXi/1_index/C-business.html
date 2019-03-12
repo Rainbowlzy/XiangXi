@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>香溪信息工作平台</title>
+    <meta charset="utf-8" />
+    <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/0-common/common.css" rel="stylesheet" />
+    <link href="../assets/css/2-index/business.css" rel="stylesheet" />
+    <script src="../assets/js/0-common/require.js"></script>
+    <script src="../assets/js/0-common/app.js"></script>
+
+    <style>
+        body{zoom:0.7;}
+        .c-title {
+            /*line-height: 97px;*/
+            /*height: 97px;*/
+            color: #ffffff;
+        }
+
+        .navbar-nav-cust {
+            font-size: 32px;
+        }
+
+            .navbar-nav-cust > li > a {
+                color: #ffffff;
+            }
+
+                .navbar-nav-cust > li > a:hover {
+                    background: transparent;
+                    /*font-size: 30px;*/
+                    color: rgb(255, 165, 77);
+                }
+
+        ul.nav > li > a:last-child :hover {
+            color: #ffffff !important;
+        }
+
+        #nav ul li {
+            margin:15px 10px;
+        }
+    </style>
+</head>
+<body style="background-image: url('../assets/i/metaicon/e.jpg');background-repeat: no-repeat;background-size: cover;">
+    <script>
+    require(['vue', 'jquery', 'bootstrap', 'cmodules'], function (Vue, $) {
+        $(function () {
+            var w = window.screen.width;
+            var zoom = w / 1920;
+            $("#container").css({
+                "zoom": zoom,
+                "-moz-transform": "scale(" + zoom + ")",
+                "-moz-transform-origin": "top left"
+            });
+        });
+        var request = GetRequest() || {
+                    data: JSON.stringify({
+                        MCTitle: '首页'
+                    })
+                };
+
+        $.call("GetMenuConfigurationByAuth", {"offset": 0, "limit": 800}, function (datum) {
+            // 这里请求顶部菜单数据
+            if (!datum.success) {
+                alert(datum.message);
+                return;
+            }
+            // category = 首页背景图片
+            $(document.body).css({
+                //"background-image": "url("+(datum.background||'../assets/i/metaicon/e.jpg')+")",
+//                "height": '1080px',
+                //'width': '1920px',
+                'background-repeat': 'no-repeat',
+                'background-size': 'cover',
+//                'overflow': 'hidden',
+            })
+            var secondmenu = datum.rows
+            var menu = JSON.parse(request.data);
+            $.call('getthirdmenu', menu, function (thirdmenujson) {
+//                这里请求豆腐块数据
+                Vue.filter('json', function (val) {
+                    return JSON.stringify(val);
+                })
+
+                var thirdmenu = (thirdmenujson || []).map(function (i) {
+                    return ({img: i.MCPicture, link: svcHeader + i.MCLink, title: i.MCTitle})
+                }).filter(function (e) {
+                    return e;
+                })
+                if (thirdmenu.length % 4 !== 0) {
+                    var imglist = '../assets/i/emptyimage/1.png,../assets/i/emptyimage/11.png,../assets/i/emptyimage/111.png,../assets/i/emptyimage/123.png,../assets/i/emptyimage/12312315.png,../assets/i/emptyimage/2.png,../assets/i/emptyimage/22 (2).png,../assets/i/emptyimage/22.png,../assets/i/emptyimage/222 (2).png,../assets/i/emptyimage/222.png,../assets/i/emptyimage/2231.png,../assets/i/emptyimage/256.png,../assets/i/emptyimage/3.png,../assets/i/emptyimage/33 (2).png,../assets/i/emptyimage/33.png,../assets/i/emptyimage/44.png,../assets/i/emptyimage/45463.png,../assets/i/emptyimage/45465.png,../assets/i/emptyimage/5456.png,../assets/i/emptyimage/55.png,../assets/i/emptyimage/78.png,../assets/i/emptyimage/78423.png,../assets/i/emptyimage/888.png,../assets/i/emptyimage/895.png,../assets/i/emptyimage/denglurizhi.png,../assets/i/emptyimage/list.txt,../assets/i/emptyimage/tu (2).png,../assets/i/emptyimage/tu.png,../assets/i/emptyimage/tutututu.png,../assets/i/emptyimage/tututuu.png,../assets/i/emptyimage/组1拷贝19.png'.split(",");
+
+                    // load images async
+                    for (var i = 0; i < imglist.length; i++) {
+                        var img = new Image();
+                        img.src = imglist[i];
+                    }
+
+                    var insertIndex = 1;
+                    for (var i = 0; i < thirdmenu.length % 4; ++i) {
+                        var imgindex = parseInt((imglist.length * Math.random()));
+                        var image = imglist[imgindex];
+                        var items = {img: image, title: '', link: '', isimage: true};
+                        thirdmenu.splice(insertIndex += 2, 0, items)
+                        console.log(imgindex, image, items);
+                    }
+                }
+
+                if (thirdmenu.length / 4 <= 1) {
+                    $("#third-menu").css({"bottom": "42%", "top": "42%"});
+                }
+
+                if (thirdmenu.length / 4 <= 2 && thirdmenu.length / 4 > 1) {
+                    $("#third-menu").css({"bottom": "33%", "top": "33%"});
+                }
+
+                var vm = new Vue({
+                    el: '#container',
+                    data: {
+                        secondmenu: secondmenu,
+                        thirdmenu: thirdmenu,
+                        svcHeader: svcHeader,
+                        imglist: imglist,
+                        colorlist: "CCDB4C#A8B81F#739DFB#5381E7#BB8BC6#A077A9#FB9A73#E87C51#E2767D#D83D47#5F9FC9#4B83A7#82DC66#54B935#5F9FC9#4B83A7#D04AD5#BB28C0#CCDB4C#A8B81F#739DFB#5381E7#BB8BC6#A077A9#FB9A73#E87C51#E2767D#D83D47#5F9FC9#4B83A7#82DC66#54B935#5F9FC9#4B83A7#D04AD5#BB28C0".split('#').reverse()
+                    },
+                    mounted: function () {
+                        var caption = JSON.parse(request.data).MCTitle;
+                        $(':contains(' + caption + ')').css({
+                            'color': '#ffa54d'
+                        })
+                        if (location.href.indexOf('?') != -1)return;
+                        var mapmenu = {
+                            "id": "d0fde592-2d11-4d82-bcd8-a8087a9ac915",
+                            "MCTitle": "村务地图",
+                            "MCLink": "/XiangXi/2_map/map.html?lnglat=[120.511929,31.252366]&zoom=16",
+                            "MCPicture": "/XiangXi/Upload/Image/966385cf-13d8-4381-8d08-cd74daa5cea5.png",
+                            "MCMenuType": "首页菜单",
+                            "TransactionID": "ca1227e1-0792-499b-b6a5-dfb4a4ef72fc",
+                            "CreateBy": "xiangxi",
+                            "CreateOn": "2018-05-16T00:00:00",
+                            "UpdateBy": "xiangxi",
+                            "UpdateOn": "2018-05-16T22:51:43.79"
+                        };
+                        this.redirect(mapmenu);
+
+                    }
+                    ,
+                    methods: {
+                        random: function () {
+                            return Math.random() * this.imglist.length;
+                        },
+                        isdirect: function (row) {
+                            return row && (row.MCLink || row.link) && (row.MCLink || row.link).indexOf('business.html') === -1;
+                        },
+                        redirect: function (p) {
+                            if (p && p.isimage) return;
+                            //$("iframe").remove();
+                            $('#third-menu').hide();
+                            var link = p.link || p.MCLink || '';
+                            if (!link || link === '' || link === 'null') {
+                                location.href = '/1_index/business.html?data=' + encodeURIComponent(JSON.stringify({MCTitle: p.title || p.MCTitle}));
+                            }
+
+                            if (link.indexOf(svcHeader) !== -1)link = link.substr(svcHeader.length);
+                            if (link.indexOf('http://') === -1)link = svcHeader + link;
+
+                            if (link.indexOf('business.html') !== -1) parent.location.href = link;
+
+                            $('iframe').remove();
+
+                            if ($("iframe").length == 0)
+                                var iframe = $("<iframe></iframe>")
+                                        .attr("src", link)
+                                        .attr("width", $(window).width())
+                                        .attr("height", $(window).height())
+//                                        .attr("scrolling", "no")
+                                        .attr("frameborder", "0")
+                                        .css({
+                                            "top": "18%",
+                                            "position": "fixed",
+                                            "background": "transparent"
+                                        });
+                            else var iframe = $("iframe").attr("src", link);
+                            $(document.body).append(iframe);
+                            $(window).resize(function () {
+                                $(iframe)
+                                        .attr("width", $(window).width())
+                                        .attr("height", $(window).height())
+                            });
+                            $('#nav > ul > li > a').css({
+                                color: '#ffffff'
+                            });
+                            var caption = p.title || p.MCTitle;
+                            $(':contains(' + caption + ')').css({
+                                'color': '#ffa54d'
+                            })
+
+                        }
+                    }
+                });
+            });
+        })
+    })
+    </script>
+    <div id="container" class="container-fluid">
+        <div class="row">
+            <div style="float: left;">
+                <img src="../assets/i/metaicon/QQ图片20180605101023.png"
+                     alt=""
+                     style="margin-left: 20px; margin-top: 20px; margin-right: 20px; height: 75px; line-height: 50px;">
+            </div>
+            <!--<div class="col-xs-9">
+                <div class="row">
+                    <a href="/XiangXi/1_index/business.html">
+                        <h1 class="c-title"
+                            style="font-size:50px;height:50px; line-height: 50px;">香溪信息工作平台</h1>
+                    </a>
+                </div>
+            </div>-->
+        </div>
+        <div class="row" style="display:none; position:relative; top:-7px;" v-show="secondmenu">
+            <div class="container-fluid" id="nav">
+                <ul class="nav navbar-nav navbar-nav-cust">
+                    <li>
+                        <a class="active" href="/XiangXi/1_index/business.html">
+                            首页
+                        </a>
+                    </li>
+                    <li v-for="row in secondmenu">
+                        <a v-if="isdirect(row)" @click="redirect(row)">
+                            {{row.MCTitle}}
+                        </a>
+                        <a v-else v-bind:href="row.MCLink">
+                            {{row.MCTitle}}
+                        </a>
+                    </li>
+                    <li style="position:absolute; left:1840px;">
+                        <a href="../4_login/login.html">
+                            <!--<div style="border-radius: 10px; border: #ffffff 2px solid; padding: 6px 10px; margin-top:-8px;">
+                                <img src="../assets/i/metaicon/退出(1).png" style="height: 20px;">
+                                退出
+                            </div>-->
+                            <div style="margin-top:-13px;">
+                                <img src="../assets/i/metaicon/退出(1).png" style="height: 45px; width:130px;">
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container" v-show="thirdmenu" style="display: none;">
+            <div id="third-menu" class="row sub_menu bus" style="position:absolute; bottom:23%; top:23%; left:26%;width:1100px;">
+                <div id="button-group" style="margin-top:30px;  margin:auto; vertical-align:central;">
+                    <a href="#" v-for="(menut,i) in thirdmenu">
+                        <div class="col-xs-2 shown" v-if="menut.img" style="margin:15px 20px;">
+                            <img v-bind:alt="menut.title" v-bind:src="menut.img" style="background: transparent; border-radius: 10px; width:180px;height:171px;margin:10px 10px;" @click="redirect(menut)" />
+                        </div>
+                        <div class="col-xs-2 shown" v-else style="margin:15px 20px;">
+                            <img v-bind:alt="menut.title" style="background: transparent; border-radius: 10px;border:#ffffff 1px solid; width:180px;height:171px;margin:10px 10px;" @click="redirect(menut)"
+                                 v-bind:src="menut.img||(svcHeader+'/XiangXi/ImageHandler.ashx?label='+menut.title+'&bgcolor2='+colorlist[i*2]+'&bgcolor1='+colorlist[i*2+1]+'&width=400&height=380&icon='+menut.title+'.png&shape=trirect&fontSize=30')" />
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
